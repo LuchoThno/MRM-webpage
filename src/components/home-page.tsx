@@ -313,65 +313,130 @@ export function HomePage() {
           </div>
         </section>
 
-        <section id="servicios" className="mx-auto max-w-7xl px-6 py-24 md:px-8">
-          <div className="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
-            <SectionHeading
-              eyebrow="Nuestros Servicios"
-              title="Capacidades submarinas para una industria que no admite error."
-              description="Cada servicio se diseña con foco operacional, trazabilidad y reporte tecnico. Las cards enlazan a fichas propias para crecer la arquitectura comercial desde el dia uno."
-            />
-            <div className="flex flex-wrap gap-3">
-              {serviceCategories.map((category) => (
-                <span key={category} className="rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-xs uppercase tracking-[0.35em] text-slate-300/80">
-                  {category}
-                </span>
-              ))}
-            </div>
-          </div>
+       <section
+  id="servicios"
+  className="mx-auto max-w-7xl px-6 py-24 md:px-8"
+>
+  <div className="grid gap-10 lg:grid-cols-[1.25fr_0.75fr] lg:items-end">
+    {/* Título y reseña */}
+    <div className="max-w-3xl">
+      <SectionHeading
+        eyebrow="Nuestros Servicios"
+        title="Capacidades submarinas para una industria que no admite error."
+        description="Cada servicio se diseña con foco operacional, trazabilidad y reportes técnicos, entregando soluciones confiables para operaciones marítimas, portuarias e industriales."
+      />
+    </div>
 
-          <div className="mt-14 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-            {services.map((service, index) => {
-              const Icon = service.icon;
-              return (
-                <motion.div
-                  key={service.slug}
-                  initial={{ opacity: 0, y: 36 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-10%" }}
-                  transition={{ duration: 0.65, delay: index * 0.04 }}
-                >
-                  <Link
-                    href={`/services/${service.slug}`}
-                    className="group relative block min-h-[320px] overflow-hidden rounded-[1.8rem] border border-white/10 bg-[#071524] transition hover:border-[rgba(240,179,35,0.24)]"
-                  >
-                    <Image
-                      src={service.image}
-                      alt={service.title}
-                      fill
-                      className="object-cover transition duration-700 group-hover:scale-[1.04]"
-                    />
-                    <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(3,11,21,0.2)_0%,rgba(3,11,21,0.56)_38%,rgba(3,11,21,0.92)_100%)]" />
-                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(240,179,35,0.14),transparent_26%),radial-gradient(circle_at_top_left,rgba(157,183,222,0.16),transparent_28%)] opacity-90" />
-                    <div className="relative flex h-full flex-col">
-                      <div className="flex items-start justify-between gap-4">
-                        <span className="inline-flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-[rgba(4,17,34,0.54)] text-[var(--blue-soft)] backdrop-blur-sm">
-                          <Icon size={26} />
-                        </span>
-                        <div className="flex items-center gap-2 pt-1 text-sm uppercase tracking-[0.28em] text-[var(--gold-soft)]">
-                          Ver servicio <ArrowRight size={16} />
-                        </div>
-                      </div>
-                      <div className="mt-5 rounded-[1.35rem] border border-white/10 bg-[rgba(4,17,34,0.52)] p-5 backdrop-blur-md">
-                        <h3 className="text-2xl font-medium text-white">{service.title}</h3>
-                        <p className="mt-4 text-sm leading-7 text-slate-200/80">{service.summary}</p>
-                      </div>
-                    </div>
-                  </Link>
-                </motion.div>
-              );
-            })}
-          </div>
-        </section>
+    {/* Sectores atendidos */}
+    <div className="flex flex-col gap-5 lg:items-end">
+      <p className="text-xs font-medium uppercase tracking-[0.32em] text-slate-400">
+        Sectores que atendemos
+      </p>
+
+      <div className="flex max-w-lg flex-wrap gap-3 lg:justify-end">
+        {serviceCategories.map((category) => (
+          <span
+            key={category}
+            className="
+              inline-flex items-center justify-center
+              rounded-full
+              border border-white/10
+              bg-white/[0.05]
+              px-5 py-2.5
+              text-xs font-medium uppercase
+              tracking-[0.22em]
+              text-slate-200
+              backdrop-blur-sm
+              transition duration-300
+              hover:border-[rgba(240,179,35,0.35)]
+              hover:bg-[rgba(240,179,35,0.08)]
+              hover:text-[var(--gold-soft)]
+            "
+          >
+            {category}
+          </span>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <div className="mt-16 grid auto-rows-fr gap-5 md:grid-cols-2 xl:grid-cols-3">
+    {services.map((service, index) => {
+      const Icon = service.icon;
+
+      return (
+        <motion.div
+          key={service.slug}
+          className="h-full"
+          initial={{ opacity: 0, y: 36 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-10%" }}
+          transition={{
+            duration: 0.65,
+            delay: index * 0.04,
+          }}
+        >
+          <Link
+            href={`/services/${service.slug}`}
+            className="
+              group relative flex h-full min-h-[380px]
+              overflow-hidden rounded-[1.8rem]
+              border border-white/10 bg-[#071524]
+              transition duration-500
+              hover:-translate-y-1
+              hover:border-[rgba(240,179,35,0.3)]
+              hover:shadow-[0_24px_70px_rgba(0,0,0,0.35)]
+            "
+          >
+            <Image
+              src={service.image}
+              alt={service.title}
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
+              className="object-cover object-center transition duration-700 ease-out group-hover:scale-[1.05]"
+            />
+
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(3,11,21,0.1)_0%,rgba(3,11,21,0.5)_42%,rgba(3,11,21,0.97)_100%)]" />
+
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(240,179,35,0.16),transparent_30%),radial-gradient(circle_at_top_left,rgba(157,183,222,0.16),transparent_32%)] opacity-90" />
+
+            <div className="relative z-10 flex w-full flex-col justify-between p-6 sm:p-7">
+              {/* Parte superior */}
+              <div className="flex items-start justify-between gap-4">
+                <span className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-[rgba(4,17,34,0.65)] text-[var(--blue-soft)] backdrop-blur-md">
+                  <Icon size={26} strokeWidth={1.8} />
+                </span>
+
+                <span className="inline-flex shrink-0 items-center gap-2 rounded-full border border-white/10 bg-[rgba(4,17,34,0.55)] px-4 py-2 text-[10px] font-medium uppercase tracking-[0.2em] text-[var(--gold-soft)] backdrop-blur-md">
+                  Ver servicio
+                  <ArrowRight
+                    size={15}
+                    className="transition-transform duration-300 group-hover:translate-x-1"
+                  />
+                </span>
+              </div>
+
+              {/* Título y reseña de cada servicio */}
+              <div className="mt-auto pt-20">
+                <div className="rounded-[1.35rem] border border-white/10 bg-[rgba(4,17,34,0.68)] p-5 backdrop-blur-md sm:p-6">
+                  <h3 className="max-w-[95%] text-[1.55rem] font-medium leading-[1.2] tracking-[-0.025em] text-white">
+                    {service.title}
+                  </h3>
+
+                  <p className="mt-3 line-clamp-3 max-w-[95%] text-sm leading-6 text-slate-200/75">
+                    {service.summary}
+                  </p>
+
+                  <div className="mt-5 h-px w-16 bg-[var(--gold-soft)]/60 transition-all duration-500 group-hover:w-full" />
+                </div>
+              </div>
+            </div>
+          </Link>
+        </motion.div>
+      );
+    })}
+  </div>
+</section>
 
         <section className="mx-auto max-w-7xl px-6 py-24 md:px-8">
           <div className="grid gap-12 lg:grid-cols-[0.88fr_1.12fr] lg:items-center">
