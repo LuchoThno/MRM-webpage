@@ -323,7 +323,7 @@ export function HomePage() {
       <SectionHeading
         eyebrow="Nuestros Servicios"
         title="Capacidades submarinas para una industria que no admite error."
-        description="Cada servicio se diseña con foco operacional, trazabilidad y reportes técnicos, entregando soluciones confiables para operaciones marítimas, portuarias e industriales."
+        description="Diseñamos cada faena con trazabilidad, evidencia y criterios técnicos claros para que tu equipo decida rápido y ejecute con seguridad."
       />
     </div>
 
