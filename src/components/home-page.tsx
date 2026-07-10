@@ -366,7 +366,7 @@ export function HomePage() {
                         <h3 className="mt-3 text-2xl font-medium text-white">{service.title}</h3>
                         <p className="mt-4 text-sm leading-7 text-slate-200/80">{service.summary}</p>
                       </div>
-                      <div className="flex items-center gap-2 pt-5 text-sm uppercase tracking-[0.28em] text-[var(--gold-soft)]">
+                      <div className="ml-auto flex items-center gap-2 pt-5 text-sm uppercase tracking-[0.28em] text-[var(--gold-soft)]">
                         Ver servicio <ArrowRight size={16} />
                       </div>
                     </div>
