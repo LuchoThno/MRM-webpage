@@ -353,21 +353,17 @@ export function HomePage() {
                     <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(3,11,21,0.2)_0%,rgba(3,11,21,0.56)_38%,rgba(3,11,21,0.92)_100%)]" />
                     <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(240,179,35,0.14),transparent_26%),radial-gradient(circle_at_top_left,rgba(157,183,222,0.16),transparent_28%)] opacity-90" />
                     <div className="relative flex h-full flex-col">
-                      <div className="flex items-center justify-between">
+                      <div className="flex items-start justify-between gap-4">
                         <span className="inline-flex h-14 w-14 items-center justify-center rounded-2xl border border-white/10 bg-[rgba(4,17,34,0.54)] text-[var(--blue-soft)] backdrop-blur-sm">
                           <Icon size={26} />
                         </span>
-                        <span className="rounded-full border border-white/10 bg-[rgba(4,17,34,0.54)] px-3 py-1 text-xs uppercase tracking-[0.35em] text-slate-300/76 backdrop-blur-sm">
-                          {String(index + 1).padStart(2, "0")}
-                        </span>
+                        <div className="flex items-center gap-2 pt-1 text-sm uppercase tracking-[0.28em] text-[var(--gold-soft)]">
+                          Ver servicio <ArrowRight size={16} />
+                        </div>
                       </div>
-                      <div className="mt-auto rounded-[1.35rem] border border-white/10 bg-[rgba(4,17,34,0.52)] p-5 backdrop-blur-md">
-                        <p className="text-[0.68rem] uppercase tracking-[0.3em] text-[var(--gold-soft)]">Servicio</p>
-                        <h3 className="mt-3 text-2xl font-medium text-white">{service.title}</h3>
+                      <div className="mt-5 rounded-[1.35rem] border border-white/10 bg-[rgba(4,17,34,0.52)] p-5 backdrop-blur-md">
+                        <h3 className="text-2xl font-medium text-white">{service.title}</h3>
                         <p className="mt-4 text-sm leading-7 text-slate-200/80">{service.summary}</p>
-                      </div>
-                      <div className="ml-auto flex items-center gap-2 pt-5 text-sm uppercase tracking-[0.28em] text-[var(--gold-soft)]">
-                        Ver servicio <ArrowRight size={16} />
                       </div>
                     </div>
                   </Link>
