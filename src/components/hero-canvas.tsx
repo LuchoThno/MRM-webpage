@@ -5,14 +5,19 @@ import { Float, Points, PointMaterial } from "@react-three/drei";
 import { useMemo, useRef } from "react";
 import type { Group } from "three";
 
+function pseudoRandom(seed: number) {
+  const value = Math.sin(seed * 12.9898) * 43758.5453;
+  return value - Math.floor(value);
+}
+
 function ParticleField() {
   const group = useRef<Group>(null);
   const points = useMemo(() => {
     const values = new Float32Array(1800);
     for (let i = 0; i < values.length; i += 3) {
-      values[i] = (Math.random() - 0.5) * 14;
-      values[i + 1] = (Math.random() - 0.5) * 10;
-      values[i + 2] = (Math.random() - 0.5) * 10;
+      values[i] = (pseudoRandom(i + 1) - 0.5) * 14;
+      values[i + 1] = (pseudoRandom(i + 2) - 0.5) * 10;
+      values[i + 2] = (pseudoRandom(i + 3) - 0.5) * 10;
     }
     return values;
   }, []);
