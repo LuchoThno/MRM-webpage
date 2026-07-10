@@ -1,6 +1,5 @@
-import { MagallanesLanding } from "@/components/magallanes-landing";
+import { HomePage } from "@/components/home-page";
 
 export default function Page() {
-  return <MagallanesLanding />;
+  return <HomePage />;
 }
-

@@ -51,7 +51,7 @@ src/
     services/[slug]/page.tsx
     technology/[slug]/page.tsx
   components/
-    magallanes-landing.tsx
+    home-page.tsx
     hero-canvas.tsx
     nav.tsx
     footer.tsx
@@ -68,7 +68,7 @@ vercel.json
 
 ## Punto de entrada
 
-La home renderiza `MagallanesLanding` desde [src/app/page.tsx](/Users/mac/Documents/WebMagRovMarine/src/app/page.tsx:1).
+La home renderiza `HomePage` desde [src/app/page.tsx](/Users/mac/Documents/WebMagRovMarine/src/app/page.tsx:1).
 
 La configuración editorial del sitio vive principalmente en [src/data/site.ts](/Users/mac/Documents/WebMagRovMarine/src/data/site.ts:1), donde están centralizados:
 

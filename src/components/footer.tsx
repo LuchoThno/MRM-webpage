@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { Logo } from "@/components/logo";
-import { navigation, socialLinks } from "@/data/site";
+import { contactInfo, navigation, socialLinks } from "@/data/site";
 
 export function Footer() {
   return (
@@ -30,9 +30,9 @@ export function Footer() {
           <div>
             <p className="mb-4 text-xs uppercase tracking-[0.32em] text-slate-400">Contacto</p>
             <div className="space-y-2 text-sm text-slate-200/80">
-              <p>contacto@magallanesrovmarine.cl</p>
-              <p>+56 9 8765 4321</p>
-              <p>Punta Arenas, Chile</p>
+              <p>{contactInfo.email}</p>
+              <p>{contactInfo.phone}</p>
+              <p>{contactInfo.location}</p>
             </div>
           </div>
 

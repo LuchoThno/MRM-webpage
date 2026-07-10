@@ -25,17 +25,17 @@ export function Nav() {
       }`}
     >
       <div
-        className={`mx-auto flex max-w-7xl items-center justify-between transition-all duration-500 ${
+        className={`mx-auto grid max-w-7xl grid-cols-[auto_1fr_auto] items-center transition-all duration-500 ${
           scrolled
             ? "rounded-full border border-white/10 bg-slate-950/55 px-5 py-3 shadow-[0_20px_60px_rgba(0,0,0,0.35)] backdrop-blur-2xl"
-            : "px-5 py-5 md:px-8"
+            : "px-5 py-4 md:px-8"
         }`}
       >
         <Link href="#inicio" className="min-w-0">
-          <Logo compact={scrolled} priority />
+          <Logo compact priority className={scrolled ? "" : "border-white/12 shadow-[0_16px_40px_rgba(0,0,0,0.22)]"} />
         </Link>
 
-        <nav className="hidden items-center gap-7 lg:flex">
+        <nav className="hidden items-center justify-center gap-8 lg:flex">
           {navigation.map((item) => (
             <Link
               key={item.href}
@@ -47,15 +47,11 @@ export function Nav() {
           ))}
         </nav>
 
-        <div className="hidden lg:block">
-          <Link href="#contacto" className="btn-primary">
-            Cotizar
-          </Link>
-        </div>
+        <div className="hidden w-[7.8rem] lg:block" />
 
         <button
           type="button"
-          className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white lg:hidden"
+          className="col-start-3 inline-flex h-11 w-11 items-center justify-center justify-self-end rounded-full border border-white/15 bg-white/5 text-white lg:hidden"
           onClick={() => setOpen((value) => !value)}
           aria-label="Abrir menu"
         >
@@ -76,9 +72,6 @@ export function Nav() {
                 {item.label}
               </Link>
             ))}
-            <Link href="#contacto" className="btn-primary mt-2 text-center" onClick={() => setOpen(false)}>
-              Cotizar
-            </Link>
           </div>
         </div>
       ) : null}
