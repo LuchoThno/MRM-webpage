@@ -20,6 +20,10 @@ Sitio corporativo de **MRM** para presentar servicios submarinos, capacidades op
 - `lint` operativo
 - `build` operativo
 
+**Package manager**
+
+- `pnpm`
+
 **Deploy**
 
 - Rama principal: `main`
@@ -90,13 +94,13 @@ La configuración editorial del sitio vive principalmente en [src/data/site.ts](
 Instalar dependencias:
 
 ```bash
-npm install
+pnpm install
 ```
 
 Levantar entorno local:
 
 ```bash
-npm run dev
+pnpm dev
 ```
 
 Abrir en navegador:
@@ -107,12 +111,11 @@ http://localhost:3000
 
 ## Scripts
 
-```bash
-npm run dev
-npm run build
-npm run start
-npm run lint
-npm run typecheck
+pnpm dev
+pnpm build
+pnpm start
+pnpm lint
+pnpm typecheck
 ```
 
 ## Despliegue
@@ -128,9 +131,9 @@ Flujo recomendado:
 
 ## Convenciones del proyecto
 
-- No versionar `node_modules`, `.next`, `.vercel` ni `.env*`.
+- No versionar `node_modules`, `.next`, `.vercel`, `.env*` ni `package-lock.json`.
 - Mantener contenido editable y catálogos en `src/data/site.ts`.
-- Validar con `npm run lint` y `npm run build` antes de publicar cambios.
+- Validar con `pnpm lint` y `pnpm build` antes de publicar cambios.
 - Tratar `public/generated` como carpeta de assets finales del sitio.
 
 ## Notas útiles
@@ -138,4 +141,3 @@ Flujo recomendado:
 - El sitio usa rutas dinámicas para servicios y tecnologías.
 - La capa visual mezcla animación DOM y escenas ligeras con canvas.
 - La base actual está pensada para seguir iterando branding, contenido y conversión comercial sin cambiar la arquitectura principal.
-
