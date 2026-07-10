@@ -1,10 +1,10 @@
-# MRM Webpage
+# Magallanes ROV Marine
 
-Sitio corporativo de **Magallanes ROV Marine**, construido con **Next.js 16**, **React 19** y **TypeScript**.
+Sitio corporativo de **MRM** para presentar servicios submarinos, capacidades operacionales, flota ROV y cobertura técnica en Chile.
 
-El proyecto presenta la oferta de servicios submarinos de MRM, su flota tecnológica, capacidades operacionales, cobertura geográfica y puntos de contacto comerciales.
+## Resumen
 
-## Stack
+**Stack**
 
 - Next.js 16
 - React 19
@@ -13,15 +13,34 @@ El proyecto presenta la oferta de servicios submarinos de MRM, su flota tecnoló
 - Framer Motion
 - GSAP
 - Three.js + React Three Fiber + Drei
-- Vercel
 
-## Estructura principal
+**Estado**
+
+- Producción lista para Vercel
+- `lint` operativo
+- `build` operativo
+
+**Deploy**
+
+- Rama principal: `main`
+- Framework: `nextjs`
+
+## Qué incluye
+
+- Landing principal con narrativa corporativa
+- Navegación por secciones
+- Páginas dinámicas de servicios
+- Páginas dinámicas de tecnología
+- `robots.txt` y `sitemap.xml`
+- Assets visuales en `public/generated`
+
+## Arquitectura
 
 ```text
 src/
   app/
-    page.tsx
     layout.tsx
+    page.tsx
     globals.css
     robots.ts
     sitemap.ts
@@ -39,43 +58,54 @@ src/
 public/
   generated/
   mrm-logo.png
+
+vercel.json
 ```
 
-## Contenido del sitio
+## Punto de entrada
 
-La página principal renderiza `MagallanesLanding` desde [src/app/page.tsx](/Users/mac/Documents/WebMagRovMarine/src/app/page.tsx:1).
+La home renderiza `MagallanesLanding` desde [src/app/page.tsx](/Users/mac/Documents/WebMagRovMarine/src/app/page.tsx:1).
 
-Los datos de navegación, servicios, tecnologías, métricas, clientes y links sociales están centralizados en [src/data/site.ts](/Users/mac/Documents/WebMagRovMarine/src/data/site.ts:1).
+La configuración editorial del sitio vive principalmente en [src/data/site.ts](/Users/mac/Documents/WebMagRovMarine/src/data/site.ts:1), donde están centralizados:
 
-Incluye:
+- navegación
+- métricas
+- servicios
+- tecnologías
+- clientes
+- links sociales
 
-- Landing principal con navegación por secciones
-- Páginas dinámicas de servicios
-- Páginas dinámicas de tecnología
-- `sitemap.xml` y `robots.txt`
-- Assets visuales en `public/generated`
+## Secciones del sitio
+
+- `Inicio`: hero principal, propuesta de valor y señal visual de marca
+- `Empresa`: contexto operativo y posicionamiento
+- `Servicios`: catálogo técnico con rutas dinámicas por `slug`
+- `Tecnologia`: flota y equipamiento complementario
+- `Proyectos`: galería y evidencia visual
+- `Clientes`: industrias atendidas
+- `Contacto`: CTA comercial y punto de conversión
 
 ## Desarrollo local
 
-Instala dependencias:
+Instalar dependencias:
 
 ```bash
 npm install
 ```
 
-Levanta el proyecto:
+Levantar entorno local:
 
 ```bash
 npm run dev
 ```
 
-Abre:
+Abrir en navegador:
 
 ```text
 http://localhost:3000
 ```
 
-## Scripts disponibles
+## Scripts
 
 ```bash
 npm run dev
@@ -85,26 +115,27 @@ npm run lint
 npm run typecheck
 ```
 
-## Despliegue en Vercel
+## Despliegue
 
-El proyecto ya está preparado para Vercel y contiene una configuración mínima en [vercel.json](/Users/mac/Documents/WebMagRovMarine/vercel.json:1).
+El proyecto está preparado para desplegar en Vercel y usa una configuración mínima en [vercel.json](/Users/mac/Documents/WebMagRovMarine/vercel.json:1).
 
 Flujo recomendado:
 
 1. Conectar el repositorio en Vercel.
-2. Usar `main` como rama de producción.
-3. Verificar variables de entorno si se agregan integraciones futuras.
+2. Seleccionar `main` como rama de producción.
+3. Mantener variables de entorno en Vercel si se agregan integraciones futuras.
 4. Desplegar con el preset de `Next.js`.
 
-## Convenciones del repositorio
+## Convenciones del proyecto
 
-- No versionar `node_modules`, `.next`, `.vercel` ni archivos `.env*`.
-- Mantener la data editable en `src/data/site.ts`.
-- Usar `npm run lint` y `npm run build` antes de subir cambios.
+- No versionar `node_modules`, `.next`, `.vercel` ni `.env*`.
+- Mantener contenido editable y catálogos en `src/data/site.ts`.
+- Validar con `npm run lint` y `npm run build` antes de publicar cambios.
+- Tratar `public/generated` como carpeta de assets finales del sitio.
 
-## Estado actual
+## Notas útiles
 
-- Build de producción operativo
-- Lint operativo
-- Repo listo para despliegue desde GitHub hacia Vercel
+- El sitio usa rutas dinámicas para servicios y tecnologías.
+- La capa visual mezcla animación DOM y escenas ligeras con canvas.
+- La base actual está pensada para seguir iterando branding, contenido y conversión comercial sin cambiar la arquitectura principal.
 
