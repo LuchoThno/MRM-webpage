@@ -5,17 +5,16 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
-  Binoculars,
+  Camera,
   ClipboardList,
   FileCheck2,
+  HardHat,
   Mail,
   MapPinned,
   MoveRight,
   Phone,
-  Radar,
   Shield,
-  ShipWheel,
-  Waypoints
+  Waypoints,
 } from "lucide-react";
 import { useEffect, useState } from "react";
 
@@ -31,46 +30,32 @@ import {
 
 const processCards = [
   {
-    step: "Planificacion",
+    step: "Diagnostico en terreno",
     icon: ClipboardList,
-    front: "Alcance operativo",
-    back:
-      "Definimos objetivo, activo, ventana de trabajo, restricciones de sitio y criterio de exito antes de movilizar recursos."
+    front: "Lectura inicial",
+    back: "Levantamos el estado real de la faena antes de mover recursos.",
+    image: "/assets/monitor_control_rov_embarcacion.jpg",
   },
   {
-    step: "Movilizacion",
-    icon: ShipWheel,
-    front: "Preparacion de faena",
-    back:
-      "Coordinamos equipo, equipamiento, permisos, logistica y secuencia de despliegue para reducir tiempos muertos y riesgo operativo."
+    step: "Plan de intervencion",
+    icon: HardHat,
+    front: "Alcance y recursos",
+    back: "Definimos alcance, recursos y ventana de ejecucion junto al cliente.",
+    image: "/assets/tecnico_cable_embarcacion_01.jpg",
   },
   {
-    step: "Inspeccion",
-    icon: Radar,
-    front: "Ejecucion en terreno",
-    back:
-      "Realizamos inspeccion o survey con control tecnico, registro continuo y foco en evidencia util para la decision del cliente."
+    step: "Ejecucion controlada",
+    icon: Camera,
+    front: "Operacion con evidencia",
+    back: "Ejecutamos con checklist y registro visual en cada frente de trabajo.",
+    image: "/assets/inspeccion_helice_submarina.jpg",
   },
   {
-    step: "Procesamiento",
-    icon: Binoculars,
-    front: "Lectura de evidencia",
-    back:
-      "Ordenamos imagenes, video y hallazgos para separar observaciones relevantes de ruido operativo o visual."
-  },
-  {
-    step: "Informe Tecnico",
+    step: "Informe y cierre",
     icon: FileCheck2,
-    front: "Informe ejecutivo",
-    back:
-      "Consolidamos resultados en un entregable claro, trazable y defendible para gerencia tecnica, auditoria o continuidad operacional."
-  },
-  {
-    step: "Entrega Cliente",
-    icon: Waypoints,
-    front: "Cierre y decision",
-    back:
-      "Presentamos hallazgos, respondemos observaciones y dejamos una base accionable para mantencion, seguimiento o nueva faena."
+    front: "Reporte ejecutivo",
+    back: "Entregamos un reporte claro, sin relleno ni informacion redundante.",
+    image: "/assets/plano_georreferenciacion_muestra.jpg",
   }
 ] as const;
 
@@ -92,14 +77,53 @@ function SectionHeading({
   );
 }
 
+function SectionBackdrop({
+  src,
+  alt,
+  imageClassName = "",
+  overlayClassName = ""
+}: {
+  src: string;
+  alt: string;
+  imageClassName?: string;
+  overlayClassName?: string;
+}) {
+  return (
+    <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        sizes="100vw"
+        className={`object-cover opacity-12 ${imageClassName}`}
+      />
+      <div
+        className={`absolute inset-0 bg-[linear-gradient(180deg,rgba(2,9,20,0.82),rgba(2,9,20,0.58)_42%,rgba(2,9,20,0.82))] ${overlayClassName}`}
+      />
+    </div>
+  );
+}
+
 export function HomePage() {
   const [formStatus, setFormStatus] = useState<string | null>(null);
+  const [activeProcess, setActiveProcess] = useState(0);
+  const [processPaused, setProcessPaused] = useState(false);
 
   useEffect(() => {
     if (!formStatus) return;
     const timer = window.setTimeout(() => setFormStatus(null), 2600);
     return () => window.clearTimeout(timer);
   }, [formStatus]);
+
+  useEffect(() => {
+    if (processPaused) return;
+    const timer = window.setInterval(() => {
+      setActiveProcess((current) => (current + 1) % processCards.length);
+    }, 4200);
+    return () => window.clearInterval(timer);
+  }, [processPaused]);
+
+  const processProgress = (activeProcess / (processCards.length - 1)) * 100;
 
   return (
     <>
@@ -242,7 +266,13 @@ export function HomePage() {
         </section>
 
         <section id="empresa" className="relative mx-auto max-w-7xl px-6 py-24 md:px-8">
-          <div className="grid gap-10 lg:grid-cols-[1.02fr_0.98fr] lg:items-center">
+          <SectionBackdrop
+            src="/assets/equipos_rov_y_cable.jpg"
+            alt=""
+            imageClassName="object-[center_32%]"
+            overlayClassName="bg-[linear-gradient(180deg,rgba(2,9,20,0.92),rgba(2,9,20,0.62)_36%,rgba(2,9,20,0.9))]"
+          />
+          <div className="relative z-10 grid gap-10 lg:grid-cols-[1.02fr_0.98fr] lg:items-center">
             <motion.div
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -315,9 +345,15 @@ export function HomePage() {
 
        <section
   id="servicios"
-  className="mx-auto max-w-7xl px-6 py-24 md:px-8"
+  className="relative mx-auto max-w-7xl overflow-hidden px-6 py-24 md:px-8"
 >
-  <div className="grid gap-10 lg:grid-cols-[1.25fr_0.75fr] lg:items-end">
+  <SectionBackdrop
+    src="/assets/centro_cultivo_aereo.jpg"
+    alt=""
+    imageClassName="object-[center_38%]"
+    overlayClassName="bg-[linear-gradient(180deg,rgba(2,9,20,0.94),rgba(2,9,20,0.7)_34%,rgba(2,9,20,0.9))]"
+  />
+  <div className="relative z-10 grid gap-10 lg:grid-cols-[1.25fr_0.75fr] lg:items-end">
     {/* Título y reseña */}
     <div className="max-w-3xl">
       <SectionHeading
@@ -360,7 +396,7 @@ export function HomePage() {
     </div>
   </div>
 
-  <div className="mt-16 grid auto-rows-fr gap-5 md:grid-cols-2 xl:grid-cols-3">
+  <div className="relative z-10 mt-16 grid auto-rows-fr gap-5 md:grid-cols-2 xl:grid-cols-3">
     {services.map((service, index) => {
       const Icon = service.icon;
 
@@ -438,8 +474,14 @@ export function HomePage() {
   </div>
 </section>
 
-        <section className="mx-auto max-w-7xl px-6 py-24 md:px-8">
-          <div className="grid gap-12 lg:grid-cols-[0.88fr_1.12fr] lg:items-center">
+        <section className="relative mx-auto max-w-7xl overflow-hidden px-6 py-24 md:px-8">
+          <SectionBackdrop
+            src="/assets/hero_barco_faena.jpg"
+            alt=""
+            imageClassName="object-[center_42%]"
+            overlayClassName="bg-[linear-gradient(180deg,rgba(2,9,20,0.94),rgba(2,9,20,0.74)_40%,rgba(2,9,20,0.92))]"
+          />
+          <div className="relative z-10 grid gap-12 lg:grid-cols-[0.88fr_1.12fr] lg:items-center">
             <SectionHeading
               eyebrow="Cobertura Nacional"
               title="Presencia estrategica en nodos maritimos clave de Chile."
@@ -486,8 +528,14 @@ export function HomePage() {
           </div>
         </section>
 
-        <section className="mx-auto max-w-7xl px-6 py-24 md:px-8">
-          <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+        <section className="relative mx-auto max-w-7xl overflow-hidden px-6 py-24 md:px-8">
+          <SectionBackdrop
+            src="/assets/rov_patagonia_m8.jpg"
+            alt=""
+            imageClassName="object-[center_48%]"
+            overlayClassName="bg-[linear-gradient(180deg,rgba(2,9,20,0.94),rgba(2,9,20,0.76)_40%,rgba(2,9,20,0.94))]"
+          />
+          <div className="relative z-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
             {metrics.map((metric, index) => (
               <motion.div
                 key={metric.label}
@@ -504,73 +552,126 @@ export function HomePage() {
           </div>
         </section>
 
-        <section className="mx-auto max-w-7xl px-6 py-24 md:px-8">
-          <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.04),rgba(255,255,255,0.02))] p-8 md:p-10">
-            <div className="grid gap-10 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
-              <div className="space-y-7">
+        <section className="relative mx-auto max-w-7xl overflow-hidden px-6 py-24 md:px-8">
+          <SectionBackdrop
+            src="/assets/diagrama_inspeccion_tensores.jpg"
+            alt=""
+            imageClassName="object-contain opacity-10"
+            overlayClassName="bg-[linear-gradient(180deg,rgba(2,9,20,0.96),rgba(2,9,20,0.78)_40%,rgba(2,9,20,0.96))]"
+          />
+          <div className="relative z-10 overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,#060f1d_0%,#0b1a2e_100%)] p-8 md:p-10">
+            <div className="max-w-3xl">
                 <SectionHeading
                   eyebrow="Proceso de Trabajo"
-                  title="Un proceso claro para ejecutar la faena y entregar informacion util."
-                  description="Cada etapa tiene una funcion operacional concreta: preparar, ejecutar, ordenar evidencia y entregar un resultado confiable para el cliente."
+                  title="De la orden de trabajo al informe final."
+                  description="Cuatro etapas, un responsable por fase y una lectura clara del avance para el cliente."
                 />
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <div className="rounded-[1.4rem] border border-white/10 bg-[rgba(8,19,38,0.76)] p-5">
-                    <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Valor para cliente</p>
-                    <p className="mt-3 text-lg font-medium text-white">Menos incertidumbre y mejor lectura tecnica del activo.</p>
-                  </div>
-                  <div className="rounded-[1.4rem] border border-white/10 bg-[rgba(8,19,38,0.76)] p-5">
-                    <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Resultado</p>
-                    <p className="mt-3 text-lg font-medium text-white">Operacion ordenada, evidencia trazable y reporte accionable.</p>
-                  </div>
-                </div>
-              </div>
+            </div>
 
-              <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3 xl:gap-6">
+            <div
+              className="mt-16"
+              onMouseEnter={() => setProcessPaused(true)}
+              onMouseLeave={() => setProcessPaused(false)}
+            >
+              <div className="relative flex flex-wrap items-start justify-between gap-y-8">
+                <div className="absolute left-0 right-0 top-6 hidden h-px bg-white/10 sm:block" />
+                <div
+                  className="absolute left-0 top-6 hidden h-px transition-all duration-700 ease-out sm:block"
+                  style={{
+                    width: `${processProgress}%`,
+                    background:
+                      "linear-gradient(90deg, rgba(240,179,35,1), rgba(157,183,222,1))",
+                  }}
+                />
+
                 {processCards.map((card, index) => {
                   const Icon = card.icon;
+                  const isActive = index === activeProcess;
+                  const isDone = index < activeProcess;
+
                   return (
-                    <div key={card.step} className="flip-card h-[260px]">
-                      <div className="flip-card-inner">
-                        <div className="flip-card-face overflow-hidden rounded-[1.7rem] border border-white/10 bg-[linear-gradient(180deg,rgba(9,22,42,0.96),rgba(6,18,35,0.96))] p-6 shadow-[0_24px_60px_rgba(0,0,0,0.22)]">
-                          <div className="flex h-full flex-col">
-                            <div className="flex items-center justify-between">
-                              <span className="rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-[var(--gold-soft)]">
-                                {String(index + 1).padStart(2, "0")}
-                              </span>
-                              <Icon className="text-[var(--blue-soft)]" size={22} />
-                            </div>
-                            <div className="mt-auto">
-                              <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Proceso</p>
-                              <p className="mt-3 text-2xl font-medium leading-8 text-white">{card.step}</p>
-                              <p className="mt-4 text-sm leading-7 text-slate-300/74">{card.front}</p>
-                            </div>
-                          </div>
-                        </div>
-                        <div className="flip-card-face flip-card-back overflow-hidden rounded-[1.7rem] border border-[rgba(240,179,35,0.26)] bg-[linear-gradient(180deg,rgba(17,36,71,0.98),rgba(8,19,38,0.98))] p-6 shadow-[0_24px_60px_rgba(0,0,0,0.26)]">
-                          <div className="flex h-full flex-col">
-                            <div className="flex items-center justify-between">
-                              <span className="rounded-full border border-[rgba(240,179,35,0.26)] bg-[rgba(240,179,35,0.08)] px-3 py-1 text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-[var(--gold-soft)]">
-                                Definicion
-                              </span>
-                              <Icon className="text-[var(--gold)]" size={22} />
-                            </div>
-                            <div className="mt-auto">
-                              <p className="text-lg font-medium text-white">{card.step}</p>
-                              <p className="mt-4 text-sm leading-7 text-slate-200/78">{card.back}</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                    <button
+                      key={card.step}
+                      onClick={() => setActiveProcess(index)}
+                      className="group relative z-10 flex w-1/2 flex-col items-start gap-3 pr-4 text-left focus:outline-none sm:w-auto"
+                      aria-pressed={isActive}
+                      type="button"
+                    >
+                      <span
+                        className="flex h-12 w-12 items-center justify-center rounded-full border text-sm font-medium transition-colors duration-300"
+                        style={{
+                          borderColor:
+                            isActive || isDone ? "rgba(240,179,35,1)" : "rgba(255,255,255,0.18)",
+                          backgroundColor: isActive
+                            ? "rgba(240,179,35,1)"
+                            : isDone
+                              ? "rgba(240,179,35,0.12)"
+                              : "rgba(11,26,46,1)",
+                          color: isActive
+                            ? "rgba(11,26,46,1)"
+                            : isDone
+                              ? "rgba(233,193,101,1)"
+                              : "rgba(255,255,255,0.5)",
+                        }}
+                      >
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <span
+                        className="max-w-[13rem] text-sm font-medium leading-5 transition-colors duration-300"
+                        style={{ color: isActive ? "white" : "rgba(255,255,255,0.55)" }}
+                      >
+                        {card.step}
+                      </span>
+                    </button>
                   );
                 })}
+              </div>
+
+              <div
+                key={activeProcess}
+                className="relative mt-10 overflow-hidden rounded-[1.7rem] border border-white/10 p-8"
+              >
+                <Image
+                  src={processCards[activeProcess].image}
+                  alt={processCards[activeProcess].step}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 1200px"
+                  className="object-cover object-center"
+                />
+                <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(4,12,24,0.92)_0%,rgba(4,12,24,0.82)_42%,rgba(4,12,24,0.55)_100%)]" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(240,179,35,0.18),transparent_28%),radial-gradient(circle_at_left,rgba(157,183,222,0.16),transparent_30%)]" />
+                <div className="relative flex flex-col gap-6 sm:flex-row sm:items-center">
+                  <span className="flex h-14 w-14 flex-none items-center justify-center rounded-xl bg-[rgba(157,183,222,0.12)] text-[var(--blue-soft)] backdrop-blur-sm">
+                    {(() => {
+                      const ActiveIcon = processCards[activeProcess].icon;
+                      return <ActiveIcon size={26} />;
+                    })()}
+                  </span>
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.28em] text-[var(--gold-soft)]">
+                      {processCards[activeProcess].front}
+                    </p>
+                    <p className="mt-3 text-xl font-medium text-white">
+                      {processCards[activeProcess].step}
+                    </p>
+                    <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-200/84">
+                      {processCards[activeProcess].back}
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
+          </div>
         </section>
 
-        <section id="contacto" className="mx-auto max-w-7xl px-6 py-24 md:px-8">
-          <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02))] p-8 md:p-10">
+        <section id="contacto" className="relative mx-auto max-w-7xl overflow-hidden px-6 py-24 md:px-8">
+          <SectionBackdrop
+            src="/assets/tecnico_boya_costa.jpg"
+            alt=""
+            imageClassName="object-[center_35%]"
+            overlayClassName="bg-[linear-gradient(180deg,rgba(2,9,20,0.94),rgba(2,9,20,0.72)_36%,rgba(2,9,20,0.92))]"
+          />
+          <div className="relative z-10 overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02))] p-8 md:p-10">
             <div className="grid gap-10 xl:grid-cols-[0.8fr_1.2fr] xl:items-start">
               <div className="space-y-7">
                 <SectionHeading
