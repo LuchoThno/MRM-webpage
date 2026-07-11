@@ -16,7 +16,7 @@ import {
   Shield,
   Waypoints,
 } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 
 import { Footer } from "@/components/footer";
 import { Nav } from "@/components/nav";
@@ -106,12 +106,21 @@ function SectionBackdrop({
 
 export function HomePage() {
   const [formStatus, setFormStatus] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    company: "",
+    email: "",
+    phone: "",
+    service: "",
+    message: "",
+  });
   const [activeProcess, setActiveProcess] = useState(0);
   const [processPaused, setProcessPaused] = useState(false);
 
   useEffect(() => {
     if (!formStatus) return;
-    const timer = window.setTimeout(() => setFormStatus(null), 2600);
+    const timer = window.setTimeout(() => setFormStatus(null), 3200);
     return () => window.clearTimeout(timer);
   }, [formStatus]);
 
@@ -124,6 +133,47 @@ export function HomePage() {
   }, [processPaused]);
 
   const processProgress = (activeProcess / (processCards.length - 1)) * 100;
+
+  async function handleContactSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    if (!formData.name || !formData.email || !formData.service || !formData.message) {
+      setFormStatus("Completa nombre, correo, servicio y mensaje.");
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!response.ok) {
+        const data = (await response.json().catch(() => null)) as { error?: string } | null;
+        throw new Error(data?.error ?? "No se pudo enviar la solicitud.");
+      }
+
+      setFormStatus("Solicitud enviada correctamente.");
+      setFormData({
+        name: "",
+        company: "",
+        email: "",
+        phone: "",
+        service: "",
+        message: "",
+      });
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "No se pudo enviar la solicitud.";
+      setFormStatus(message);
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
 
   return (
     <>
@@ -711,10 +761,7 @@ export function HomePage() {
               <div>
                 <form
                   className="rounded-[1.7rem] border border-white/10 bg-[#061321]/72 p-7"
-                  onSubmit={(event) => {
-                    event.preventDefault();
-                    setFormStatus("Solicitud enviada");
-                  }}
+                  onSubmit={handleContactSubmit}
                 >
                   <div className="mb-6 flex items-end justify-between gap-6">
                     <div>
@@ -723,11 +770,44 @@ export function HomePage() {
                     </div>
                   </div>
                   <div className="grid gap-4 md:grid-cols-2">
-                    <input className="field-input" placeholder="Nombre" />
-                    <input className="field-input" placeholder="Empresa" />
-                    <input className="field-input" placeholder="Correo" type="email" />
-                    <input className="field-input" placeholder="Telefono" />
-                    <select className="field-input md:col-span-2" defaultValue="">
+                    <input
+                      className="field-input"
+                      placeholder="Nombre"
+                      name="name"
+                      value={formData.name}
+                      onChange={(event) => setFormData((current) => ({ ...current, name: event.target.value }))}
+                      required
+                    />
+                    <input
+                      className="field-input"
+                      placeholder="Empresa"
+                      name="company"
+                      value={formData.company}
+                      onChange={(event) => setFormData((current) => ({ ...current, company: event.target.value }))}
+                    />
+                    <input
+                      className="field-input"
+                      placeholder="Correo"
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={(event) => setFormData((current) => ({ ...current, email: event.target.value }))}
+                      required
+                    />
+                    <input
+                      className="field-input"
+                      placeholder="Telefono"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={(event) => setFormData((current) => ({ ...current, phone: event.target.value }))}
+                    />
+                    <select
+                      className="field-input md:col-span-2"
+                      name="service"
+                      value={formData.service}
+                      onChange={(event) => setFormData((current) => ({ ...current, service: event.target.value }))}
+                      required
+                    >
                       <option value="" disabled>
                         Servicio
                       </option>
@@ -737,10 +817,18 @@ export function HomePage() {
                         </option>
                       ))}
                     </select>
-                    <textarea className="field-input min-h-36 md:col-span-2" placeholder="Mensaje" />
+                    <textarea
+                      className="field-input min-h-36 md:col-span-2"
+                      placeholder="Mensaje"
+                      name="message"
+                      value={formData.message}
+                      onChange={(event) => setFormData((current) => ({ ...current, message: event.target.value }))}
+                      required
+                    />
                   </div>
-                  <button type="submit" className="btn-primary mt-6 w-full justify-center">
-                    {formStatus ?? "Enviar Solicitud"}
+                  {formStatus ? <p className="mt-4 text-sm text-slate-200">{formStatus}</p> : null}
+                  <button type="submit" className="btn-primary mt-6 w-full justify-center" disabled={isSubmitting}>
+                    {isSubmitting ? "Enviando..." : "Enviar Solicitud"}
                   </button>
                 </form>
               </div>
