@@ -26,9 +26,9 @@ export const navigation = [
 
 export const contactInfo = {
   email: "contacto@magallanesrovmarine.cl",
-  phone: "+56 9 8765 4321",
+  phone: "+56 9 6443 4499",
   location: "Punta Arenas / Cobertura Nacional",
-  whatsappHref: "https://wa.me/56987654321",
+  whatsappHref: "https://wa.me/56964434499",
   mailtoHref: "mailto:contacto@magallanesrovmarine.cl"
 } as const;
 
