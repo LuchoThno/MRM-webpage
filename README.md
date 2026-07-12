@@ -11,23 +11,17 @@ Sitio corporativo de **MRM** para presentar servicios submarinos, capacidades op
 - TypeScript
 - Tailwind CSS 4
 - Framer Motion
-- GSAP
-- Three.js + React Three Fiber + Drei
+- Nodemailer
 
 **Estado**
 
-- Producción lista para Vercel
-- `lint` operativo
-- `build` operativo
+- Producción desplegada en Vercel
+- Rutas dinámicas de servicios y tecnología operativas
+- `lint` y `typecheck` operativos
 
 **Package manager**
 
 - `pnpm`
-
-**Deploy**
-
-- Rama principal: `main`
-- Framework: `nextjs`
 
 ## Qué incluye
 
@@ -35,14 +29,17 @@ Sitio corporativo de **MRM** para presentar servicios submarinos, capacidades op
 - Navegación por secciones
 - Páginas dinámicas de servicios
 - Páginas dinámicas de tecnología
+- Formulario de contacto conectado a `/api/contact`
 - `robots.txt` y `sitemap.xml`
-- Assets visuales en `public/generated`
+- Favicons y apple touch icon en `public/favicon`
+- Assets visuales en `public/assets` y `public/generated`
 
 ## Arquitectura
 
 ```text
 src/
   app/
+    api/contact/route.ts
     layout.tsx
     page.tsx
     globals.css
@@ -52,7 +49,6 @@ src/
     technology/[slug]/page.tsx
   components/
     home-page.tsx
-    hero-canvas.tsx
     nav.tsx
     footer.tsx
     logo.tsx
@@ -60,6 +56,8 @@ src/
     site.ts
 
 public/
+  assets/
+  favicon/
   generated/
   mrm-logo.png
 
@@ -81,13 +79,12 @@ La configuración editorial del sitio vive principalmente en [src/data/site.ts](
 
 ## Secciones del sitio
 
-- `Inicio`: hero principal, propuesta de valor y señal visual de marca
+- `Inicio`: hero principal y propuesta de valor
 - `Empresa`: contexto operativo y posicionamiento
 - `Servicios`: catálogo técnico con rutas dinámicas por `slug`
-- `Tecnologia`: flota y equipamiento complementario
-- `Proyectos`: galería y evidencia visual
-- `Clientes`: industrias atendidas
-- `Contacto`: CTA comercial y punto de conversión
+- `Cobertura`: presencia operacional en Chile
+- `Proceso`: flujo de trabajo comercial y operativo
+- `Contacto`: CTA comercial y formulario
 
 ## Desarrollo local
 
@@ -109,8 +106,23 @@ Abrir en navegador:
 http://localhost:3000
 ```
 
+## Variables de entorno
+
+El formulario de contacto usa SMTP y espera estas variables:
+
+```env
+SMTP_HOST=mail.magallanesrovmarine.cl
+SMTP_PORT=465
+SMTP_USER=contacto@magallanesrovmarine.cl
+SMTP_PASS=your-email-password
+CONTACT_FORM_TO=contacto@magallanesrovmarine.cl
+```
+
+Referencia: [.env.example](/Users/mac/Documents/WebMagRovMarine/.env.example:1)
+
 ## Scripts
 
+```bash
 pnpm dev
 pnpm build
 pnpm start
@@ -120,24 +132,24 @@ pnpm typecheck
 
 ## Despliegue
 
-El proyecto está preparado para desplegar en Vercel y usa una configuración mínima en [vercel.json](/Users/mac/Documents/WebMagRovMarine/vercel.json:1).
+El proyecto está preparado para Vercel y usa una configuración mínima en [vercel.json](/Users/mac/Documents/WebMagRovMarine/vercel.json:1).
 
 Flujo recomendado:
 
 1. Conectar el repositorio en Vercel.
 2. Seleccionar `main` como rama de producción.
-3. Mantener variables de entorno en Vercel si se agregan integraciones futuras.
+3. Cargar las variables `SMTP_*` y `CONTACT_FORM_TO` en Vercel.
 4. Desplegar con el preset de `Next.js`.
 
 ## Convenciones del proyecto
 
 - No versionar `node_modules`, `.next`, `.vercel`, `.env*` ni `package-lock.json`.
 - Mantener contenido editable y catálogos en `src/data/site.ts`.
-- Validar con `pnpm lint` y `pnpm build` antes de publicar cambios.
-- Tratar `public/generated` como carpeta de assets finales del sitio.
+- Validar con `pnpm lint` y `pnpm typecheck` antes de publicar cambios.
+- Tratar `public/assets`, `public/generated` y `public/favicon` como assets finales del sitio.
 
 ## Notas útiles
 
-- El sitio usa rutas dinámicas para servicios y tecnologías.
-- La capa visual mezcla animación DOM y escenas ligeras con canvas.
-- La base actual está pensada para seguir iterando branding, contenido y conversión comercial sin cambiar la arquitectura principal.
+- El formulario está implementado en [src/app/api/contact/route.ts](/Users/mac/Documents/WebMagRovMarine/src/app/api/contact/route.ts:1).
+- Los favicons se configuran desde [src/app/layout.tsx](/Users/mac/Documents/WebMagRovMarine/src/app/layout.tsx:1).
+- Las rutas dinámicas se prerenderizan con `generateStaticParams`.
