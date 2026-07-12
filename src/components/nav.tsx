@@ -31,7 +31,7 @@ export function Nav() {
             : "px-5 py-4 md:px-8"
         }`}
       >
-        <Link href="#inicio" className="min-w-0">
+        <Link href="/#inicio" className="min-w-0">
           <Logo compact priority className={scrolled ? "" : "border-white/12 shadow-[0_16px_40px_rgba(0,0,0,0.22)]"} />
         </Link>
 

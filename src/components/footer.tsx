@@ -31,7 +31,6 @@ export function Footer() {
             <p className="mb-4 text-xs uppercase tracking-[0.32em] text-slate-400">Contacto</p>
             <div className="space-y-2 text-sm text-slate-200/80">
               <p>{contactInfo.email}</p>
-              <p>{contactInfo.phone}</p>
               <p>{contactInfo.location}</p>
             </div>
           </div>

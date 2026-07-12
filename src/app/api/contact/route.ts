@@ -18,6 +18,42 @@ function requiredEnv(name: string, fallback?: string) {
   return value;
 }
 
+function escapeHtml(value: string) {
+  return value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
+}
+
+function formatMessage(payload: Required<ContactPayload>) {
+  return {
+    text: [
+      `Nombre: ${payload.name}`,
+      `Empresa: ${payload.company || "-"}`,
+      `Correo: ${payload.email}`,
+      `Telefono: ${payload.phone || "-"}`,
+      `Servicio: ${payload.service}`,
+      "",
+      "Mensaje:",
+      payload.message,
+    ].join("\n"),
+    html: `
+      <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #0f172a;">
+        <h2 style="margin-bottom: 16px;">Nueva solicitud desde magallanesrovmarine.cl</h2>
+        <p><strong>Nombre:</strong> ${escapeHtml(payload.name)}</p>
+        <p><strong>Empresa:</strong> ${escapeHtml(payload.company || "-")}</p>
+        <p><strong>Correo:</strong> ${escapeHtml(payload.email)}</p>
+        <p><strong>Telefono:</strong> ${escapeHtml(payload.phone || "-")}</p>
+        <p><strong>Servicio:</strong> ${escapeHtml(payload.service)}</p>
+        <p><strong>Mensaje:</strong></p>
+        <p style="white-space: pre-line;">${escapeHtml(payload.message)}</p>
+      </div>
+    `,
+  };
+}
+
 export async function POST(request: Request) {
   try {
     const body = (await request.json()) as ContactPayload;
@@ -43,6 +79,7 @@ export async function POST(request: Request) {
     const smtpUser = requiredEnv("SMTP_USER", "contacto@magallanesrovmarine.cl");
     const smtpPass = requiredEnv("SMTP_PASS");
     const contactTo = requiredEnv("CONTACT_FORM_TO", smtpUser);
+    const content = formatMessage(payload);
 
     const transporter = nodemailer.createTransport({
       host: smtpHost,
@@ -59,28 +96,8 @@ export async function POST(request: Request) {
       to: contactTo,
       replyTo: payload.email,
       subject: `Nueva solicitud web: ${payload.service}`,
-      text: [
-        `Nombre: ${payload.name}`,
-        `Empresa: ${payload.company || "-"}`,
-        `Correo: ${payload.email}`,
-        `Telefono: ${payload.phone || "-"}`,
-        `Servicio: ${payload.service}`,
-        "",
-        "Mensaje:",
-        payload.message,
-      ].join("\n"),
-      html: `
-        <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #0f172a;">
-          <h2 style="margin-bottom: 16px;">Nueva solicitud desde magallanesrovmarine.cl</h2>
-          <p><strong>Nombre:</strong> ${payload.name}</p>
-          <p><strong>Empresa:</strong> ${payload.company || "-"}</p>
-          <p><strong>Correo:</strong> ${payload.email}</p>
-          <p><strong>Telefono:</strong> ${payload.phone || "-"}</p>
-          <p><strong>Servicio:</strong> ${payload.service}</p>
-          <p><strong>Mensaje:</strong></p>
-          <p style="white-space: pre-line;">${payload.message}</p>
-        </div>
-      `,
+      text: content.text,
+      html: content.html,
     });
 
     return NextResponse.json({ ok: true });

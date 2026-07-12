@@ -18,17 +18,15 @@ import {
 export const siteUrl = "https://www.magallanesrovmarine.cl";
 
 export const navigation = [
-  { label: "Inicio", href: "#inicio" },
-  { label: "Empresa", href: "#empresa" },
-  { label: "Servicios", href: "#servicios" },
-  { label: "Cotizar", href: "#contacto" }
+  { label: "Inicio", href: "/#inicio" },
+  { label: "Empresa", href: "/#empresa" },
+  { label: "Servicios", href: "/#servicios" },
+  { label: "Cotizar", href: "/#contacto" }
 ];
 
 export const contactInfo = {
   email: "contacto@magallanesrovmarine.cl",
-  phone: "+56 9 6443 4499",
   location: "Punta Arenas / Cobertura Nacional",
-  whatsappHref: "https://wa.me/56964434499",
   mailtoHref: "mailto:contacto@magallanesrovmarine.cl"
 } as const;
 

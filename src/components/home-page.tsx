@@ -249,10 +249,10 @@ export function HomePage() {
                   transition={{ duration: 0.8, delay: 0.2 }}
                   className="mt-10 flex flex-col gap-4 sm:flex-row"
                 >
-                  <Link href="#contacto" className="btn-primary">
+                  <Link href="/#contacto" className="btn-primary">
                     Solicitar Cotizacion
                   </Link>
-                  <Link href="#servicios" className="btn-secondary">
+                  <Link href="/#servicios" className="btn-secondary">
                     Nuestros Servicios
                   </Link>
                 </motion.div>
@@ -739,13 +739,6 @@ export function HomePage() {
                     <div>
                       <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Correo</p>
                       <p className="mt-1 text-white">{contactInfo.email}</p>
-                    </div>
-                  </div>
-                  <div className="glass-panel flex items-center gap-4 rounded-[1.4rem] p-5">
-                    <Phone className="text-[var(--blue-soft)]" />
-                    <div>
-                      <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Telefono</p>
-                      <p className="mt-1 text-white">{contactInfo.phone}</p>
                     </div>
                   </div>
                   <div className="glass-panel flex items-center gap-4 rounded-[1.4rem] p-5">
