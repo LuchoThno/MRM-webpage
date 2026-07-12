@@ -49,7 +49,18 @@ export function Footer() {
       </div>
 
       <div className="border-t border-white/10 px-6 py-5 text-center text-xs uppercase tracking-[0.3em] text-slate-500">
-        Copyright {new Date().getFullYear()} MRM Magallanes ROV Marine. All rights reserved.
+        <span>Copyright {new Date().getFullYear()} MRM Magallanes ROV Marine. All rights reserved.</span>
+        <span className="mx-3 text-slate-700">|</span>
+        <span>Built with ❤️ by </span>
+        <Link
+          href="https://github.com/LuchoThno"
+          target="_blank"
+          rel="noreferrer"
+          className="text-slate-300 transition hover:text-white"
+        >
+          LuchoThno
+        </Link>
+        <span> Software Enginner</span>
       </div>
     </footer>
   );
