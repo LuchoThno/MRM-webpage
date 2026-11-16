@@ -539,7 +539,7 @@ export function HomePage() {
             />
 
             <div className="glass-panel rounded-[2rem] p-6">
-              <div className="relative h-[520px] overflow-hidden rounded-[1.6rem] border border-white/10 bg-[linear-gradient(180deg,#0c2445,#061223)]">
+              <div className="relative h-[460px] overflow-hidden rounded-[1.6rem] sm:h-[520px] border border-white/10 bg-[linear-gradient(180deg,#0c2445,#061223)]">
                 <div className="absolute left-5 top-5 z-10 max-w-[16rem] overflow-hidden rounded-[1.25rem] border border-[rgba(240,179,35,0.18)] bg-[linear-gradient(180deg,rgba(7,21,36,0.96),rgba(7,21,36,0.82))] px-4 py-3 shadow-[0_20px_50px_rgba(0,0,0,0.25)] backdrop-blur-md">
                   <div className="absolute inset-y-0 left-0 w-1 bg-[linear-gradient(180deg,var(--gold),rgba(240,179,35,0.18))]" />
                   <p className="pl-3 text-[0.62rem] font-semibold uppercase tracking-[0.34em] text-[var(--gold-soft)]">
@@ -549,30 +549,34 @@ export function HomePage() {
                     Cobertura Nacional
                   </p>
                 </div>
-                <Image
-                  src="/cl.svg"
-                  alt="Mapa de Chile para cobertura nacional"
-                  fill
-                  className="object-contain p-8 opacity-95"
-                />
-                {locations.map((location, index) => (
-                  <motion.div
-                    key={location.city}
-                    initial={{ opacity: 0.3, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: index * 0.08 }}
-                    className="absolute"
-                    style={{ top: location.top, left: location.left }}
-                  >
-                    <span className="absolute -left-3 -top-3 h-6 w-6 animate-ping rounded-full bg-[rgba(240,179,35,0.16)]" />
-                    <span className="relative block h-5 w-5 rounded-full border border-white/60 bg-[var(--gold)] shadow-[0_0_24px_rgba(240,179,35,0.34)]" />
-                    <div
-                      className={`absolute whitespace-nowrap rounded-full border border-white/10 bg-[#071524]/90 px-3 py-1 backdrop-blur-sm ${location.labelClass}`}
-                    >
-                      <p className="text-[0.68rem] uppercase tracking-[0.24em] text-white">{location.city}</p>
-                    </div>
-                  </motion.div>
-                ))}
+                <div className="absolute inset-x-2 bottom-4 top-24 flex items-center justify-center sm:inset-8">
+                  <div className="relative aspect-square w-full max-w-[28.5rem]">
+                    <Image
+                      src="/cl.svg"
+                      alt="Mapa de Chile con las zonas de cobertura de MRM"
+                      fill
+                      className="object-contain opacity-95"
+                    />
+                    {locations.map((location, index) => (
+                      <motion.div
+                        key={location.city}
+                        initial={{ opacity: 0.3, scale: 0.8 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: index * 0.08 }}
+                        className="absolute -translate-x-1/2 -translate-y-1/2"
+                        style={{ top: location.top, left: location.left }}
+                      >
+                        <span className="absolute -left-0.5 -top-0.5 h-6 w-6 animate-ping rounded-full bg-[rgba(240,179,35,0.16)] motion-reduce:animate-none" />
+                        <span className="relative block h-5 w-5 rounded-full border border-white/60 bg-[var(--gold)] shadow-[0_0_24px_rgba(240,179,35,0.34)]" />
+                        <div
+                          className={`absolute whitespace-nowrap rounded-full border border-white/10 bg-[#071524]/90 px-3 py-1 backdrop-blur-sm ${location.labelClass}`}
+                        >
+                          <p className="text-[0.6rem] uppercase tracking-[0.18em] text-white sm:text-[0.68rem] sm:tracking-[0.24em]">{location.city}</p>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -738,7 +742,9 @@ export function HomePage() {
                     <Mail className="text-[var(--blue-soft)]" />
                     <div>
                       <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Correo</p>
-                      <p className="mt-1 text-white">{contactInfo.email}</p>
+                      <a href={contactInfo.mailtoHref} className="mt-1 block break-all text-white transition hover:text-[var(--gold-soft)]">
+                        {contactInfo.email}
+                      </a>
                     </div>
                   </div>
                   <div className="glass-panel flex items-center gap-4 rounded-[1.4rem] p-5">

@@ -30,7 +30,9 @@ export function Footer() {
           <div>
             <p className="mb-4 text-xs uppercase tracking-[0.32em] text-slate-400">Contacto</p>
             <div className="space-y-2 text-sm text-slate-200/80">
-              <p>{contactInfo.email}</p>
+              <a href={contactInfo.mailtoHref} className="block transition hover:text-white">
+                {contactInfo.email}
+              </a>
               <p>{contactInfo.location}</p>
             </div>
           </div>
@@ -49,7 +51,7 @@ export function Footer() {
       </div>
 
       <div className="border-t border-white/10 px-6 py-5 text-center text-xs uppercase tracking-[0.3em] text-slate-500">
-        <span>Copyright {new Date().getFullYear()} MRM Magallanes ROV Marine. All rights reserved.</span>
+        <span>© {new Date().getFullYear()} MRM Magallanes ROV Marine. Todos los derechos reservados.</span>
         <span className="mx-3 text-slate-700">|</span>
         <span>Built with ❤️ by </span>
         <Link
@@ -60,7 +62,7 @@ export function Footer() {
         >
           LuchoThno
         </Link>
-        <span> Software Enginner</span>
+        <span> Software Engineer</span>
       </div>
     </footer>
   );

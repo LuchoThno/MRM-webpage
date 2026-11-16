@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Inter, Space_Grotesk } from "next/font/google";
 
 import "@/app/globals.css";
 import { siteUrl } from "@/data/site";
@@ -52,9 +53,12 @@ export const metadata: Metadata = {
   }
 };
 
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter-loaded", display: "swap" });
+const spaceGrotesk = Space_Grotesk({ subsets: ["latin"], variable: "--font-space-loaded", display: "swap" });
+
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="es" className="dark">
+    <html lang="es" className={`dark ${inter.variable} ${spaceGrotesk.variable}`}>
       <body className="bg-[#020914] font-[family-name:var(--font-inter)] text-white antialiased">{children}</body>
     </html>
   );

@@ -53,7 +53,8 @@ export function Nav() {
           type="button"
           className="col-start-3 inline-flex h-11 w-11 items-center justify-center justify-self-end rounded-full border border-white/15 bg-white/5 text-white lg:hidden"
           onClick={() => setOpen((value) => !value)}
-          aria-label="Abrir menu"
+          aria-label={open ? "Cerrar menú" : "Abrir menú"}
+          aria-expanded={open}
         >
           {open ? <X size={18} /> : <Menu size={18} />}
         </button>

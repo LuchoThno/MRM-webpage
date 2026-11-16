@@ -37,35 +37,35 @@ export const locations = [
     city: "Valparaiso",
     region: "Valparaiso",
     top: "34.7%",
-    left: "50.3%",
+    left: "52.6%",
     labelClass: "left-7 top-[-0.35rem]"
   },
   {
     city: "Concepcion",
     region: "Biobio",
-    top: "46.1%",
-    left: "48.4%",
+    top: "47.7%",
+    left: "50.1%",
     labelClass: "left-7 top-[-0.35rem]"
   },
   {
     city: "Talcahuano",
     region: "Biobio",
-    top: "44.4%",
-    left: "46.9%",
+    top: "45.8%",
+    left: "48.1%",
     labelClass: "right-7 top-[-0.35rem] text-right"
   },
   {
     city: "Puerto Montt",
     region: "Los Lagos",
-    top: "54.1%",
-    left: "46.2%",
+    top: "56.9%",
+    left: "47.2%",
     labelClass: "left-7 top-[-0.35rem]"
   },
   {
     city: "Punta Arenas",
     region: "Magallanes",
-    top: "80.7%",
-    left: "46.6%",
+    top: "87.2%",
+    left: "47.7%",
     labelClass: "left-7 top-[-0.35rem]"
   }
 ];
