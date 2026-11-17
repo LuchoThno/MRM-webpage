@@ -5,35 +5,57 @@ import { ArrowLeft, ArrowRight, CheckCircle2 } from "lucide-react";
 
 import { Footer } from "@/components/footer";
 import { Nav } from "@/components/nav";
-import { services } from "@/data/site";
+import type { Metadata } from "next";
+
+import { getServices } from "@/data/content";
+import { serviceSlugs } from "@/data/site";
+import { isLocale, localizePath, locales } from "@/i18n/config";
+import { getDictionary } from "@/i18n/dictionaries";
+
+export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return services.map((service) => ({ slug: service.slug }));
+  return locales.flatMap((lang) => serviceSlugs.map((slug) => ({ lang, slug })));
 }
 
-export default async function ServicePage({
-  params
-}: {
-  params: Promise<{ slug: string }>;
-}) {
-  const { slug } = await params;
-  const service = services.find((item) => item.slug === slug);
+export async function generateMetadata({ params }: PageProps<"/[lang]/services/[slug]">): Promise<Metadata> {
+  const { lang, slug } = await params;
+  if (!isLocale(lang)) return {};
+  const service = getServices(lang).find((item) => item.slug === slug);
+  if (!service) return {};
+  const path = `/services/${slug}`;
+
+  return {
+    title: service.title,
+    description: service.summary,
+    alternates: {
+      canonical: localizePath(lang, path),
+      languages: { es: localizePath("es", path), en: localizePath("en", path), "x-default": localizePath("es", path) }
+    }
+  };
+}
+
+export default async function ServicePage({ params }: PageProps<"/[lang]/services/[slug]">) {
+  const { lang, slug } = await params;
+  if (!isLocale(lang)) notFound();
+  const service = getServices(lang).find((item) => item.slug === slug);
 
   if (!service) notFound();
+  const t = getDictionary(lang).servicePage;
 
   const Icon = service.icon;
 
   return (
     <>
-      <Nav />
+      <Nav locale={lang} />
       <main className="min-h-screen bg-[#020914] px-6 pb-24 pt-32 md:px-8">
         <div className="mx-auto max-w-6xl">
           <Link
-            href="/#servicios"
+            href={localizePath(lang, "/#servicios")}
             className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.35em] text-[#8fd9ff] transition hover:text-white"
           >
             <ArrowLeft size={14} />
-            Volver a servicios
+            {t.back}
           </Link>
 
           <div className="mt-8 overflow-hidden rounded-[2.2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02))]">
@@ -63,7 +85,7 @@ export default async function ServicePage({
             <div className="p-8 md:p-12">
               <div className="grid gap-10 lg:grid-cols-[1.08fr_0.92fr]">
                 <div>
-                  <p className="text-xs uppercase tracking-[0.34em] text-[#8fd9ff]">Vision General</p>
+                  <p className="text-xs uppercase tracking-[0.34em] text-[#8fd9ff]">{t.overview}</p>
                   <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-300/82">{service.detail}</p>
 
                   <div className="mt-8 grid gap-4 md:grid-cols-2">
@@ -78,29 +100,29 @@ export default async function ServicePage({
 
                 <div className="space-y-5">
                   <div className="rounded-[1.6rem] border border-white/10 bg-[#061321] p-6">
-                    <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Sectores</p>
+                    <p className="text-xs uppercase tracking-[0.3em] text-slate-500">{t.sectors}</p>
                     <p className="mt-3 text-white">{service.sectors.join(", ")}.</p>
                   </div>
                   <div className="rounded-[1.6rem] border border-white/10 bg-[#061321] p-6">
-                    <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Aplicacion</p>
+                    <p className="text-xs uppercase tracking-[0.3em] text-slate-500">{t.application}</p>
                     <p className="mt-3 text-white">{service.application}</p>
                   </div>
                   <div className="rounded-[1.6rem] border border-white/10 bg-[#061321] p-6">
-                    <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Salida</p>
+                    <p className="text-xs uppercase tracking-[0.3em] text-slate-500">{t.deliverable}</p>
                     <p className="mt-3 text-white">{service.deliverable}</p>
                   </div>
                   <div className="rounded-[1.6rem] border border-white/10 bg-[#061321] p-6">
-                    <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Disponibilidad</p>
+                    <p className="text-xs uppercase tracking-[0.3em] text-slate-500">{t.availability}</p>
                     <p className="mt-3 text-white">{service.availability}</p>
                   </div>
                   <div className="rounded-[1.6rem] border border-[rgba(240,179,35,0.18)] bg-[linear-gradient(180deg,rgba(240,179,35,0.07),rgba(6,19,33,0.9))] p-6">
-                    <p className="text-xs uppercase tracking-[0.3em] text-[var(--gold-soft)]">Siguiente Paso</p>
-                    <p className="mt-3 text-white">Solicita alcance, ventana de trabajo y requerimientos tecnicos para preparar una cotizacion clara.</p>
+                    <p className="text-xs uppercase tracking-[0.3em] text-[var(--gold-soft)]">{t.nextStep}</p>
+                    <p className="mt-3 text-white">{t.nextStepText}</p>
                     <Link
-                      href="/#contacto"
+                      href={localizePath(lang, "/#contacto")}
                       className="mt-6 inline-flex items-center gap-2 text-sm uppercase tracking-[0.28em] text-[var(--gold-soft)] transition hover:text-white"
                     >
-                      Ir a cotizar <ArrowRight size={16} />
+                      {t.nextStepCta} <ArrowRight size={16} />
                     </Link>
                   </div>
                 </div>
@@ -109,7 +131,7 @@ export default async function ServicePage({
           </div>
         </div>
       </main>
-      <Footer />
+      <Footer locale={lang} />
     </>
   );
 }

@@ -10,8 +10,8 @@
   --gold-soft: #f6cf70;
   --blue-soft: #9db7de;
   --muted: #e5e7eb;
-  --font-space: "Space Grotesk", "Avenir Next Condensed", "Arial Narrow", sans-serif;
-  --font-inter: "Inter", "IBM Plex Sans", "Segoe UI", sans-serif;
+  --font-space: var(--font-space-loaded), "Space Grotesk", "Avenir Next Condensed", "Arial Narrow", sans-serif;
+  --font-inter: var(--font-inter-loaded), "Inter", "IBM Plex Sans", "Segoe UI", sans-serif;
   --font-ibm-plex: "IBM Plex Sans", "Inter", "Segoe UI", sans-serif;
 }
 
