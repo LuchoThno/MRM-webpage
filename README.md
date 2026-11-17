@@ -38,22 +38,29 @@ Sitio corporativo de **MRM** para presentar servicios submarinos, capacidades op
 
 ```text
 src/
+  proxy.ts                    # español en "/", inglés en "/en"
   app/
+    [lang]/
+      layout.tsx              # <html lang>, metadatos y hreflang por idioma
+      page.tsx
+      services/[slug]/page.tsx
+      technology/[slug]/page.tsx
     api/contact/route.ts
-    layout.tsx
-    page.tsx
     globals.css
     robots.ts
-    sitemap.ts
-    services/[slug]/page.tsx
-    technology/[slug]/page.tsx
+    sitemap.ts                # incluye ambas versiones con alternates
   components/
     home-page.tsx
-    nav.tsx
+    nav.tsx / nav-client.tsx  # navegación + selector ES / EN
     footer.tsx
     logo.tsx
   data/
-    site.ts
+    site.ts                   # datos que no dependen del idioma (slugs, imágenes, íconos)
+    content.ts                # combina datos + textos del idioma
+  i18n/
+    config.ts                 # idiomas y helper localizePath()
+    dictionaries/es.ts        # todos los textos en español
+    dictionaries/en.ts        # todos los textos en inglés
 
 public/
   assets/
@@ -64,18 +71,18 @@ public/
 vercel.json
 ```
 
-## Punto de entrada
+## Idiomas
 
-La home renderiza `HomePage` desde [src/app/page.tsx](/Users/mac/Documents/WebMagRovMarine/src/app/page.tsx:1).
+El sitio es bilingüe:
 
-La configuración editorial del sitio vive principalmente en [src/data/site.ts](/Users/mac/Documents/WebMagRovMarine/src/data/site.ts:1), donde están centralizados:
+- Español (idioma por defecto): `/`, `/services/<slug>`, `/technology/<slug>`
+- Inglés: `/en`, `/en/services/<slug>`, `/en/technology/<slug>`
 
-- navegación
-- métricas
-- servicios
-- tecnologías
-- clientes
-- links sociales
+`src/proxy.ts` reescribe internamente las rutas sin prefijo al segmento `/es` y redirige `/es/...` a la URL limpia.
+
+Para editar textos, cambia `src/i18n/dictionaries/es.ts` y `src/i18n/dictionaries/en.ts`. El archivo en inglés está tipado contra el español, así que TypeScript avisa si falta una traducción.
+
+Para agregar un servicio: suma el `slug` en `serviceSlugs` y su imagen/ícono en `serviceMedia` (`src/data/site.ts`), y agrega sus textos en ambos diccionarios.
 
 ## Secciones del sitio
 

@@ -27,7 +27,7 @@ function escapeHtml(value: string) {
     .replaceAll("'", "&#39;");
 }
 
-function formatMessage(payload: Required<ContactPayload>) {
+function formatMessage(payload: Required<ContactPayload>, locale: "es" | "en") {
   return {
     text: [
       `Nombre: ${payload.name}`,
@@ -35,6 +35,7 @@ function formatMessage(payload: Required<ContactPayload>) {
       `Correo: ${payload.email}`,
       `Telefono: ${payload.phone || "-"}`,
       `Servicio: ${payload.service}`,
+      `Idioma del sitio: ${locale === "en" ? "Inglés" : "Español"}`,
       "",
       "Mensaje:",
       payload.message,
@@ -47,6 +48,7 @@ function formatMessage(payload: Required<ContactPayload>) {
         <p><strong>Correo:</strong> ${escapeHtml(payload.email)}</p>
         <p><strong>Telefono:</strong> ${escapeHtml(payload.phone || "-")}</p>
         <p><strong>Servicio:</strong> ${escapeHtml(payload.service)}</p>
+        <p><strong>Idioma del sitio:</strong> ${locale === "en" ? "Inglés" : "Español"}</p>
         <p><strong>Mensaje:</strong></p>
         <p style="white-space: pre-line;">${escapeHtml(payload.message)}</p>
       </div>
@@ -54,9 +56,23 @@ function formatMessage(payload: Required<ContactPayload>) {
   };
 }
 
+const errors = {
+  es: {
+    missing: "Completa nombre, correo, servicio y mensaje.",
+    failed: "No se pudo enviar la solicitud. Intenta nuevamente o escríbenos a contacto@magallanesrovmarine.cl."
+  },
+  en: {
+    missing: "Please fill in your name, email, service and message.",
+    failed: "We couldn’t send your request. Please try again or email contacto@magallanesrovmarine.cl."
+  }
+} as const;
+
 export async function POST(request: Request) {
+  let locale: keyof typeof errors = "es";
+
   try {
-    const body = (await request.json()) as ContactPayload;
+    const body = (await request.json()) as ContactPayload & { locale?: string };
+    locale = body.locale === "en" ? "en" : "es";
 
     const payload = {
       name: body.name?.trim() ?? "",
@@ -69,7 +85,7 @@ export async function POST(request: Request) {
 
     if (!payload.name || !payload.email || !payload.service || !payload.message) {
       return NextResponse.json(
-        { error: "Completa nombre, correo, servicio y mensaje." },
+        { error: errors[locale].missing },
         { status: 400 }
       );
     }
@@ -79,7 +95,7 @@ export async function POST(request: Request) {
     const smtpUser = requiredEnv("SMTP_USER", "contacto@magallanesrovmarine.cl");
     const smtpPass = requiredEnv("SMTP_PASS");
     const contactTo = requiredEnv("CONTACT_FORM_TO", smtpUser);
-    const content = formatMessage(payload);
+    const content = formatMessage(payload, locale);
 
     const transporter = nodemailer.createTransport({
       host: smtpHost,
@@ -104,7 +120,7 @@ export async function POST(request: Request) {
   } catch (error) {
     console.error("Contact form error:", error);
     return NextResponse.json(
-      { error: "No se pudo enviar la solicitud. Revisa la configuracion SMTP." },
+      { error: errors[locale].failed },
       { status: 500 }
     );
   }

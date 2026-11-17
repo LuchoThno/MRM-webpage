@@ -1,28 +1,24 @@
 import type { MetadataRoute } from "next";
 
-import { services, siteUrl, technologies } from "@/data/site";
+import { serviceSlugs, siteUrl, technologySlugs } from "@/data/site";
+import { localizePath, locales } from "@/i18n/config";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const staticRoutes = ["", "/#empresa", "/#servicios", "/#tecnologia", "/#contacto"].map((path) => ({
-    url: `${siteUrl}${path}`,
-    lastModified: new Date(),
-    changeFrequency: "monthly" as const,
-    priority: path === "" ? 1 : 0.8
-  }));
+  const paths = [
+    { path: "/", priority: 1 },
+    ...serviceSlugs.map((slug) => ({ path: `/services/${slug}`, priority: 0.7 })),
+    ...technologySlugs.map((slug) => ({ path: `/technology/${slug}`, priority: 0.5 }))
+  ];
 
-  const serviceRoutes = services.map((service) => ({
-    url: `${siteUrl}/services/${service.slug}`,
-    lastModified: new Date(),
-    changeFrequency: "monthly" as const,
-    priority: 0.7
-  }));
-
-  const techRoutes = technologies.map((technology) => ({
-    url: `${siteUrl}/technology/${technology.slug}`,
-    lastModified: new Date(),
-    changeFrequency: "monthly" as const,
-    priority: 0.7
-  }));
-
-  return [...staticRoutes, ...serviceRoutes, ...techRoutes];
+  return paths.flatMap(({ path, priority }) =>
+    locales.map((locale) => ({
+      url: `${siteUrl}${localizePath(locale, path)}`,
+      lastModified: new Date(),
+      changeFrequency: "monthly" as const,
+      priority,
+      alternates: {
+        languages: Object.fromEntries(locales.map((item) => [item, `${siteUrl}${localizePath(item, path)}`]))
+      }
+    }))
+  );
 }

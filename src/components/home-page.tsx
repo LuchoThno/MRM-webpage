@@ -18,45 +18,16 @@ import {
 } from "lucide-react";
 import { useEffect, useState, type FormEvent } from "react";
 
-import { Footer } from "@/components/footer";
-import { Nav } from "@/components/nav";
-import {
-  contactInfo,
-  locations,
-  metrics,
-  serviceCategories,
-  services,
-} from "@/data/site";
+import type { ServiceCard } from "@/data/content";
+import { contactInfo, getServiceIcon, locations } from "@/data/site";
+import { localizePath, type Locale } from "@/i18n/config";
+import type { Dictionary } from "@/i18n/dictionaries";
 
-const processCards = [
-  {
-    step: "Diagnostico en terreno",
-    icon: ClipboardList,
-    front: "Lectura inicial",
-    back: "Levantamos el estado real de la faena antes de mover recursos.",
-    image: "/assets/monitor_control_rov_embarcacion.jpg",
-  },
-  {
-    step: "Plan de intervencion",
-    icon: HardHat,
-    front: "Alcance y recursos",
-    back: "Definimos alcance, recursos y ventana de ejecucion junto al cliente.",
-    image: "/assets/tecnico_cable_embarcacion_01.jpg",
-  },
-  {
-    step: "Ejecucion controlada",
-    icon: Camera,
-    front: "Operacion con evidencia",
-    back: "Ejecutamos con checklist y registro visual en cada frente de trabajo.",
-    image: "/assets/inspeccion_helice_submarina.jpg",
-  },
-  {
-    step: "Informe y cierre",
-    icon: FileCheck2,
-    front: "Reporte ejecutivo",
-    back: "Entregamos un reporte claro, sin relleno ni informacion redundante.",
-    image: "/assets/plano_georreferenciacion_muestra.jpg",
-  }
+const processMedia = [
+  { icon: ClipboardList, image: "/assets/monitor_control_rov_embarcacion.jpg" },
+  { icon: HardHat, image: "/assets/tecnico_cable_embarcacion_01.jpg" },
+  { icon: Camera, image: "/assets/inspeccion_helice_submarina.jpg" },
+  { icon: FileCheck2, image: "/assets/plano_georreferenciacion_muestra.jpg" }
 ] as const;
 
 function SectionHeading({
@@ -104,7 +75,16 @@ function SectionBackdrop({
   );
 }
 
-export function HomePage() {
+type HomePageProps = {
+  locale: Locale;
+  dict: Dictionary;
+  services: ServiceCard[];
+};
+
+export function HomePage({ locale, dict, services }: HomePageProps) {
+  const processCards = dict.process.steps.map((step, index) => ({ ...step, ...processMedia[index] }));
+  const metrics = dict.metrics;
+  const t = dict.contact;
   const [formStatus, setFormStatus] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
@@ -130,7 +110,7 @@ export function HomePage() {
       setActiveProcess((current) => (current + 1) % processCards.length);
     }, 4200);
     return () => window.clearInterval(timer);
-  }, [processPaused]);
+  }, [processPaused, processCards.length]);
 
   const processProgress = (activeProcess / (processCards.length - 1)) * 100;
 
@@ -138,7 +118,7 @@ export function HomePage() {
     event.preventDefault();
 
     if (!formData.name || !formData.email || !formData.service || !formData.message) {
-      setFormStatus("Completa nombre, correo, servicio y mensaje.");
+      setFormStatus(t.missingFields);
       return;
     }
 
@@ -150,15 +130,15 @@ export function HomePage() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, locale }),
       });
 
       if (!response.ok) {
         const data = (await response.json().catch(() => null)) as { error?: string } | null;
-        throw new Error(data?.error ?? "No se pudo enviar la solicitud.");
+        throw new Error(data?.error ?? t.error);
       }
 
-      setFormStatus("Solicitud enviada correctamente.");
+      setFormStatus(t.success);
       setFormData({
         name: "",
         company: "",
@@ -168,7 +148,7 @@ export function HomePage() {
         message: "",
       });
     } catch (error) {
-      const message = error instanceof Error ? error.message : "No se pudo enviar la solicitud.";
+      const message = error instanceof Error ? error.message : t.error;
       setFormStatus(message);
     } finally {
       setIsSubmitting(false);
@@ -177,14 +157,12 @@ export function HomePage() {
 
   return (
     <>
-      <Nav />
-
       <main className="relative overflow-hidden bg-[#020914] text-white">
         <section id="inicio" className="relative min-h-screen overflow-hidden">
           <div className="absolute inset-0">
             <Image
               src="/generated/hero-rov-underwater.png"
-              alt="ROV industrial trabajando bajo el agua"
+              alt={dict.hero.imageAlt}
               fill
               priority
               className="object-cover object-[70%_center] opacity-80"
@@ -202,7 +180,7 @@ export function HomePage() {
                   transition={{ duration: 0.8 }}
                   className="mb-6 text-xs uppercase tracking-[0.45em] text-[var(--blue-soft)]"
                 >
-                  Ingenieria submarina premium para Chile
+                  {dict.hero.eyebrow}
                 </motion.p>
                 <motion.h1
                   initial={{ opacity: 0, y: 28 }}
@@ -211,12 +189,12 @@ export function HomePage() {
                   transition={{ duration: 0.9 }}
                   className="font-[family-name:var(--font-space)] text-5xl font-semibold tracking-tight text-white sm:text-6xl lg:text-[4.35rem]"
                 >
-                  Ingenieria submarina
+                  {dict.hero.title}
                   <span className="mt-4 block text-2xl font-normal tracking-[0.08em] text-slate-100 md:text-3xl">
-                    profesional para operaciones criticas
+                    {dict.hero.subtitle}
                   </span>
                   <span className="mt-2 block text-lg uppercase tracking-[0.42em] text-[var(--gold-soft)] md:text-xl">
-                    Marine Robotics &amp; Subsea Engineering
+                    {dict.hero.tagline}
                   </span>
                 </motion.h1>
                 <motion.p
@@ -226,8 +204,7 @@ export function HomePage() {
                   transition={{ duration: 0.9, delay: 0.1 }}
                   className="mt-8 max-w-2xl text-lg leading-8 text-slate-300/80 md:text-xl"
                 >
-                  Inspeccion, survey y soporte tecnico con enfoque ejecutivo, trazabilidad digital y capacidad de
-                  despliegue nacional para puertos, acuicultura, navieras e infraestructura maritima.
+                  {dict.hero.description}
                 </motion.p>
                 <div className="mt-10 grid gap-4 sm:grid-cols-3">
                   {metrics.slice(0, 3).map((metric) => (
@@ -249,11 +226,11 @@ export function HomePage() {
                   transition={{ duration: 0.8, delay: 0.2 }}
                   className="mt-10 flex flex-col gap-4 sm:flex-row"
                 >
-                  <Link href="/#contacto" className="btn-primary">
-                    Solicitar Cotizacion
+                  <Link href={localizePath(locale, "/#contacto")} className="btn-primary">
+                    {dict.hero.primaryCta}
                   </Link>
-                  <Link href="/#servicios" className="btn-secondary">
-                    Nuestros Servicios
+                  <Link href={localizePath(locale, "/#servicios")} className="btn-secondary">
+                    {dict.hero.secondaryCta}
                   </Link>
                 </motion.div>
                 <div className="mt-14 flex items-center gap-5">
@@ -276,25 +253,25 @@ export function HomePage() {
                     <div className="relative h-[27rem]">
                       <Image
                         src="/generated/hull-inspection-real.png"
-                        alt="Inspeccion de casco con ROV"
+                        alt={dict.hero.cardImageAlt}
                         fill
                         className="object-cover object-center"
                       />
                       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,16,31,0.02),rgba(5,16,31,0.74))]" />
                     </div>
                     <div className="absolute left-5 top-5 rounded-full border border-white/10 bg-[#081523]/80 px-3 py-1 text-[0.65rem] uppercase tracking-[0.32em] text-slate-200/84">
-                      ROV Inspection
+                      {dict.hero.cardBadge}
                     </div>
                   </div>
                   <div className="grid gap-4 px-2 pb-2 pt-5 sm:grid-cols-2">
                     <div>
-                      <p className="text-xs uppercase tracking-[0.32em] text-slate-400">Capacidad operacional</p>
-                      <p className="mt-3 text-2xl font-medium text-white">250 m de profundidad con despliegue nacional.</p>
+                      <p className="text-xs uppercase tracking-[0.32em] text-slate-400">{dict.hero.capacityLabel}</p>
+                      <p className="mt-3 text-2xl font-medium text-white">{dict.hero.capacityValue}</p>
                     </div>
                     <div>
-                      <p className="text-xs uppercase tracking-[0.32em] text-slate-400">Entrega ejecutiva</p>
+                      <p className="text-xs uppercase tracking-[0.32em] text-slate-400">{dict.hero.deliveryLabel}</p>
                       <p className="mt-3 text-sm leading-7 text-slate-300/74">
-                        Evidencia visual, hallazgos tecnicos y reportes listos para toma de decision, auditoria o continuidad operacional.
+                        {dict.hero.deliveryValue}
                       </p>
                     </div>
                   </div>
@@ -304,7 +281,7 @@ export function HomePage() {
           </div>
 
           <div className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-3 md:flex">
-            <span className="text-[0.65rem] uppercase tracking-[0.45em] text-slate-400">Scroll</span>
+            <span className="text-[0.65rem] uppercase tracking-[0.45em] text-slate-400">{dict.hero.scroll}</span>
             <div className="flex h-14 w-8 justify-center rounded-full border border-white/15">
               <motion.div
                 animate={{ y: [6, 24, 6] }}
@@ -331,23 +308,17 @@ export function HomePage() {
               className="space-y-7"
             >
               <SectionHeading
-                eyebrow="Quienes Somos"
-                title="Un operador tecnico para decisiones submarinas con estandar ejecutivo."
-                description="MRM ejecuta inspeccion, survey y soporte operacional con foco en continuidad, trazabilidad y velocidad de respuesta."
+                eyebrow={dict.about.eyebrow}
+                title={dict.about.title}
+                description={dict.about.description}
               />
               <div className="grid gap-4 sm:grid-cols-3">
-                <div className="rounded-[1.6rem] border border-white/10 bg-[rgba(8,19,38,0.72)] p-5">
-                  <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Perfil</p>
-                  <p className="mt-3 text-lg font-medium text-white">ROV, survey e informes tecnicos.</p>
-                </div>
-                <div className="rounded-[1.6rem] border border-white/10 bg-[rgba(8,19,38,0.72)] p-5">
-                  <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Cobertura</p>
-                  <p className="mt-3 text-lg font-medium text-white">Puertos, acuicultura y activos criticos.</p>
-                </div>
-                <div className="rounded-[1.6rem] border border-white/10 bg-[rgba(8,19,38,0.72)] p-5">
-                  <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Entrega</p>
-                  <p className="mt-3 text-lg font-medium text-white">Evidencia visual y lectura ejecutiva.</p>
-                </div>
+                {dict.about.cards.map((card) => (
+                  <div key={card.label} className="rounded-[1.6rem] border border-white/10 bg-[rgba(8,19,38,0.72)] p-5">
+                    <p className="text-xs uppercase tracking-[0.3em] text-slate-400">{card.label}</p>
+                    <p className="mt-3 text-lg font-medium text-white">{card.value}</p>
+                  </div>
+                ))}
               </div>
             </motion.div>
 
@@ -363,27 +334,26 @@ export function HomePage() {
                 <div className="relative min-h-[360px]">
                   <Image
                     src="/generated/team-deck-operations.png"
-                    alt="Equipo MRM preparando despliegue de ROV"
+                    alt={dict.about.imageAlt}
                     fill
                     className="object-cover"
                   />
                   <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(3,17,31,0.12),rgba(1,7,13,0.88))]" />
                   <div className="absolute inset-x-0 bottom-0 grid gap-4 border-t border-white/10 bg-[rgba(4,17,34,0.78)] p-6 md:grid-cols-[1.15fr_0.85fr]">
                     <div>
-                      <p className="text-xs uppercase tracking-[0.3em] text-[var(--blue-soft)]">Equipo y Operacion</p>
+                      <p className="text-xs uppercase tracking-[0.3em] text-[var(--blue-soft)]">{dict.about.teamLabel}</p>
                       <p className="mt-3 max-w-xl text-lg leading-8 text-slate-200/84">
-                        Operamos con protocolos claros, movilizacion coordinada y evidencia lista para cliente,
-                        gerencia tecnica o auditoria.
+                        {dict.about.teamText}
                       </p>
                     </div>
                     <div className="grid gap-3">
                       <div className="flex items-center gap-3 rounded-[1.1rem] border border-white/10 bg-white/[0.04] px-4 py-3">
                         <Shield className="text-[var(--gold)]" size={18} />
-                        <span className="text-sm text-slate-100">Seguridad operacional y control documental</span>
+                        <span className="text-sm text-slate-100">{dict.about.safety}</span>
                       </div>
                       <div className="flex items-center gap-3 rounded-[1.1rem] border border-white/10 bg-white/[0.04] px-4 py-3">
                         <MoveRight className="text-[var(--gold)]" size={18} />
-                        <span className="text-sm text-slate-100">Respuesta tecnica desde Magallanes a nivel nacional</span>
+                        <span className="text-sm text-slate-100">{dict.about.response}</span>
                       </div>
                     </div>
                   </div>
@@ -407,20 +377,20 @@ export function HomePage() {
     {/* Título y reseña */}
     <div className="max-w-3xl">
       <SectionHeading
-        eyebrow="Nuestros Servicios"
-        title="Capacidades submarinas para una industria que no admite error."
-        description="Diseñamos cada faena con trazabilidad, evidencia y criterios técnicos claros para que tu equipo decida rápido y ejecute con seguridad."
+        eyebrow={dict.servicesSection.eyebrow}
+        title={dict.servicesSection.title}
+        description={dict.servicesSection.description}
       />
     </div>
 
     {/* Sectores atendidos */}
     <div className="flex flex-col gap-5 lg:items-end">
       <p className="text-xs font-medium uppercase tracking-[0.32em] text-slate-400">
-        Sectores que atendemos
+        {dict.servicesSection.sectorsLabel}
       </p>
 
       <div className="flex max-w-lg flex-wrap gap-3 lg:justify-end">
-        {serviceCategories.map((category) => (
+        {dict.servicesSection.sectors.map((category) => (
           <span
             key={category}
             className="
@@ -448,7 +418,7 @@ export function HomePage() {
 
   <div className="relative z-10 mt-16 grid auto-rows-fr gap-5 md:grid-cols-2 xl:grid-cols-3">
     {services.map((service, index) => {
-      const Icon = service.icon;
+      const Icon = getServiceIcon(service.slug);
 
       return (
         <motion.div
@@ -463,7 +433,7 @@ export function HomePage() {
           }}
         >
           <Link
-            href={`/services/${service.slug}`}
+            href={localizePath(locale, `/services/${service.slug}`)}
             className="
               group relative flex h-full min-h-[380px]
               overflow-hidden rounded-[1.8rem]
@@ -494,7 +464,7 @@ export function HomePage() {
                 </span>
 
                 <span className="inline-flex shrink-0 items-center gap-2 rounded-full border border-white/10 bg-[rgba(4,17,34,0.55)] px-4 py-2 text-[10px] font-medium uppercase tracking-[0.2em] text-[var(--gold-soft)] backdrop-blur-md">
-                  Ver servicio
+                  {dict.servicesSection.viewService}
                   <ArrowRight
                     size={15}
                     className="transition-transform duration-300 group-hover:translate-x-1"
@@ -533,9 +503,9 @@ export function HomePage() {
           />
           <div className="relative z-10 grid gap-12 lg:grid-cols-[0.88fr_1.12fr] lg:items-center">
             <SectionHeading
-              eyebrow="Cobertura Nacional"
-              title="Presencia estrategica en nodos maritimos clave de Chile."
-              description="Una lectura visual simple de cobertura y despliegue, con foco en zonas portuarias, salmoneras y operaciones maritimas de alta exigencia."
+              eyebrow={dict.coverage.eyebrow}
+              title={dict.coverage.title}
+              description={dict.coverage.description}
             />
 
             <div className="glass-panel rounded-[2rem] p-6">
@@ -543,17 +513,17 @@ export function HomePage() {
                 <div className="absolute left-5 top-5 z-10 max-w-[16rem] overflow-hidden rounded-[1.25rem] border border-[rgba(240,179,35,0.18)] bg-[linear-gradient(180deg,rgba(7,21,36,0.96),rgba(7,21,36,0.82))] px-4 py-3 shadow-[0_20px_50px_rgba(0,0,0,0.25)] backdrop-blur-md">
                   <div className="absolute inset-y-0 left-0 w-1 bg-[linear-gradient(180deg,var(--gold),rgba(240,179,35,0.18))]" />
                   <p className="pl-3 text-[0.62rem] font-semibold uppercase tracking-[0.34em] text-[var(--gold-soft)]">
-                    Presencia Operativa
+                    {dict.coverage.badgeEyebrow}
                   </p>
                   <p className="pl-3 pt-1 text-sm font-medium tracking-[0.08em] text-white">
-                    Cobertura Nacional
+                    {dict.coverage.badgeTitle}
                   </p>
                 </div>
                 <div className="absolute inset-x-2 bottom-4 top-24 flex items-center justify-center sm:inset-8">
                   <div className="relative aspect-square w-full max-w-[28.5rem]">
                     <Image
                       src="/cl.svg"
-                      alt="Mapa de Chile con las zonas de cobertura de MRM"
+                      alt={dict.coverage.mapAlt}
                       fill
                       className="object-contain opacity-95"
                     />
@@ -616,9 +586,9 @@ export function HomePage() {
           <div className="relative z-10 overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,#060f1d_0%,#0b1a2e_100%)] p-8 md:p-10">
             <div className="max-w-3xl">
                 <SectionHeading
-                  eyebrow="Proceso de Trabajo"
-                  title="De la orden de trabajo al informe final."
-                  description="Cuatro etapas, un responsable por fase y una lectura clara del avance para el cliente."
+                  eyebrow={dict.process.eyebrow}
+                  title={dict.process.title}
+                  description={dict.process.description}
                 />
             </div>
 
@@ -729,19 +699,19 @@ export function HomePage() {
             <div className="grid gap-10 xl:grid-cols-[0.8fr_1.2fr] xl:items-start">
               <div className="space-y-7">
                 <SectionHeading
-                  eyebrow="Cotizar"
-                  title="Conversemos un alcance tecnico claro, rapido y listo para evaluar."
-                  description="Un solo punto de contacto para levantar necesidad, definir alcance y preparar una cotizacion seria."
+                  eyebrow={t.eyebrow}
+                  title={t.title}
+                  description={t.description}
                 />
                 <div className="grid gap-4">
                   <div className="rounded-[1.4rem] border border-white/10 bg-[rgba(8,19,38,0.7)] p-5">
-                    <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Tiempo de respuesta</p>
-                    <p className="mt-3 text-2xl font-medium text-white">Respuesta comercial en menos de 48 horas.</p>
+                    <p className="text-xs uppercase tracking-[0.3em] text-slate-400">{t.responseLabel}</p>
+                    <p className="mt-3 text-2xl font-medium text-white">{t.responseValue}</p>
                   </div>
                   <div className="glass-panel flex items-center gap-4 rounded-[1.4rem] p-5">
                     <Mail className="text-[var(--blue-soft)]" />
                     <div>
-                      <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Correo</p>
+                      <p className="text-xs uppercase tracking-[0.3em] text-slate-500">{t.emailLabel}</p>
                       <a href={contactInfo.mailtoHref} className="mt-1 block break-all text-white transition hover:text-[var(--gold-soft)]">
                         {contactInfo.email}
                       </a>
@@ -750,8 +720,8 @@ export function HomePage() {
                   <div className="glass-panel flex items-center gap-4 rounded-[1.4rem] p-5">
                     <MapPinned className="text-[var(--blue-soft)]" />
                     <div>
-                      <p className="text-xs uppercase tracking-[0.3em] text-slate-500">Base Operacional</p>
-                      <p className="mt-1 text-white">{contactInfo.location}</p>
+                      <p className="text-xs uppercase tracking-[0.3em] text-slate-500">{t.baseLabel}</p>
+                      <p className="mt-1 text-white">{t.location}</p>
                     </div>
                   </div>
                 </div>
@@ -764,14 +734,15 @@ export function HomePage() {
                 >
                   <div className="mb-6 flex items-end justify-between gap-6">
                     <div>
-                      <p className="text-xs uppercase tracking-[0.3em] text-[var(--blue-soft)]">Formulario Ejecutivo</p>
-                      <p className="mt-3 text-2xl font-medium text-white">Cuéntanos el alcance y te contactamos.</p>
+                      <p className="text-xs uppercase tracking-[0.3em] text-[var(--blue-soft)]">{t.formEyebrow}</p>
+                      <p className="mt-3 text-2xl font-medium text-white">{t.formTitle}</p>
                     </div>
                   </div>
                   <div className="grid gap-4 md:grid-cols-2">
                     <input
                       className="field-input"
-                      placeholder="Nombre"
+                      placeholder={t.fields.name}
+                      aria-label={t.fields.name}
                       name="name"
                       value={formData.name}
                       onChange={(event) => setFormData((current) => ({ ...current, name: event.target.value }))}
@@ -779,14 +750,16 @@ export function HomePage() {
                     />
                     <input
                       className="field-input"
-                      placeholder="Empresa"
+                      placeholder={t.fields.company}
+                      aria-label={t.fields.company}
                       name="company"
                       value={formData.company}
                       onChange={(event) => setFormData((current) => ({ ...current, company: event.target.value }))}
                     />
                     <input
                       className="field-input"
-                      placeholder="Correo"
+                      placeholder={t.fields.email}
+                      aria-label={t.fields.email}
                       type="email"
                       name="email"
                       value={formData.email}
@@ -795,7 +768,8 @@ export function HomePage() {
                     />
                     <input
                       className="field-input"
-                      placeholder="Telefono"
+                      placeholder={t.fields.phone}
+                      aria-label={t.fields.phone}
                       name="phone"
                       value={formData.phone}
                       onChange={(event) => setFormData((current) => ({ ...current, phone: event.target.value }))}
@@ -803,12 +777,13 @@ export function HomePage() {
                     <select
                       className="field-input md:col-span-2"
                       name="service"
+                      aria-label={t.fields.service}
                       value={formData.service}
                       onChange={(event) => setFormData((current) => ({ ...current, service: event.target.value }))}
                       required
                     >
                       <option value="" disabled>
-                        Servicio
+                        {t.fields.service}
                       </option>
                       {services.map((service) => (
                         <option key={service.slug} value={service.slug}>
@@ -818,16 +793,21 @@ export function HomePage() {
                     </select>
                     <textarea
                       className="field-input min-h-36 md:col-span-2"
-                      placeholder="Mensaje"
+                      placeholder={t.fields.message}
+                      aria-label={t.fields.message}
                       name="message"
                       value={formData.message}
                       onChange={(event) => setFormData((current) => ({ ...current, message: event.target.value }))}
                       required
                     />
                   </div>
-                  {formStatus ? <p className="mt-4 text-sm text-slate-200">{formStatus}</p> : null}
+                  {formStatus ? (
+                    <p className="mt-4 text-sm text-slate-200" role="status">
+                      {formStatus}
+                    </p>
+                  ) : null}
                   <button type="submit" className="btn-primary mt-6 w-full justify-center" disabled={isSubmitting}>
-                    {isSubmitting ? "Enviando..." : "Enviar Solicitud"}
+                    {isSubmitting ? t.submitting : t.submit}
                   </button>
                 </form>
               </div>
@@ -836,7 +816,6 @@ export function HomePage() {
         </section>
       </main>
 
-      <Footer />
     </>
   );
 }
