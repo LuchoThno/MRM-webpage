@@ -56,9 +56,9 @@ export type ServiceSlug = (typeof serviceSlugs)[number];
 
 export const serviceMedia: Record<ServiceSlug, { icon: LucideIcon; image: string }> = {
   "rov-inspection": { icon: Radar, image: "/assets/piloto_operando_rov.jpg" },
-  "hull-inspection": { icon: ShipWheel, image: "/assets/inspeccion_casco_buque.jpg" },
-  "hull-cleaning": { icon: Sparkles, image: "/assets/inspeccion_fondo_marino_restos.jpg" },
-  "cavitation-cleaning": { icon: Waves, image: "/assets/vista_camara_cavitacion.jpg" },
+  "hull-inspection": { icon: ShipWheel, image: "/assets/casco/inspeccion-bulbo-proa.jpg" },
+  "hull-cleaning": { icon: Sparkles, image: "/assets/casco/helice-con-fouling.jpg" },
+  "cavitation-cleaning": { icon: Waves, image: "/assets/casco/pala-helice-algas.jpg" },
   "subsea-survey": { icon: Map, image: "/assets/diagrama_inspeccion_tensores.jpg" },
   "usbl-positioning": { icon: Waypoints, image: "/assets/usbl_seatrac_subsea.jpg" },
   "pipeline-inspection": { icon: Cable, image: "/assets/inspeccion_oleoducto_submarino.jpg" },
@@ -66,7 +66,7 @@ export const serviceMedia: Record<ServiceSlug, { icon: LucideIcon; image: string
   "environmental-monitoring": { icon: Activity, image: "/assets/equipo_multiparametrico_terreno.jpg" },
   aquaculture: { icon: Fish, image: "/assets/inspeccion_malla_cultivo.jpg" },
   "pre-infa": { icon: ScanSearch, image: "/assets/tecnico_boya_costa.jpg" },
-  "technical-reports": { icon: FileText, image: "/assets/diagrama_inspeccion_malla.jpg" }
+  "technical-reports": { icon: FileText, image: "/assets/casco/corrosion-bulbo.jpg" }
 };
 
 export function getServiceIcon(slug: ServiceSlug) {
