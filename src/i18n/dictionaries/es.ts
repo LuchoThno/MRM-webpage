@@ -29,9 +29,8 @@ const es = {
     switchLanguage: "Ver el sitio en inglés"
   },
   hero: {
-    eyebrow: "Ingeniería submarina para Chile",
     title: "Ingeniería submarina",
-    subtitle: "profesional para operaciones críticas",
+    subtitle: "para operaciones críticas",
     tagline: "Marine Robotics & Subsea Engineering",
     description:
       "Inspección, survey y soporte técnico con enfoque ejecutivo, trazabilidad digital y capacidad de despliegue nacional para puertos, acuicultura, navieras e infraestructura marítima.",
@@ -40,8 +39,6 @@ const es = {
     imageAlt: "ROV industrial trabajando bajo el agua",
     cardImageAlt: "Inspección de casco con ROV",
     cardBadge: "Inspección ROV",
-    capacityLabel: "Capacidad operacional",
-    capacityValue: "250 m de profundidad con despliegue nacional.",
     deliveryLabel: "Entrega ejecutiva",
     deliveryValue:
       "Evidencia visual, hallazgos técnicos y reportes listos para toma de decisión, auditoría o continuidad operacional.",

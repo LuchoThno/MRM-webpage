@@ -30,7 +30,6 @@ const en: Dictionary = {
     switchLanguage: "Ver el sitio en español"
   },
   hero: {
-    eyebrow: "Subsea engineering for Chile",
     title: "Subsea engineering",
     subtitle: "for critical marine operations",
     tagline: "Marine Robotics & Subsea Engineering",
@@ -41,8 +40,6 @@ const en: Dictionary = {
     imageAlt: "Industrial ROV working underwater",
     cardImageAlt: "ROV hull inspection",
     cardBadge: "ROV Inspection",
-    capacityLabel: "Operating capacity",
-    capacityValue: "250 m depth rating with nationwide deployment.",
     deliveryLabel: "Executive delivery",
     deliveryValue:
       "Visual evidence, technical findings and reports ready for decision-making, audits or operational continuity.",

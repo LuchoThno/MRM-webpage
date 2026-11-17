@@ -64,7 +64,7 @@ export function NavClient({ locale, items, homeHref, labels }: NavClientProps) {
         }`}
       >
         <Link href={homeHref} className="min-w-0">
-          <Logo compact priority className={scrolled ? "" : "border-white/12 shadow-[0_16px_40px_rgba(0,0,0,0.22)]"} />
+          <Logo compact priority className={`transition-all duration-500 ${scrolled ? "!w-[6.25rem] sm:!w-[6.75rem]" : ""}`} />
         </Link>
 
         <nav className="hidden items-center justify-center gap-8 lg:flex">

@@ -178,24 +178,20 @@ export function HomePage({ locale, dict, services }: HomePageProps) {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.8 }}
-                  className="mb-6 text-xs uppercase tracking-[0.45em] text-[var(--blue-soft)]"
+                  className="mb-6 flex items-center gap-4 text-xs font-medium uppercase tracking-[0.32em] text-[var(--gold-soft)] sm:text-sm"
                 >
-                  {dict.hero.eyebrow}
+                  <span aria-hidden="true" className="h-px w-10 bg-[var(--gold)]" />
+                  {dict.hero.tagline}
                 </motion.p>
                 <motion.h1
                   initial={{ opacity: 0, y: 28 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.9 }}
-                  className="font-[family-name:var(--font-space)] text-5xl font-semibold tracking-tight text-white sm:text-6xl lg:text-[4.35rem]"
+                  className="font-[family-name:var(--font-space)] text-[2.75rem] font-semibold leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-[4.35rem]"
                 >
-                  {dict.hero.title}
-                  <span className="mt-4 block text-2xl font-normal tracking-[0.08em] text-slate-100 md:text-3xl">
-                    {dict.hero.subtitle}
-                  </span>
-                  <span className="mt-2 block text-lg uppercase tracking-[0.42em] text-[var(--gold-soft)] md:text-xl">
-                    {dict.hero.tagline}
-                  </span>
+                  {dict.hero.title}{" "}
+                  <span className="block font-medium text-slate-300/90">{dict.hero.subtitle}</span>
                 </motion.h1>
                 <motion.p
                   initial={{ opacity: 0, y: 22 }}
@@ -206,19 +202,6 @@ export function HomePage({ locale, dict, services }: HomePageProps) {
                 >
                   {dict.hero.description}
                 </motion.p>
-                <div className="mt-10 grid gap-4 sm:grid-cols-3">
-                  {metrics.slice(0, 3).map((metric) => (
-                    <div
-                      key={metric.label}
-                      className="rounded-[1.35rem] border border-white/10 bg-[rgba(8,19,38,0.72)] px-5 py-4"
-                    >
-                      <p className="text-2xl font-semibold text-white">{metric.value}</p>
-                      <p className="mt-2 text-[0.68rem] uppercase tracking-[0.28em] text-slate-300/72">
-                        {metric.label}
-                      </p>
-                    </div>
-                  ))}
-                </div>
                 <motion.div
                   initial={{ opacity: 0, y: 16 }}
                   whileInView={{ opacity: 1, y: 0 }}
@@ -233,12 +216,6 @@ export function HomePage({ locale, dict, services }: HomePageProps) {
                     {dict.hero.secondaryCta}
                   </Link>
                 </motion.div>
-                <div className="mt-14 flex items-center gap-5">
-                  <div className="h-px w-20 bg-gradient-to-r from-transparent via-[var(--gold)] to-transparent" />
-                  <p className="text-xs uppercase tracking-[0.5em] text-slate-300/75">
-                    Vis Manet, Locus Tenetur
-                  </p>
-                </div>
               </div>
 
               <motion.div
@@ -263,17 +240,9 @@ export function HomePage({ locale, dict, services }: HomePageProps) {
                       {dict.hero.cardBadge}
                     </div>
                   </div>
-                  <div className="grid gap-4 px-2 pb-2 pt-5 sm:grid-cols-2">
-                    <div>
-                      <p className="text-xs uppercase tracking-[0.32em] text-slate-400">{dict.hero.capacityLabel}</p>
-                      <p className="mt-3 text-2xl font-medium text-white">{dict.hero.capacityValue}</p>
-                    </div>
-                    <div>
-                      <p className="text-xs uppercase tracking-[0.32em] text-slate-400">{dict.hero.deliveryLabel}</p>
-                      <p className="mt-3 text-sm leading-7 text-slate-300/74">
-                        {dict.hero.deliveryValue}
-                      </p>
-                    </div>
+                  <div className="px-2 pb-2 pt-5">
+                    <p className="text-xs uppercase tracking-[0.32em] text-slate-400">{dict.hero.deliveryLabel}</p>
+                    <p className="mt-3 text-base leading-7 text-slate-200/85">{dict.hero.deliveryValue}</p>
                   </div>
                 </div>
               </motion.div>
