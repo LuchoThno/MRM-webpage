@@ -164,6 +164,7 @@ export function HomePage({ locale, dict, services }: HomePageProps) {
               src="/generated/hero-rov-underwater.png"
               alt={dict.hero.imageAlt}
               fill
+              sizes="100vw"
               priority
               className="object-cover object-[70%_center] opacity-80"
             />
@@ -232,6 +233,7 @@ export function HomePage({ locale, dict, services }: HomePageProps) {
                         src="/generated/hull-inspection-real.png"
                         alt={dict.hero.cardImageAlt}
                         fill
+                        sizes="(max-width: 1024px) 100vw, 560px"
                         className="object-cover object-center"
                       />
                       <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,16,31,0.02),rgba(5,16,31,0.74))]" />
@@ -305,6 +307,7 @@ export function HomePage({ locale, dict, services }: HomePageProps) {
                     src="/generated/team-deck-operations.png"
                     alt={dict.about.imageAlt}
                     fill
+                    sizes="(max-width: 1024px) 100vw, 600px"
                     className="object-cover"
                   />
                   <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(3,17,31,0.12),rgba(1,7,13,0.88))]" />
@@ -494,6 +497,7 @@ export function HomePage({ locale, dict, services }: HomePageProps) {
                       src="/cl.svg"
                       alt={dict.coverage.mapAlt}
                       fill
+                      sizes="(max-width: 1024px) 80vw, 456px"
                       className="object-contain opacity-95"
                     />
                     {locations.map((location, index) => (

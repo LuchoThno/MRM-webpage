@@ -9,7 +9,9 @@ import type { Metadata } from "next";
 
 import { getServices } from "@/data/content";
 import { serviceSlugs } from "@/data/site";
-import { isLocale, localizePath, locales } from "@/i18n/config";
+import { isLocale, localeLabels, localizePath, locales } from "@/i18n/config";
+import { JsonLd } from "@/components/json-ld";
+import { buildAlternates, serviceJsonLd, siteName } from "@/lib/seo";
 import { getDictionary } from "@/i18n/dictionaries";
 
 export const dynamicParams = false;
@@ -25,12 +27,27 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/services/[
   if (!service) return {};
   const path = `/services/${slug}`;
 
+  const dict = getDictionary(lang);
+  const title = `${service.title} ${dict.meta.serviceTitleSuffix}`;
+
   return {
-    title: service.title,
-    description: service.summary,
-    alternates: {
-      canonical: localizePath(lang, path),
-      languages: { es: localizePath("es", path), en: localizePath("en", path), "x-default": localizePath("es", path) }
+    title,
+    description: `${service.summary} ${service.availability}`,
+    alternates: buildAlternates(lang, path),
+    openGraph: {
+      title: `${title} | ${siteName}`,
+      description: service.summary,
+      url: localizePath(lang, path),
+      siteName,
+      locale: localeLabels[lang].ogLocale,
+      type: "website",
+      images: [{ url: service.image, alt: service.title }]
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${title} | ${siteName}`,
+      description: service.summary,
+      images: [service.image]
     }
   };
 }
@@ -47,6 +64,7 @@ export default async function ServicePage({ params }: PageProps<"/[lang]/service
 
   return (
     <>
+      <JsonLd data={serviceJsonLd(lang, service.slug, service.image)} />
       <Nav locale={lang} />
       <main className="min-h-screen bg-[#020914] px-6 pb-24 pt-32 md:px-8">
         <div className="mx-auto max-w-6xl">
@@ -65,6 +83,7 @@ export default async function ServicePage({ params }: PageProps<"/[lang]/service
                 alt={service.title}
                 fill
                 priority
+                sizes="(max-width: 1200px) 100vw, 1152px"
                 className="object-cover object-center"
               />
               <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(3,11,21,0.14),rgba(3,11,21,0.72)_60%,rgba(3,11,21,0.92)_100%)]" />

@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { Logo } from "@/components/logo";
-import { contactInfo, navigationAnchors, socialLinks } from "@/data/site";
+import { contactInfo, navigationAnchors, serviceSlugs, socialLinks } from "@/data/site";
 import { localizePath, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 
@@ -11,7 +11,7 @@ export function Footer({ locale }: { locale: Locale }) {
 
   return (
     <footer className="border-t border-white/10 bg-[#020a14]">
-      <div className="mx-auto grid max-w-7xl gap-10 px-6 py-14 md:grid-cols-[1.4fr_1fr_1fr] md:px-8">
+      <div className="mx-auto grid max-w-7xl gap-10 px-6 py-14 md:grid-cols-2 md:px-8 lg:grid-cols-[1.3fr_0.7fr_1.1fr_1fr]">
         <div className="space-y-5">
           <Logo />
           <p className="max-w-md text-sm leading-7 text-slate-300/75">
@@ -29,6 +29,22 @@ export function Footer({ locale }: { locale: Locale }) {
             ))}
           </div>
         </div>
+
+        <nav aria-label={t.services}>
+          <p className="mb-4 text-xs uppercase tracking-[0.32em] text-slate-400">{t.services}</p>
+          <ul className="flex flex-col gap-2">
+            {serviceSlugs.map((slug) => (
+              <li key={slug}>
+                <Link
+                  href={localizePath(locale, `/services/${slug}`)}
+                  className="text-sm text-slate-200/80 transition hover:text-white"
+                >
+                  {dict.services[slug].title}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
 
         <div className="space-y-5">
           <div>
