@@ -1,23 +1,31 @@
 const es = {
   meta: {
-    title: "MRM | Robótica submarina e ingeniería subacuática",
+    title: "Inspección submarina con ROV en Chile | MRM Magallanes ROV Marine",
     description:
-      "Magallanes ROV Marine entrega robótica submarina, inspección con ROV, limpieza por cavitación, survey y reportes técnicos para puertos, acuicultura, navieras e industria crítica.",
+      "Inspección submarina con ROV, inspección y limpieza de cascos, limpieza por cavitación, batimetría y monitoreo ambiental en Chile. Base en Punta Arenas, cobertura nacional para puertos, salmoneras y navieras.",
     ogDescription:
-      "Ingeniería submarina para Chile: inspección con ROV, survey, limpieza por cavitación y reportes técnicos de alto estándar.",
+      "Ingeniería submarina en Chile: inspección con ROV, limpieza de cascos y cavitación, survey y reportes técnicos. Base en Punta Arenas, cobertura nacional.",
     twitterDescription:
       "Robótica submarina, inspección industrial y evidencia técnica para operaciones marítimas en Chile.",
     keywords: [
-      "MRM",
-      "Magallanes ROV Marine",
-      "ROV Chile",
-      "robótica submarina",
       "inspección submarina",
-      "USBL",
-      "batimetría",
+      "ROV Chile",
       "inspección de cascos",
-      "acuicultura"
-    ]
+      "limpieza de cascos",
+      "limpieza por cavitación",
+      "inspección con ROV Punta Arenas",
+      "servicios submarinos Magallanes",
+      "inspección de redes salmoneras",
+      "batimetría",
+      "posicionamiento USBL",
+      "Magallanes ROV Marine"
+    ],
+    serviceTitleSuffix: "en Chile",
+    ogImageAlt: "MRM Magallanes ROV Marine: inspección submarina con ROV en Chile",
+    orgDescription:
+      "Empresa de ingeniería submarina con base en Punta Arenas que presta servicios de inspección con ROV, inspección y limpieza de cascos, survey, posicionamiento USBL y monitoreo ambiental en todo Chile.",
+    breadcrumbHome: "Inicio",
+    breadcrumbServices: "Servicios"
   },
   nav: {
     home: "Inicio",
@@ -142,6 +150,7 @@ const es = {
     tagline:
       "Vis Manet, Locus Tenetur. Ingeniería submarina, robótica y evidencia técnica para activos críticos a lo largo de Chile.",
     navigation: "Navegación",
+    services: "Servicios",
     contact: "Contacto",
     social: "Redes",
     rights: "Todos los derechos reservados.",

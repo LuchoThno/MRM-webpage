@@ -2,23 +2,30 @@ import type { Dictionary } from "./es";
 
 const en: Dictionary = {
   meta: {
-    title: "MRM | Marine Robotics & Subsea Engineering",
+    title: "ROV Subsea Inspection in Chile | MRM Magallanes ROV Marine",
     description:
-      "Magallanes ROV Marine delivers subsea robotics, ROV inspection, cavitation cleaning, surveys and technical reports for ports, aquaculture, shipping and critical industry in Chile.",
+      "ROV subsea inspection, hull inspection and cleaning, cavitation cleaning, bathymetric surveys and environmental monitoring in Chile. Based in Punta Arenas with nationwide coverage for ports, salmon farms and shipping.",
     ogDescription:
-      "Subsea engineering in Chile: ROV inspection, surveys, cavitation cleaning and high-standard technical reporting.",
+      "Subsea engineering in Chile: ROV inspection, hull and cavitation cleaning, surveys and technical reporting. Based in Punta Arenas, serving all of Chile.",
     twitterDescription: "Subsea robotics, industrial inspection and technical evidence for marine operations in Chile.",
     keywords: [
-      "MRM",
-      "Magallanes ROV Marine",
-      "ROV Chile",
-      "subsea robotics",
-      "underwater inspection",
-      "USBL",
-      "bathymetry",
-      "hull inspection",
-      "aquaculture"
-    ]
+      "ROV inspection Chile",
+      "subsea inspection",
+      "underwater hull inspection",
+      "hull cleaning Chile",
+      "cavitation cleaning",
+      "ROV services Punta Arenas",
+      "aquaculture net inspection",
+      "bathymetric survey",
+      "USBL positioning",
+      "Magallanes ROV Marine"
+    ],
+    serviceTitleSuffix: "in Chile",
+    ogImageAlt: "MRM Magallanes ROV Marine: ROV subsea inspection in Chile",
+    orgDescription:
+      "Subsea engineering company based in Punta Arenas providing ROV inspection, hull inspection and cleaning, surveys, USBL positioning and environmental monitoring throughout Chile.",
+    breadcrumbHome: "Home",
+    breadcrumbServices: "Services"
   },
   nav: {
     home: "Home",
@@ -142,6 +149,7 @@ const en: Dictionary = {
     tagline:
       "Vis Manet, Locus Tenetur. Subsea engineering, robotics and technical evidence for critical assets throughout Chile.",
     navigation: "Navigation",
+    services: "Services",
     contact: "Contact",
     social: "Social",
     rights: "All rights reserved.",

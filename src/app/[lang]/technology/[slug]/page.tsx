@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -7,8 +8,24 @@ import { getTechnologies } from "@/data/content";
 import { technologySlugs } from "@/data/site";
 import { isLocale, localizePath, locales } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
+import { buildAlternates } from "@/lib/seo";
 
 export const dynamicParams = false;
+
+// Technology pages are still placeholders without real content or photos:
+// keep them out of search results until they are finished.
+export async function generateMetadata({ params }: PageProps<"/[lang]/technology/[slug]">): Promise<Metadata> {
+  const { lang, slug } = await params;
+  if (!isLocale(lang)) return {};
+  const technology = getTechnologies(lang).find((item) => item.slug === slug);
+
+  return {
+    title: technology ? `ROV ${technology.title}` : undefined,
+    description: technology?.description,
+    robots: { index: false, follow: true },
+    alternates: buildAlternates(lang, `/technology/${slug}`)
+  };
+}
 
 export function generateStaticParams() {
   return locales.flatMap((lang) => technologySlugs.map((slug) => ({ lang, slug })));
