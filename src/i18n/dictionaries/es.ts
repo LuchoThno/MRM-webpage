@@ -61,10 +61,10 @@ const es = {
     scroll: "Bajar"
   },
   metrics: [
-    { value: "250 m", label: "Profundidad operacional" },
-    { value: "3", label: "ROV industriales" },
-    { value: "100%", label: "Inspecciones digitales" },
-    { value: "24/7", label: "Disponibilidad" }
+    { value: "250 m", label: "Profundidad operacional", detail: "Hasta 250 m con el ROV Kirke; 200 m con Skyring." },
+    { value: "3", label: "ROV industriales", detail: "Kirke, Skyring y Patagonia M8, según faena y profundidad." },
+    { value: "100%", label: "Inspecciones digitales", detail: "Video y registro trazable de cada hallazgo en terreno." },
+    { value: "24/7", label: "Disponibilidad", detail: "Respuesta coordinada en los principales puertos del país." }
   ],
   about: {
     eyebrow: "Quiénes somos",
@@ -108,6 +108,7 @@ const es = {
     title: "Presencia estratégica en nodos marítimos clave de Chile.",
     description:
       "Una lectura visual simple de cobertura y despliegue, con foco en zonas portuarias, salmoneras y operaciones marítimas de alta exigencia.",
+    capabilitiesLabel: "Capacidad operativa",
     badgeEyebrow: "Presencia operativa",
     badgeTitle: "Cobertura nacional",
     mapAlt: "Mapa de Chile con las zonas de cobertura de MRM"

@@ -61,10 +61,10 @@ const en: Dictionary = {
     scroll: "Scroll"
   },
   metrics: [
-    { value: "250 m", label: "Operating depth" },
-    { value: "3", label: "Industrial ROVs" },
-    { value: "100%", label: "Digital inspections" },
-    { value: "24/7", label: "Availability" }
+    { value: "250 m", label: "Operating depth", detail: "Up to 250 m with the Kirke ROV; 200 m with Skyring." },
+    { value: "3", label: "Industrial ROVs", detail: "Kirke, Skyring and Patagonia M8, matched to job and depth." },
+    { value: "100%", label: "Digital inspections", detail: "Video and traceable records of every finding on site." },
+    { value: "24/7", label: "Availability", detail: "Coordinated response in the country's main ports." }
   ],
   about: {
     eyebrow: "About us",
@@ -108,6 +108,7 @@ const en: Dictionary = {
     title: "Strategic presence at Chile’s key maritime hubs.",
     description:
       "A simple view of our coverage and deployment, focused on port areas, salmon farming regions and demanding marine operations.",
+    capabilitiesLabel: "Operating capability",
     badgeEyebrow: "Operational presence",
     badgeTitle: "Nationwide coverage",
     mapAlt: "Map of Chile showing MRM coverage areas"

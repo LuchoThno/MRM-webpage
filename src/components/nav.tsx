@@ -5,7 +5,7 @@ import { getDictionary } from "@/i18n/dictionaries";
 
 export function Nav({ locale }: { locale: Locale }) {
   const t = getDictionary(locale).nav;
-  const items = navigationAnchors.map((item) => ({ label: t[item.key], href: localizePath(locale, item.href) }));
+  const items = navigationAnchors.map((item) => ({ key: item.key, label: t[item.key], href: localizePath(locale, item.href) }));
 
   return (
     <NavClient

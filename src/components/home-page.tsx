@@ -5,6 +5,10 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   ArrowRight,
+  Bot,
+  Clock3,
+  Gauge,
+  MonitorPlay,
   Camera,
   CheckCircle2,
   ClipboardList,
@@ -23,6 +27,8 @@ import type { ServiceCard } from "@/data/content";
 import { contactInfo, getServiceIcon, locations } from "@/data/site";
 import { localizePath, type Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/dictionaries";
+
+const metricIcons = [Gauge, Bot, MonitorPlay, Clock3];
 
 const processMedia = [
   { icon: ClipboardList, image: "/assets/monitor_control_rov_embarcacion.jpg" },
@@ -98,8 +104,6 @@ export function HomePage({ locale, dict, services }: HomePageProps) {
     service: "",
     message: "",
   });
-  const [activeProcess, setActiveProcess] = useState(0);
-  const [processPaused, setProcessPaused] = useState(false);
 
   useEffect(() => {
     if (!formStatus) return;
@@ -107,15 +111,7 @@ export function HomePage({ locale, dict, services }: HomePageProps) {
     return () => window.clearTimeout(timer);
   }, [formStatus]);
 
-  useEffect(() => {
-    if (processPaused) return;
-    const timer = window.setInterval(() => {
-      setActiveProcess((current) => (current + 1) % processCards.length);
-    }, 4200);
-    return () => window.clearInterval(timer);
-  }, [processPaused, processCards.length]);
 
-  const processProgress = (activeProcess / (processCards.length - 1)) * 100;
 
   async function handleContactSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -555,12 +551,45 @@ export function HomePage({ locale, dict, services }: HomePageProps) {
             imageClassName="object-[center_42%]"
             overlayClassName="bg-[linear-gradient(180deg,rgba(2,9,20,0.94),rgba(2,9,20,0.74)_40%,rgba(2,9,20,0.92))]"
           />
-          <div className="relative z-10 grid gap-12 lg:grid-cols-[0.88fr_1.12fr] lg:items-center">
-            <SectionHeading
-              eyebrow={dict.coverage.eyebrow}
-              title={dict.coverage.title}
-              description={dict.coverage.description}
-            />
+          <div className="relative z-10 grid gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+            <div>
+              <SectionHeading
+                eyebrow={dict.coverage.eyebrow}
+                title={dict.coverage.title}
+                description={dict.coverage.description}
+              />
+              <p className="mt-10 text-xs uppercase tracking-[0.32em] text-[var(--gold-soft)]">
+                {dict.coverage.capabilitiesLabel}
+              </p>
+              <div className="mt-4 grid gap-4 sm:grid-cols-2">
+                {metrics.map((metric, index) => {
+                  const MetricIcon = metricIcons[index] ?? Gauge;
+                  return (
+                    <motion.div
+                      key={metric.label}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: "-10%" }}
+                      transition={{ duration: 0.5, delay: index * 0.06 }}
+                      className="flex gap-4 rounded-[1.4rem] border border-white/10 bg-[rgba(7,21,36,0.78)] p-5 backdrop-blur-sm"
+                    >
+                      <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-[rgba(240,179,35,0.08)] text-[var(--gold-soft)]">
+                        <MetricIcon size={20} strokeWidth={1.8} aria-hidden="true" />
+                      </span>
+                      <div className="min-w-0">
+                        <p className="font-[family-name:var(--font-space)] text-3xl font-semibold leading-none text-white">
+                          {metric.value}
+                        </p>
+                        <p className="mt-2 text-[11px] font-medium uppercase tracking-[0.22em] text-slate-300">
+                          {metric.label}
+                        </p>
+                        <p className="mt-2 text-sm leading-6 text-slate-400">{metric.detail}</p>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </div>
 
             <div className="glass-panel rounded-[2rem] p-6">
               <div className="relative h-[460px] overflow-hidden rounded-[1.6rem] sm:h-[520px] border border-white/10 bg-[linear-gradient(180deg,#0c2445,#061223)]">
@@ -609,30 +638,6 @@ export function HomePage({ locale, dict, services }: HomePageProps) {
 
         <section className="relative mx-auto max-w-7xl overflow-hidden px-6 py-24 md:px-8">
           <SectionBackdrop
-            src="/assets/rov_patagonia_m8.jpg"
-            alt=""
-            imageClassName="object-[center_48%]"
-            overlayClassName="bg-[linear-gradient(180deg,rgba(2,9,20,0.94),rgba(2,9,20,0.76)_40%,rgba(2,9,20,0.94))]"
-          />
-          <div className="relative z-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-            {metrics.map((metric, index) => (
-              <motion.div
-                key={metric.label}
-                initial={{ opacity: 0, y: 26 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-10%" }}
-                transition={{ duration: 0.6, delay: index * 0.08 }}
-                className="rounded-[1.8rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02))] p-7"
-              >
-                <p className="text-5xl font-semibold text-white">{metric.value}</p>
-                <p className="mt-4 text-sm uppercase tracking-[0.32em] text-slate-300/72">{metric.label}</p>
-              </motion.div>
-            ))}
-          </div>
-        </section>
-
-        <section className="relative mx-auto max-w-7xl overflow-hidden px-6 py-24 md:px-8">
-          <SectionBackdrop
             src="/assets/diagrama_inspeccion_tensores.jpg"
             alt=""
             imageClassName="object-contain opacity-10"
@@ -647,99 +652,50 @@ export function HomePage({ locale, dict, services }: HomePageProps) {
                 />
             </div>
 
-            <div
-              className="mt-16"
-              onMouseEnter={() => setProcessPaused(true)}
-              onMouseLeave={() => setProcessPaused(false)}
-            >
-              <div className="relative flex flex-wrap items-start justify-between gap-y-8">
-                <div className="absolute left-0 right-0 top-6 hidden h-px bg-white/10 sm:block" />
-                <div
-                  className="absolute left-0 top-6 hidden h-px transition-all duration-700 ease-out sm:block"
-                  style={{
-                    width: `${processProgress}%`,
-                    background:
-                      "linear-gradient(90deg, rgba(240,179,35,1), rgba(157,183,222,1))",
-                  }}
-                />
-
-                {processCards.map((card, index) => {
-                  const Icon = card.icon;
-                  const isActive = index === activeProcess;
-                  const isDone = index < activeProcess;
-
-                  return (
-                    <button
-                      key={card.step}
-                      onClick={() => setActiveProcess(index)}
-                      className="group relative z-10 flex w-1/2 flex-col items-start gap-3 pr-4 text-left focus:outline-none sm:w-auto"
-                      aria-pressed={isActive}
-                      type="button"
-                    >
-                      <span
-                        className="flex h-12 w-12 items-center justify-center rounded-full border text-sm font-medium transition-colors duration-300"
-                        style={{
-                          borderColor:
-                            isActive || isDone ? "rgba(240,179,35,1)" : "rgba(255,255,255,0.18)",
-                          backgroundColor: isActive
-                            ? "rgba(240,179,35,1)"
-                            : isDone
-                              ? "rgba(240,179,35,0.12)"
-                              : "rgba(11,26,46,1)",
-                          color: isActive
-                            ? "rgba(11,26,46,1)"
-                            : isDone
-                              ? "rgba(233,193,101,1)"
-                              : "rgba(255,255,255,0.5)",
-                        }}
-                      >
+            <ol className="relative mt-14 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+              {processCards.map((card, index) => {
+                const Icon = card.icon;
+                return (
+                  <motion.li
+                    key={card.step}
+                    initial={{ opacity: 0, y: 24 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-10%" }}
+                    transition={{ duration: 0.55, delay: index * 0.08 }}
+                    className="group relative flex flex-col overflow-hidden rounded-[1.5rem] border border-white/10 bg-[#071524] transition duration-500 hover:border-[rgba(240,179,35,0.3)]"
+                  >
+                    <div className="relative aspect-[16/10] overflow-hidden">
+                      <Image
+                        src={card.image}
+                        alt={card.step}
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 300px"
+                        className="object-cover transition duration-700 ease-out group-hover:scale-[1.05]"
+                      />
+                      <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(4,12,24,0.1),rgba(4,12,24,0.85))]" />
+                      <span className="absolute left-4 top-4 inline-flex h-11 w-11 items-center justify-center rounded-full bg-[var(--gold)] font-[family-name:var(--font-space)] text-sm font-semibold text-[#0b1a2e] shadow-[0_8px_24px_rgba(240,179,35,0.35)]">
                         {String(index + 1).padStart(2, "0")}
                       </span>
-                      <span
-                        className="max-w-[13rem] text-sm font-medium leading-5 transition-colors duration-300"
-                        style={{ color: isActive ? "white" : "rgba(255,255,255,0.55)" }}
-                      >
-                        {card.step}
-                      </span>
-                    </button>
-                  );
-                })}
-              </div>
-
-              <div
-                key={activeProcess}
-                className="relative mt-10 overflow-hidden rounded-[1.7rem] border border-white/10 p-8"
-              >
-                <Image
-                  src={processCards[activeProcess].image}
-                  alt={processCards[activeProcess].step}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 1200px"
-                  className="object-cover object-center"
-                />
-                <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(4,12,24,0.92)_0%,rgba(4,12,24,0.82)_42%,rgba(4,12,24,0.55)_100%)]" />
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(240,179,35,0.18),transparent_28%),radial-gradient(circle_at_left,rgba(157,183,222,0.16),transparent_30%)]" />
-                <div className="relative flex flex-col gap-6 sm:flex-row sm:items-center">
-                  <span className="flex h-14 w-14 flex-none items-center justify-center rounded-xl bg-[rgba(157,183,222,0.12)] text-[var(--blue-soft)] backdrop-blur-sm">
-                    {(() => {
-                      const ActiveIcon = processCards[activeProcess].icon;
-                      return <ActiveIcon size={26} />;
-                    })()}
-                  </span>
-                  <div>
-                    <p className="text-xs uppercase tracking-[0.28em] text-[var(--gold-soft)]">
-                      {processCards[activeProcess].front}
-                    </p>
-                    <p className="mt-3 text-xl font-medium text-white">
-                      {processCards[activeProcess].step}
-                    </p>
-                    <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-200/84">
-                      {processCards[activeProcess].back}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
+                      {index < processCards.length - 1 ? (
+                        <ArrowRight
+                          aria-hidden="true"
+                          size={18}
+                          className="absolute right-4 top-6 hidden text-white/60 xl:block"
+                        />
+                      ) : null}
+                    </div>
+                    <div className="flex flex-1 flex-col p-6">
+                      <div className="flex items-center gap-2 text-[var(--blue-soft)]">
+                        <Icon size={16} strokeWidth={1.8} aria-hidden="true" />
+                        <p className="text-[11px] uppercase tracking-[0.26em]">{card.front}</p>
+                      </div>
+                      <h3 className="mt-3 text-lg font-medium leading-snug text-white">{card.step}</h3>
+                      <p className="mt-3 text-sm leading-6 text-slate-300/80">{card.back}</p>
+                    </div>
+                  </motion.li>
+                );
+              })}
+            </ol>
           </div>
         </section>
 
