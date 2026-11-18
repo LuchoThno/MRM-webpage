@@ -490,9 +490,9 @@ export function HomePage({ locale, dict, services }: HomePageProps) {
               description={dict.logisticsSection.description}
             />
             <div className="rounded-[1.8rem] border border-[rgba(240,179,35,0.22)] bg-[linear-gradient(180deg,rgba(240,179,35,0.08),rgba(6,19,33,0.9))] p-6">
-              <p className="text-xs uppercase tracking-[0.32em] text-[var(--gold-soft)]">{dict.logisticsSection.seasonLabel}</p>
-              <p className="mt-3 text-2xl font-semibold text-white">{dict.logisticsSection.seasonValue}</p>
-              <p className="mt-2 text-sm leading-6 text-slate-300/80">{dict.logisticsSection.seasonNote}</p>
+              <p className="text-xs uppercase tracking-[0.32em] text-[var(--gold-soft)]">{dict.logisticsSection.coverageLabel}</p>
+              <p className="mt-3 text-2xl font-semibold text-white">{dict.logisticsSection.coverageValue}</p>
+              <p className="mt-2 text-sm leading-6 text-slate-300/80">{dict.logisticsSection.coverageNote}</p>
               <ul className="mt-5 space-y-2">
                 {dict.logisticsSection.pillars.map((pillar) => (
                   <li key={pillar} className="flex items-center gap-3 text-sm text-slate-100">
@@ -517,8 +517,18 @@ export function HomePage({ locale, dict, services }: HomePageProps) {
                 >
                   <Link
                     href={localizePath(locale, `/services/${service.slug}`)}
-                    className="group flex h-full gap-5 rounded-[1.6rem] border border-white/10 bg-[rgba(7,21,36,0.82)] p-6 backdrop-blur-sm transition duration-500 hover:-translate-y-1 hover:border-[rgba(240,179,35,0.3)] sm:p-7"
+                    className="group flex h-full flex-col overflow-hidden rounded-[1.6rem] border border-white/10 bg-[rgba(7,21,36,0.88)] backdrop-blur-sm transition duration-500 hover:-translate-y-1 hover:border-[rgba(240,179,35,0.3)]"
                   >
+                    <div className="relative aspect-[16/9] overflow-hidden border-b border-white/10">
+                      <Image
+                        src={service.image}
+                        alt={service.title}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 600px"
+                        className="object-cover transition duration-700 ease-out group-hover:scale-[1.04]"
+                      />
+                    </div>
+                    <div className="flex gap-5 p-6 sm:p-7">
                     <span className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-[rgba(4,17,34,0.65)] text-[var(--gold-soft)]">
                       <Icon size={26} strokeWidth={1.8} />
                     </span>
@@ -529,6 +539,7 @@ export function HomePage({ locale, dict, services }: HomePageProps) {
                         {dict.logisticsSection.viewService}
                         <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
                       </span>
+                    </div>
                     </div>
                   </Link>
                 </motion.div>

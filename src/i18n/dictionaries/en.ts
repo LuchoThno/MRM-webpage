@@ -4,7 +4,7 @@ const en: Dictionary = {
   meta: {
     title: "ROV Subsea Inspection and Marine Logistics in Chile | MRM Magallanes ROV Marine",
     description:
-      "ROV subsea inspection, hull cleaning and logistics for vessels and cruise ships in Punta Arenas: ship supply, crew changes, afloat technical support and Antarctic expedition support. Nationwide coverage.",
+      "ROV subsea inspection, hull cleaning and marine logistics for vessels and cruise ships in Chile's main ports: ship supply, crew changes and afloat technical support.",
     ogDescription:
       "Subsea engineering in Chile: ROV inspection, hull and cavitation cleaning, surveys and technical reporting. Based in Punta Arenas, serving all of Chile.",
     twitterDescription: "Subsea robotics, industrial inspection and technical evidence for marine operations in Chile.",
@@ -18,10 +18,10 @@ const en: Dictionary = {
       "aquaculture net inspection",
       "bathymetric survey",
       "USBL positioning",
-      "marine logistics Punta Arenas",
-      "cruise ship services Punta Arenas",
+      "marine logistics Chile",
+      "cruise ship services Chile",
       "ship supply Magellan Strait",
-      "crew change Punta Arenas",
+      "crew change Chile",
       "Antarctic expedition support",
       "afloat technical support",
       "Magallanes ROV Marine"
@@ -29,7 +29,7 @@ const en: Dictionary = {
     serviceTitleSuffix: "in Chile",
     ogImageAlt: "MRM Magallanes ROV Marine: ROV subsea inspection in Chile",
     orgDescription:
-      "Subsea engineering and marine logistics company based in Punta Arenas: ROV inspection, hull cleaning, surveys and environmental monitoring throughout Chile, plus logistics for vessels, cruise ships and Antarctic expeditions in Magallanes.",
+      "Subsea engineering and marine logistics company based in Punta Arenas: ROV inspection, hull cleaning, surveys and environmental monitoring throughout Chile, plus logistics for vessels, cruise ships and Antarctic expeditions in the country's main ports.",
     breadcrumbHome: "Home",
     breadcrumbServices: "Subsea services",
     breadcrumbLogistics: "Marine logistics"
@@ -46,10 +46,10 @@ const en: Dictionary = {
   },
   hero: {
     title: "Subsea and logistics solutions",
-    subtitle: "for vessels and cruise ships in Magallanes",
+    subtitle: "for vessels",
     tagline: "Subsea Engineering & Marine Logistics",
     description:
-      "ROV inspection, hull cleaning and port logistics from Punta Arenas: one team for shipping lines, cruise ships, Antarctic expeditions, aquaculture and marine infrastructure.",
+      "ROV inspection, hull cleaning and port logistics across Chile: one team for shipping lines, cruise ships, Antarctic expeditions, aquaculture and marine infrastructure.",
     primaryCta: "Request a quote",
     secondaryCta: "Subsea services",
     tertiaryCta: "Marine logistics",
@@ -95,12 +95,12 @@ const en: Dictionary = {
   },
   logisticsSection: {
     eyebrow: "Marine logistics",
-    title: "Everything your vessel needs in Magallanes, coordinated by one team.",
+    title: "Everything your vessel needs in port, coordinated by one team.",
     description:
-      "From Punta Arenas we support port calls by vessels, cruise ships and Antarctic expeditions: crew logistics, ship supply and afloat technical support, backed by our subsea capability.",
-    seasonLabel: "2026-2027 season",
-    seasonValue: "160 cruise calls in Magallanes",
-    seasonNote: "Gateway to Antarctica, September to April.",
+      "We regularly support port calls by vessels, cruise ships and expeditions in Chile's main ports: crew logistics, ship supply and afloat technical support, backed by our subsea capability.",
+    coverageLabel: "Nationwide coverage",
+    coverageValue: "Frequent service in Chile's main ports",
+    coverageNote: "Valparaíso, San Antonio, Talcahuano, Puerto Montt and Punta Arenas, among others.",
     pillars: ["24/7 point of contact", "Vetted local suppliers", "ROV and logistics in the same port call"],
     viewService: "View details"
   },
@@ -415,27 +415,27 @@ const en: Dictionary = {
     },
     "cruise-expedition-support": {
       title: "Cruise and Antarctic expedition support",
-      summary: "End-to-end support for cruise ships and expedition vessels operating from Magallanes to Antarctica.",
+      summary: "End-to-end support for cruise ships and expedition vessels in Chilean ports, including the Antarctic route.",
       detail:
-        "We support cruise ships and expedition vessels calling at Punta Arenas, Puerto Williams and the southern channels, coordinating ship supply, crew and technician logistics, and hull inspection and cleaning before the Antarctic crossing through a single point of contact. The goal is to keep the vessel on schedule without losing time in port.",
+        "We support cruise ships and expedition vessels calling at Chile's main ports, from Valparaíso and San Antonio to Puerto Montt and Punta Arenas, coordinating ship supply, crew and technician logistics, and hull inspection and cleaning before the Antarctic crossing through a single point of contact. The goal is to keep the vessel on schedule without losing time in port.",
       sectors: ["Cruise ships", "Antarctic expeditions", "Shipping"],
       application:
-        "Seasonal port calls (September to April), crew changes in Punta Arenas and vessel preparation before sailing to Antarctica.",
+        "Cruise port calls, crew changes in port and vessel preparation before sailing, including the Antarctic route.",
       deliverable:
         "A coordinated port-call plan, services delivered on schedule, delivery records and a closing report for the owner or agent.",
-      availability: "Cruise and expedition season, with planning ahead of each call and 24/7 response while in port.",
+      availability: "Frequent service all year round, with planning ahead of each call and 24/7 response while in port.",
       highlights: [
         "One local contact for the master, the owner and the agent.",
         "ROV hull inspection and cleaning before the Antarctic crossing (biosecurity).",
         "Supply, crew logistics and technical support in the same port call.",
-        "Local knowledge of Magallanes ports, anchorages and channels."
+        "Coverage in the country's main ports."
       ]
     },
     "crew-logistics": {
       title: "Crew logistics",
       summary: "Crew changes, transfers and accommodation ashore for seafarers and technical staff.",
       detail:
-        "We organise crew changes in Punta Arenas: airport meet and greet, transfers between airport, hotel and vessel, accommodation, tickets and help with immigration formalities. We also coordinate technicians and inspectors who need to board.",
+        "We organise crew changes in Chile's main ports: airport meet and greet, transfers between airport, hotel and vessel, accommodation, tickets and help with immigration formalities. We also coordinate technicians and inspectors who need to board.",
       sectors: ["Cruise ships", "Shipping", "Antarctic expeditions"],
       application:
         "Crew rotations, technicians and inspectors joining the vessel, and staff in transit to or from Antarctica.",
@@ -477,7 +477,7 @@ const en: Dictionary = {
         "Damage found in transit, inspections required by class or insurers, pre-season cleaning and repairs that do not justify dry-docking.",
       deliverable:
         "Diagnosis with visual evidence, work coordinated or carried out afloat and a technical report for the owner, class society or insurer.",
-      availability: "Fast response in Punta Arenas and scheduled jobs in other Chilean ports.",
+      availability: "Fast response and scheduled jobs in Chile's main ports.",
       highlights: [
         "ROV inspection of hull, propeller, rudder and sea chests.",
         "Coordination of technicians, surveyors and class societies.",

@@ -87,10 +87,10 @@ export const serviceMedia: Record<ServiceSlug, { icon: LucideIcon; image: string
   aquaculture: { icon: Fish, image: "/assets/inspeccion_malla_cultivo.jpg" },
   "pre-infa": { icon: ScanSearch, image: "/assets/tecnico_boya_costa.jpg" },
   "technical-reports": { icon: FileText, image: "/assets/casco/corrosion-bulbo.jpg" },
-  "cruise-expedition-support": { icon: Snowflake, image: "/assets/hero_barco_faena.jpg" },
-  "crew-logistics": { icon: Users, image: "/generated/team-deck-operations.png" },
-  "ship-supply": { icon: Package, image: "/assets/tecnico_cable_embarcacion_01.jpg" },
-  "afloat-technical-support": { icon: Wrench, image: "/assets/inspeccion_casco_buque.jpg" }
+  "cruise-expedition-support": { icon: Snowflake, image: "/assets/logistica/cruise.jpg" },
+  "crew-logistics": { icon: Users, image: "/assets/logistica/crew.jpg" },
+  "ship-supply": { icon: Package, image: "/assets/logistica/supply.jpg" },
+  "afloat-technical-support": { icon: Wrench, image: "/assets/logistica/tech.jpg" }
 };
 
 export function getServiceIcon(slug: ServiceSlug) {

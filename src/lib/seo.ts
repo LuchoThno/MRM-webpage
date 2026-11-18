@@ -85,9 +85,7 @@ export function serviceJsonLd(locale: Locale, slug: (typeof serviceSlugs)[number
       image: absoluteUrl(image),
       inLanguage: localeLabels[locale].htmlLang,
       provider: { "@id": `${siteUrl}/#organization` },
-      areaServed: isLogisticsSlug(slug)
-        ? { "@type": "AdministrativeArea", name: "Magallanes y de la Antártica Chilena" }
-        : { "@type": "Country", name: "Chile" },
+      areaServed: { "@type": "Country", name: "Chile" },
       audience: { "@type": "BusinessAudience", audienceType: service.sectors.join(", ") }
     },
     {

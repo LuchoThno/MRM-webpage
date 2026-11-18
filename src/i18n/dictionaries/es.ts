@@ -2,7 +2,7 @@ const es = {
   meta: {
     title: "Inspección submarina con ROV y logística marítima en Chile | MRM Magallanes ROV Marine",
     description:
-      "Inspección submarina con ROV, limpieza de cascos y logística para naves y cruceros en Punta Arenas: abastecimiento, tripulación, apoyo técnico a flote y expediciones antárticas. Cobertura nacional.",
+      "Inspección submarina con ROV, limpieza de cascos y logística marítima para naves y cruceros en los principales puertos de Chile: abastecimiento, tripulación y apoyo técnico a flote.",
     ogDescription:
       "Ingeniería submarina en Chile: inspección con ROV, limpieza de cascos y cavitación, survey y reportes técnicos. Base en Punta Arenas, cobertura nacional.",
     twitterDescription:
@@ -18,10 +18,10 @@ const es = {
       "inspección de redes salmoneras",
       "batimetría",
       "posicionamiento USBL",
-      "logística marítima Punta Arenas",
-      "servicios a cruceros Punta Arenas",
-      "abastecimiento de naves Magallanes",
-      "cambio de tripulación Punta Arenas",
+      "logística marítima Chile",
+      "servicios a cruceros Chile",
+      "abastecimiento de naves",
+      "cambio de tripulación Chile",
       "apoyo técnico a flote",
       "expediciones antárticas",
       "Magallanes ROV Marine"
@@ -29,7 +29,7 @@ const es = {
     serviceTitleSuffix: "en Chile",
     ogImageAlt: "MRM Magallanes ROV Marine: inspección submarina con ROV en Chile",
     orgDescription:
-      "Empresa de ingeniería submarina y logística marítima con base en Punta Arenas: inspección con ROV, limpieza de cascos, survey y monitoreo ambiental en todo Chile, y servicios logísticos para naves, cruceros y expediciones antárticas en Magallanes.",
+      "Empresa de ingeniería submarina y logística marítima con base en Punta Arenas: inspección con ROV, limpieza de cascos, survey y monitoreo ambiental en todo Chile, y servicios logísticos para naves, cruceros y expediciones antárticas en los principales puertos del país.",
     breadcrumbHome: "Inicio",
     breadcrumbServices: "Servicios submarinos",
     breadcrumbLogistics: "Logística marítima"
@@ -46,10 +46,10 @@ const es = {
   },
   hero: {
     title: "Soluciones submarinas y logísticas",
-    subtitle: "para naves y cruceros en Magallanes",
+    subtitle: "para naves",
     tagline: "Subsea Engineering & Marine Logistics",
     description:
-      "Inspección con ROV, limpieza de cascos y logística en puerto desde Punta Arenas: un solo equipo para navieras, cruceros, expediciones antárticas, acuicultura e infraestructura marítima.",
+      "Inspección con ROV, limpieza de cascos y logística en puerto a lo largo de Chile: un solo equipo para navieras, cruceros, expediciones antárticas, acuicultura e infraestructura marítima.",
     primaryCta: "Solicitar cotización",
     secondaryCta: "Servicios submarinos",
     tertiaryCta: "Logística marítima",
@@ -95,12 +95,12 @@ const es = {
   },
   logisticsSection: {
     eyebrow: "Logística marítima",
-    title: "Todo lo que tu nave necesita en Magallanes, coordinado por un solo equipo.",
+    title: "Todo lo que tu nave necesita en puerto, coordinado por un solo equipo.",
     description:
-      "Desde Punta Arenas apoyamos la recalada de naves, cruceros y expediciones antárticas: logística de tripulación, abastecimiento a bordo y apoyo técnico a flote, sumado a nuestra capacidad submarina.",
-    seasonLabel: "Temporada 2026-2027",
-    seasonValue: "160 recaladas de cruceros en Magallanes",
-    seasonNote: "Puerta de entrada a la Antártica, de septiembre a abril.",
+      "Apoyamos de forma frecuente la recalada de naves, cruceros y expediciones en los principales puertos de Chile: logística de tripulación, abastecimiento a bordo y apoyo técnico a flote, sumado a nuestra capacidad submarina.",
+    coverageLabel: "Cobertura nacional",
+    coverageValue: "Servicio frecuente en los principales puertos de Chile",
+    coverageNote: "Valparaíso, San Antonio, Talcahuano, Puerto Montt y Punta Arenas, entre otros.",
     pillars: ["Punto de contacto 24/7", "Proveedores locales verificados", "ROV y logística en la misma recalada"],
     viewService: "Ver detalle"
   },
@@ -419,27 +419,27 @@ const es = {
     },
     "cruise-expedition-support": {
       title: "Apoyo a cruceros y expediciones antárticas",
-      summary: "Soporte integral en recaladas de cruceros y naves de expedición que operan desde Magallanes hacia la Antártica.",
+      summary: "Soporte integral en recaladas de cruceros y naves de expedición en los puertos de Chile, incluida la ruta antártica.",
       detail:
-        "Acompañamos la recalada de cruceros y naves de expedición en Punta Arenas, Puerto Williams y canales australes, coordinando en un solo punto de contacto el abastecimiento, la logística de tripulación y técnicos, y la inspección y limpieza de casco antes del cruce a la Antártica. El objetivo es que la nave cumpla su itinerario sin pérdidas de tiempo en puerto.",
+        "Acompañamos la recalada de cruceros y naves de expedición en los principales puertos de Chile, desde Valparaíso y San Antonio hasta Puerto Montt y Punta Arenas, coordinando en un solo punto de contacto el abastecimiento, la logística de tripulación y técnicos, y la inspección y limpieza de casco antes del cruce a la Antártica. El objetivo es que la nave cumpla su itinerario sin pérdidas de tiempo en puerto.",
       sectors: ["Cruceros", "Expediciones antárticas", "Navieras"],
       application:
-        "Recaladas de temporada (septiembre a abril), cambios de tripulación en Punta Arenas y preparación de naves antes de zarpar a la Antártica.",
+        "Recaladas de cruceros, cambios de tripulación en puerto y preparación de naves antes de zarpar, incluida la ruta antártica.",
       deliverable:
         "Plan de recalada coordinado, servicios ejecutados según itinerario, registro de entregas y reporte de cierre para el armador o agente.",
-      availability: "Temporada de cruceros y expediciones, con coordinación previa a cada recalada y respuesta 24/7 durante la estadía.",
+      availability: "Servicio frecuente durante todo el año, con coordinación previa a cada recalada y respuesta 24/7 durante la estadía.",
       highlights: [
         "Un solo interlocutor local para el capitán, el armador y el agente.",
         "Inspección y limpieza de casco con ROV antes del cruce antártico (bioseguridad).",
         "Abastecimiento, tripulación y apoyo técnico en la misma recalada.",
-        "Conocimiento de puertos, fondeaderos y canales de Magallanes."
+        "Cobertura en los principales puertos del país."
       ]
     },
     "crew-logistics": {
       title: "Logística de tripulación",
       summary: "Cambios de tripulación, traslados, alojamiento y asistencia en tierra para tripulantes y personal técnico.",
       detail:
-        "Organizamos los cambios de tripulación en Punta Arenas: recepción en aeropuerto, traslados entre aeropuerto, hotel y nave, alojamiento, pasajes y apoyo en trámites migratorios. También coordinamos el traslado de técnicos o inspectores que deben embarcar.",
+        "Organizamos los cambios de tripulación en los principales puertos de Chile: recepción en aeropuerto, traslados entre aeropuerto, hotel y nave, alojamiento, pasajes y apoyo en trámites migratorios. También coordinamos el traslado de técnicos o inspectores que deben embarcar.",
       sectors: ["Cruceros", "Navieras", "Expediciones antárticas"],
       application:
         "Relevos de tripulación, embarque de técnicos e inspectores y personal en tránsito hacia o desde la Antártica.",
@@ -481,7 +481,7 @@ const es = {
         "Daños detectados en tránsito, inspecciones requeridas por la casa clasificadora o la aseguradora, limpiezas antes de temporada y reparaciones que no justifican varar la nave.",
       deliverable:
         "Diagnóstico con evidencia visual, trabajos coordinados o ejecutados a flote e informe técnico para el armador, la casa clasificadora o la aseguradora.",
-      availability: "Respuesta rápida en Punta Arenas y coordinación de faenas programadas en otros puertos de Chile.",
+      availability: "Respuesta rápida y faenas programadas en los principales puertos de Chile.",
       highlights: [
         "Inspección ROV de casco, hélice, timón y cajas de mar.",
         "Coordinación de técnicos, inspectores y casas clasificadoras.",
