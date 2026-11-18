@@ -9,7 +9,7 @@ import {
   Radar,
   ScanSearch,
   ShipWheel,
-  Snowflake,
+  Ship,
   Sparkles,
   Users,
   Waves,
@@ -59,7 +59,7 @@ export const subseaSlugs = [
 
 /** Logistics services for vessels and cruise ships calling at Magallanes ports. */
 export const logisticsSlugs = [
-  "cruise-expedition-support",
+  "cruise-support",
   "crew-logistics",
   "ship-supply",
   "afloat-technical-support"
@@ -87,7 +87,7 @@ export const serviceMedia: Record<ServiceSlug, { icon: LucideIcon; image: string
   aquaculture: { icon: Fish, image: "/assets/inspeccion_malla_cultivo.jpg" },
   "pre-infa": { icon: ScanSearch, image: "/assets/tecnico_boya_costa.jpg" },
   "technical-reports": { icon: FileText, image: "/assets/casco/corrosion-bulbo.jpg" },
-  "cruise-expedition-support": { icon: Snowflake, image: "/assets/logistica/cruise.jpg" },
+  "cruise-support": { icon: Ship, image: "/assets/logistica/cruise.jpg" },
   "crew-logistics": { icon: Users, image: "/assets/logistica/crew.jpg" },
   "ship-supply": { icon: Package, image: "/assets/logistica/supply.jpg" },
   "afloat-technical-support": { icon: Wrench, image: "/assets/logistica/tech.jpg" }

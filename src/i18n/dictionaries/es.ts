@@ -23,13 +23,12 @@ const es = {
       "abastecimiento de naves",
       "cambio de tripulación Chile",
       "apoyo técnico a flote",
-      "expediciones antárticas",
       "Magallanes ROV Marine"
     ],
     serviceTitleSuffix: "en Chile",
     ogImageAlt: "MRM Magallanes ROV Marine: inspección submarina con ROV en Chile",
     orgDescription:
-      "Empresa de ingeniería submarina y logística marítima con base en Punta Arenas: inspección con ROV, limpieza de cascos, survey y monitoreo ambiental en todo Chile, y servicios logísticos para naves, cruceros y expediciones antárticas en los principales puertos del país.",
+      "Empresa de ingeniería submarina y logística marítima con base en Punta Arenas: inspección con ROV, limpieza de cascos, survey y monitoreo ambiental en todo Chile, y servicios logísticos para naves y cruceros en los principales puertos del país.",
     breadcrumbHome: "Inicio",
     breadcrumbServices: "Servicios submarinos",
     breadcrumbLogistics: "Logística marítima"
@@ -49,7 +48,7 @@ const es = {
     subtitle: "para naves",
     tagline: "Subsea Engineering & Marine Logistics",
     description:
-      "Inspección con ROV, limpieza de cascos y logística en puerto a lo largo de Chile: un solo equipo para navieras, cruceros, expediciones antárticas, acuicultura e infraestructura marítima.",
+      "Inspección con ROV, limpieza de cascos y logística en puerto a lo largo de Chile: un solo equipo para navieras, cruceros, acuicultura e infraestructura marítima.",
     primaryCta: "Solicitar cotización",
     secondaryCta: "Servicios submarinos",
     tertiaryCta: "Logística marítima",
@@ -97,7 +96,7 @@ const es = {
     eyebrow: "Logística marítima",
     title: "Todo lo que tu nave necesita en puerto, coordinado por un solo equipo.",
     description:
-      "Apoyamos de forma frecuente la recalada de naves, cruceros y expediciones en los principales puertos de Chile: logística de tripulación, abastecimiento a bordo y apoyo técnico a flote, sumado a nuestra capacidad submarina.",
+      "Apoyamos de forma frecuente la recalada de naves y cruceros en los principales puertos de Chile: logística de tripulación, abastecimiento a bordo y apoyo técnico a flote, sumado a nuestra capacidad submarina.",
     coverageLabel: "Cobertura nacional",
     coverageValue: "Servicio frecuente en los principales puertos de Chile",
     coverageNote: "Valparaíso, San Antonio, Talcahuano, Puerto Montt y Punta Arenas, entre otros.",
@@ -417,20 +416,20 @@ const es = {
         "Formato adaptable al tipo de activo, faena o requerimiento."
       ]
     },
-    "cruise-expedition-support": {
-      title: "Apoyo a cruceros y expediciones antárticas",
-      summary: "Soporte integral en recaladas de cruceros y naves de expedición en los puertos de Chile, incluida la ruta antártica.",
+    "cruise-support": {
+      title: "Apoyo a cruceros",
+      summary: "Soporte integral en recaladas de cruceros en los principales puertos de Chile.",
       detail:
-        "Acompañamos la recalada de cruceros y naves de expedición en los principales puertos de Chile, desde Valparaíso y San Antonio hasta Puerto Montt y Punta Arenas, coordinando en un solo punto de contacto el abastecimiento, la logística de tripulación y técnicos, y la inspección y limpieza de casco antes del cruce a la Antártica. El objetivo es que la nave cumpla su itinerario sin pérdidas de tiempo en puerto.",
-      sectors: ["Cruceros", "Expediciones antárticas", "Navieras"],
+        "Acompañamos la recalada de cruceros en los principales puertos de Chile, desde Valparaíso y San Antonio hasta Puerto Montt y Punta Arenas, coordinando en un solo punto de contacto el abastecimiento, la logística de tripulación y técnicos, y la inspección y limpieza de casco con ROV. El objetivo es que la nave cumpla su itinerario sin pérdidas de tiempo en puerto.",
+      sectors: ["Cruceros", "Navieras", "Puertos"],
       application:
-        "Recaladas de cruceros, cambios de tripulación en puerto y preparación de naves antes de zarpar, incluida la ruta antártica.",
+        "Recaladas de cruceros, cambios de tripulación en puerto y preparación de la nave antes de zarpar.",
       deliverable:
         "Plan de recalada coordinado, servicios ejecutados según itinerario, registro de entregas y reporte de cierre para el armador o agente.",
       availability: "Servicio frecuente durante todo el año, con coordinación previa a cada recalada y respuesta 24/7 durante la estadía.",
       highlights: [
         "Un solo interlocutor local para el capitán, el armador y el agente.",
-        "Inspección y limpieza de casco con ROV antes del cruce antártico (bioseguridad).",
+        "Inspección y limpieza de casco con ROV durante la recalada.",
         "Abastecimiento, tripulación y apoyo técnico en la misma recalada.",
         "Cobertura en los principales puertos del país."
       ]
@@ -440,9 +439,9 @@ const es = {
       summary: "Cambios de tripulación, traslados, alojamiento y asistencia en tierra para tripulantes y personal técnico.",
       detail:
         "Organizamos los cambios de tripulación en los principales puertos de Chile: recepción en aeropuerto, traslados entre aeropuerto, hotel y nave, alojamiento, pasajes y apoyo en trámites migratorios. También coordinamos el traslado de técnicos o inspectores que deben embarcar.",
-      sectors: ["Cruceros", "Navieras", "Expediciones antárticas"],
+      sectors: ["Cruceros", "Navieras", "Pesca"],
       application:
-        "Relevos de tripulación, embarque de técnicos e inspectores y personal en tránsito hacia o desde la Antártica.",
+        "Relevos de tripulación, embarque de técnicos e inspectores y personal en tránsito.",
       deliverable:
         "Itinerario coordinado por tripulante, traslados y alojamiento confirmados, y seguimiento hasta el embarque o el vuelo de salida.",
       availability: "Programado según itinerario de la nave, con apoyo ante cambios de último minuto.",
@@ -458,9 +457,9 @@ const es = {
       summary: "Provisiones, agua, stores, repuestos y courier entregados a bordo o en muelle.",
       detail:
         "Coordinamos el abastecimiento de la nave con proveedores locales: provisiones frescas y secas, agua potable, consumibles de cubierta y máquina, repuestos en tránsito y courier. Recibimos, consolidamos y entregamos en muelle o a bordo, cuidando la cadena de frío y los tiempos de la nave.",
-      sectors: ["Cruceros", "Navieras", "Pesca", "Expediciones antárticas"],
+      sectors: ["Cruceros", "Navieras", "Pesca"],
       application:
-        "Naves en recalada o tránsito por el Estrecho que necesitan reponer provisiones, recibir repuestos urgentes o cargar suministros antes de una expedición.",
+        "Naves en recalada o en tránsito que necesitan reponer provisiones, recibir repuestos urgentes o cargar suministros antes de zarpar.",
       deliverable:
         "Lista de pedido confirmada, recepción y consolidación de carga, entrega a bordo con registro y documentación de respaldo.",
       availability: "Según itinerario de la nave, con entregas coordinadas en muelle o a bordo.",

@@ -22,14 +22,13 @@ const en: Dictionary = {
       "cruise ship services Chile",
       "ship supply Magellan Strait",
       "crew change Chile",
-      "Antarctic expedition support",
       "afloat technical support",
       "Magallanes ROV Marine"
     ],
     serviceTitleSuffix: "in Chile",
     ogImageAlt: "MRM Magallanes ROV Marine: ROV subsea inspection in Chile",
     orgDescription:
-      "Subsea engineering and marine logistics company based in Punta Arenas: ROV inspection, hull cleaning, surveys and environmental monitoring throughout Chile, plus logistics for vessels, cruise ships and Antarctic expeditions in the country's main ports.",
+      "Subsea engineering and marine logistics company based in Punta Arenas: ROV inspection, hull cleaning, surveys and environmental monitoring throughout Chile, plus logistics for vessels and cruise ships in the country's main ports.",
     breadcrumbHome: "Home",
     breadcrumbServices: "Subsea services",
     breadcrumbLogistics: "Marine logistics"
@@ -49,7 +48,7 @@ const en: Dictionary = {
     subtitle: "for vessels",
     tagline: "Subsea Engineering & Marine Logistics",
     description:
-      "ROV inspection, hull cleaning and port logistics across Chile: one team for shipping lines, cruise ships, Antarctic expeditions, aquaculture and marine infrastructure.",
+      "ROV inspection, hull cleaning and port logistics across Chile: one team for shipping lines, cruise ships, aquaculture and marine infrastructure.",
     primaryCta: "Request a quote",
     secondaryCta: "Subsea services",
     tertiaryCta: "Marine logistics",
@@ -97,7 +96,7 @@ const en: Dictionary = {
     eyebrow: "Marine logistics",
     title: "Everything your vessel needs in port, coordinated by one team.",
     description:
-      "We regularly support port calls by vessels, cruise ships and expeditions in Chile's main ports: crew logistics, ship supply and afloat technical support, backed by our subsea capability.",
+      "We regularly support port calls by vessels and cruise ships in Chile's main ports: crew logistics, ship supply and afloat technical support, backed by our subsea capability.",
     coverageLabel: "Nationwide coverage",
     coverageValue: "Frequent service in Chile's main ports",
     coverageNote: "Valparaíso, San Antonio, Talcahuano, Puerto Montt and Punta Arenas, among others.",
@@ -413,20 +412,20 @@ const en: Dictionary = {
         "Format adapted to the asset, job or requirement."
       ]
     },
-    "cruise-expedition-support": {
-      title: "Cruise and Antarctic expedition support",
-      summary: "End-to-end support for cruise ships and expedition vessels in Chilean ports, including the Antarctic route.",
+    "cruise-support": {
+      title: "Cruise ship support",
+      summary: "End-to-end support for cruise ship port calls in Chile's main ports.",
       detail:
-        "We support cruise ships and expedition vessels calling at Chile's main ports, from Valparaíso and San Antonio to Puerto Montt and Punta Arenas, coordinating ship supply, crew and technician logistics, and hull inspection and cleaning before the Antarctic crossing through a single point of contact. The goal is to keep the vessel on schedule without losing time in port.",
-      sectors: ["Cruise ships", "Antarctic expeditions", "Shipping"],
+        "We support cruise ships calling at Chile's main ports, from Valparaíso and San Antonio to Puerto Montt and Punta Arenas, coordinating ship supply, crew and technician logistics, and ROV hull inspection and cleaning through a single point of contact. The goal is to keep the vessel on schedule without losing time in port.",
+      sectors: ["Cruise ships", "Shipping", "Ports"],
       application:
-        "Cruise port calls, crew changes in port and vessel preparation before sailing, including the Antarctic route.",
+        "Cruise port calls, crew changes in port and vessel preparation before sailing.",
       deliverable:
         "A coordinated port-call plan, services delivered on schedule, delivery records and a closing report for the owner or agent.",
       availability: "Frequent service all year round, with planning ahead of each call and 24/7 response while in port.",
       highlights: [
         "One local contact for the master, the owner and the agent.",
-        "ROV hull inspection and cleaning before the Antarctic crossing (biosecurity).",
+        "ROV hull inspection and cleaning during the port call.",
         "Supply, crew logistics and technical support in the same port call.",
         "Coverage in the country's main ports."
       ]
@@ -436,9 +435,9 @@ const en: Dictionary = {
       summary: "Crew changes, transfers and accommodation ashore for seafarers and technical staff.",
       detail:
         "We organise crew changes in Chile's main ports: airport meet and greet, transfers between airport, hotel and vessel, accommodation, tickets and help with immigration formalities. We also coordinate technicians and inspectors who need to board.",
-      sectors: ["Cruise ships", "Shipping", "Antarctic expeditions"],
+      sectors: ["Cruise ships", "Shipping", "Fishing"],
       application:
-        "Crew rotations, technicians and inspectors joining the vessel, and staff in transit to or from Antarctica.",
+        "Crew rotations, technicians and inspectors joining the vessel, and staff in transit.",
       deliverable:
         "A coordinated itinerary per crew member, confirmed transfers and accommodation, and follow-up until boarding or departure flight.",
       availability: "Scheduled around the vessel's itinerary, with support for last-minute changes.",
@@ -454,9 +453,9 @@ const en: Dictionary = {
       summary: "Provisions, fresh water, stores, spare parts and courier delivered on board or at the quay.",
       detail:
         "We coordinate vessel supply with local suppliers: fresh and dry provisions, fresh water, deck and engine consumables, spare parts in transit and courier. We receive, consolidate and deliver at the quay or on board, protecting the cold chain and the vessel's schedule.",
-      sectors: ["Cruise ships", "Shipping", "Fishing", "Antarctic expeditions"],
+      sectors: ["Cruise ships", "Shipping", "Fishing"],
       application:
-        "Vessels calling at or transiting the Strait of Magellan that need to restock provisions, receive urgent spares or load supplies before an expedition.",
+        "Vessels in port or in transit that need to restock provisions, receive urgent spares or load supplies before sailing.",
       deliverable:
         "Confirmed order list, cargo reception and consolidation, delivery on board with records and supporting documents.",
       availability: "According to the vessel's itinerary, with deliveries coordinated at the quay or on board.",
