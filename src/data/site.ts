@@ -5,12 +5,16 @@ import {
   FileText,
   Fish,
   Map,
+  Package,
   Radar,
   ScanSearch,
   ShipWheel,
+  Snowflake,
   Sparkles,
+  Users,
   Waves,
   Waypoints,
+  Wrench,
   type LucideIcon
 } from "lucide-react";
 
@@ -21,6 +25,7 @@ export const navigationAnchors = [
   { key: "home", href: "/#inicio" },
   { key: "company", href: "/#empresa" },
   { key: "services", href: "/#servicios" },
+  { key: "logistics", href: "/#logistica" },
   { key: "quote", href: "/#contacto" }
 ] as const;
 
@@ -37,7 +42,7 @@ export const locations = [
   { city: "Punta Arenas", top: "87.2%", left: "47.7%", labelClass: "left-7 top-[-0.35rem]" }
 ];
 
-export const serviceSlugs = [
+export const subseaSlugs = [
   "rov-inspection",
   "hull-inspection",
   "hull-cleaning",
@@ -52,7 +57,22 @@ export const serviceSlugs = [
   "technical-reports"
 ] as const;
 
+/** Logistics services for vessels and cruise ships calling at Magallanes ports. */
+export const logisticsSlugs = [
+  "cruise-expedition-support",
+  "crew-logistics",
+  "ship-supply",
+  "afloat-technical-support"
+] as const;
+
+export const serviceSlugs = [...subseaSlugs, ...logisticsSlugs] as const;
+
 export type ServiceSlug = (typeof serviceSlugs)[number];
+export type LogisticsSlug = (typeof logisticsSlugs)[number];
+
+export function isLogisticsSlug(slug: string): slug is LogisticsSlug {
+  return (logisticsSlugs as readonly string[]).includes(slug);
+}
 
 export const serviceMedia: Record<ServiceSlug, { icon: LucideIcon; image: string }> = {
   "rov-inspection": { icon: Radar, image: "/assets/piloto_operando_rov.jpg" },
@@ -66,7 +86,11 @@ export const serviceMedia: Record<ServiceSlug, { icon: LucideIcon; image: string
   "environmental-monitoring": { icon: Activity, image: "/assets/equipo_multiparametrico_terreno.jpg" },
   aquaculture: { icon: Fish, image: "/assets/inspeccion_malla_cultivo.jpg" },
   "pre-infa": { icon: ScanSearch, image: "/assets/tecnico_boya_costa.jpg" },
-  "technical-reports": { icon: FileText, image: "/assets/casco/corrosion-bulbo.jpg" }
+  "technical-reports": { icon: FileText, image: "/assets/casco/corrosion-bulbo.jpg" },
+  "cruise-expedition-support": { icon: Snowflake, image: "/assets/hero_barco_faena.jpg" },
+  "crew-logistics": { icon: Users, image: "/generated/team-deck-operations.png" },
+  "ship-supply": { icon: Package, image: "/assets/tecnico_cable_embarcacion_01.jpg" },
+  "afloat-technical-support": { icon: Wrench, image: "/assets/inspeccion_casco_buque.jpg" }
 };
 
 export function getServiceIcon(slug: ServiceSlug) {

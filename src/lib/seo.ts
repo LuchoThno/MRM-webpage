@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { contactInfo, serviceSlugs, siteUrl } from "@/data/site";
+import { contactInfo, isLogisticsSlug, serviceSlugs, siteUrl } from "@/data/site";
 import { localeLabels, localizePath, locales, type Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 
@@ -85,7 +85,9 @@ export function serviceJsonLd(locale: Locale, slug: (typeof serviceSlugs)[number
       image: absoluteUrl(image),
       inLanguage: localeLabels[locale].htmlLang,
       provider: { "@id": `${siteUrl}/#organization` },
-      areaServed: { "@type": "Country", name: "Chile" },
+      areaServed: isLogisticsSlug(slug)
+        ? { "@type": "AdministrativeArea", name: "Magallanes y de la Antártica Chilena" }
+        : { "@type": "Country", name: "Chile" },
       audience: { "@type": "BusinessAudience", audienceType: service.sectors.join(", ") }
     },
     {
@@ -96,8 +98,8 @@ export function serviceJsonLd(locale: Locale, slug: (typeof serviceSlugs)[number
         {
           "@type": "ListItem",
           position: 2,
-          name: dict.meta.breadcrumbServices,
-          item: absoluteUrl(localizePath(locale, "/#servicios"))
+          name: isLogisticsSlug(slug) ? dict.meta.breadcrumbLogistics : dict.meta.breadcrumbServices,
+          item: absoluteUrl(localizePath(locale, isLogisticsSlug(slug) ? "/#logistica" : "/#servicios"))
         },
         { "@type": "ListItem", position: 3, name: service.title, item: url }
       ]

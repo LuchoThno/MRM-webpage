@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import {
   ArrowRight,
   Camera,
+  CheckCircle2,
   ClipboardList,
   FileCheck2,
   HardHat,
@@ -84,6 +85,8 @@ type HomePageProps = {
 export function HomePage({ locale, dict, services }: HomePageProps) {
   const processCards = dict.process.steps.map((step, index) => ({ ...step, ...processMedia[index] }));
   const metrics = dict.metrics;
+  const subseaServices = services.filter((service) => service.category === "subsea");
+  const logisticsServices = services.filter((service) => service.category === "logistics");
   const t = dict.contact;
   const [formStatus, setFormStatus] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -189,7 +192,7 @@ export function HomePage({ locale, dict, services }: HomePageProps) {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.9 }}
-                  className="font-[family-name:var(--font-space)] text-[2.75rem] font-semibold leading-[1.05] tracking-tight text-white sm:text-6xl lg:text-[4.35rem]"
+                  className="font-[family-name:var(--font-space)] text-[2.6rem] font-semibold leading-[1.06] tracking-tight text-white sm:text-[3.4rem] lg:text-[3.7rem]"
                 >
                   {dict.hero.title}{" "}
                   <span className="block font-medium text-slate-300/90">{dict.hero.subtitle}</span>
@@ -208,13 +211,20 @@ export function HomePage({ locale, dict, services }: HomePageProps) {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.8, delay: 0.2 }}
-                  className="mt-10 flex flex-col gap-4 sm:flex-row"
+                  className="mt-10 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center"
                 >
                   <Link href={localizePath(locale, "/#contacto")} className="btn-primary">
                     {dict.hero.primaryCta}
                   </Link>
                   <Link href={localizePath(locale, "/#servicios")} className="btn-secondary">
                     {dict.hero.secondaryCta}
+                  </Link>
+                  <Link
+                    href={localizePath(locale, "/#logistica")}
+                    className="inline-flex items-center gap-2 px-2 py-3 text-xs font-medium uppercase tracking-[0.28em] text-[var(--gold-soft)] transition hover:text-white"
+                  >
+                    {dict.hero.tertiaryCta}
+                    <ArrowRight size={15} />
                   </Link>
                 </motion.div>
               </div>
@@ -389,7 +399,7 @@ export function HomePage({ locale, dict, services }: HomePageProps) {
   </div>
 
   <div className="relative z-10 mt-16 grid auto-rows-fr gap-5 md:grid-cols-2 xl:grid-cols-3">
-    {services.map((service, index) => {
+    {subseaServices.map((service, index) => {
       const Icon = getServiceIcon(service.slug);
 
       return (
@@ -465,6 +475,67 @@ export function HomePage({ locale, dict, services }: HomePageProps) {
     })}
   </div>
 </section>
+
+        <section id="logistica" className="relative mx-auto max-w-7xl overflow-hidden px-6 py-24 md:px-8">
+          <SectionBackdrop
+            src="/assets/hero_barco_faena.jpg"
+            alt=""
+            imageClassName="object-[center_45%]"
+            overlayClassName="bg-[linear-gradient(180deg,rgba(2,9,20,0.94),rgba(2,9,20,0.72)_36%,rgba(2,9,20,0.92))]"
+          />
+          <div className="relative z-10 grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
+            <SectionHeading
+              eyebrow={dict.logisticsSection.eyebrow}
+              title={dict.logisticsSection.title}
+              description={dict.logisticsSection.description}
+            />
+            <div className="rounded-[1.8rem] border border-[rgba(240,179,35,0.22)] bg-[linear-gradient(180deg,rgba(240,179,35,0.08),rgba(6,19,33,0.9))] p-6">
+              <p className="text-xs uppercase tracking-[0.32em] text-[var(--gold-soft)]">{dict.logisticsSection.seasonLabel}</p>
+              <p className="mt-3 text-2xl font-semibold text-white">{dict.logisticsSection.seasonValue}</p>
+              <p className="mt-2 text-sm leading-6 text-slate-300/80">{dict.logisticsSection.seasonNote}</p>
+              <ul className="mt-5 space-y-2">
+                {dict.logisticsSection.pillars.map((pillar) => (
+                  <li key={pillar} className="flex items-center gap-3 text-sm text-slate-100">
+                    <CheckCircle2 size={16} className="shrink-0 text-[var(--gold-soft)]" />
+                    {pillar}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+
+          <div className="relative z-10 mt-14 grid gap-5 md:grid-cols-2">
+            {logisticsServices.map((service, index) => {
+              const Icon = getServiceIcon(service.slug);
+              return (
+                <motion.div
+                  key={service.slug}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-10%" }}
+                  transition={{ duration: 0.6, delay: index * 0.05 }}
+                >
+                  <Link
+                    href={localizePath(locale, `/services/${service.slug}`)}
+                    className="group flex h-full gap-5 rounded-[1.6rem] border border-white/10 bg-[rgba(7,21,36,0.82)] p-6 backdrop-blur-sm transition duration-500 hover:-translate-y-1 hover:border-[rgba(240,179,35,0.3)] sm:p-7"
+                  >
+                    <span className="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-[rgba(4,17,34,0.65)] text-[var(--gold-soft)]">
+                      <Icon size={26} strokeWidth={1.8} />
+                    </span>
+                    <div className="min-w-0">
+                      <h3 className="text-xl font-medium leading-snug text-white">{service.title}</h3>
+                      <p className="mt-2 text-sm leading-6 text-slate-300/80">{service.summary}</p>
+                      <span className="mt-4 inline-flex items-center gap-2 text-[11px] font-medium uppercase tracking-[0.2em] text-[var(--gold-soft)]">
+                        {dict.logisticsSection.viewService}
+                        <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
+                      </span>
+                    </div>
+                  </Link>
+                </motion.div>
+              );
+            })}
+          </div>
+        </section>
 
         <section className="relative mx-auto max-w-7xl overflow-hidden px-6 py-24 md:px-8">
           <SectionBackdrop
@@ -758,11 +829,20 @@ export function HomePage({ locale, dict, services }: HomePageProps) {
                       <option value="" disabled>
                         {t.fields.service}
                       </option>
-                      {services.map((service) => (
-                        <option key={service.slug} value={service.slug}>
-                          {service.title}
-                        </option>
-                      ))}
+                      <optgroup label={t.fields.subseaGroup}>
+                        {subseaServices.map((service) => (
+                          <option key={service.slug} value={service.title}>
+                            {service.title}
+                          </option>
+                        ))}
+                      </optgroup>
+                      <optgroup label={t.fields.logisticsGroup}>
+                        {logisticsServices.map((service) => (
+                          <option key={service.slug} value={service.title}>
+                            {service.title}
+                          </option>
+                        ))}
+                      </optgroup>
                     </select>
                     <textarea
                       className="field-input min-h-36 md:col-span-2"

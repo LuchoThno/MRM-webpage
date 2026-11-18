@@ -1,6 +1,6 @@
 import type { Locale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
-import { serviceMedia, serviceSlugs, technologySlugs, technologySpecs } from "@/data/site";
+import { isLogisticsSlug, serviceMedia, serviceSlugs, technologySlugs, technologySpecs } from "@/data/site";
 
 export function getServices(locale: Locale) {
   const dict = getDictionary(locale);
@@ -12,6 +12,7 @@ export function getServiceCards(locale: Locale) {
   const dict = getDictionary(locale);
   return serviceSlugs.map((slug) => ({
     slug,
+    category: isLogisticsSlug(slug) ? ("logistics" as const) : ("subsea" as const),
     image: serviceMedia[slug].image,
     title: dict.services[slug].title,
     summary: dict.services[slug].summary
