@@ -89,6 +89,7 @@ const en: Dictionary = {
     description:
       "We design every job with traceability, evidence and clear technical criteria so your team can decide quickly and execute safely.",
     sectorsLabel: "Industries we serve",
+    capabilitiesLabel: "Our ROV capability",
     sectors: ["Ports", "Salmon farming", "Shipping", "Cruise ships", "Industry"],
     viewService: "View service"
   },
@@ -107,8 +108,11 @@ const en: Dictionary = {
     eyebrow: "Nationwide coverage",
     title: "Strategic presence at Chile’s key maritime hubs.",
     description:
-      "A simple view of our coverage and deployment, focused on port areas, salmon farming regions and demanding marine operations.",
-    capabilitiesLabel: "Operating capability",
+      "From Punta Arenas we deploy subsea and logistics services across Chile's main ports and aquaculture regions.",
+    lines: [
+      { label: "Subsea services", text: "ROV inspection, hulls, surveys and environmental monitoring." },
+      { label: "Marine logistics", text: "Cruise ships, crew, ship supply and afloat support." }
+    ],
     badgeEyebrow: "Operational presence",
     badgeTitle: "Nationwide coverage",
     mapAlt: "Map of Chile showing MRM coverage areas"

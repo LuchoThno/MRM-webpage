@@ -89,6 +89,7 @@ const es = {
     description:
       "Diseñamos cada faena con trazabilidad, evidencia y criterios técnicos claros para que tu equipo decida rápido y ejecute con seguridad.",
     sectorsLabel: "Sectores que atendemos",
+    capabilitiesLabel: "Capacidad de nuestros ROV",
     sectors: ["Puertos", "Salmoneras", "Navieras", "Cruceros", "Industria"],
     viewService: "Ver servicio"
   },
@@ -107,8 +108,11 @@ const es = {
     eyebrow: "Cobertura nacional",
     title: "Presencia estratégica en nodos marítimos clave de Chile.",
     description:
-      "Una lectura visual simple de cobertura y despliegue, con foco en zonas portuarias, salmoneras y operaciones marítimas de alta exigencia.",
-    capabilitiesLabel: "Capacidad operativa",
+      "Desde Punta Arenas desplegamos servicios submarinos y logísticos en los principales puertos y zonas acuícolas de Chile.",
+    lines: [
+      { label: "Servicios submarinos", text: "Inspección ROV, cascos, survey y monitoreo ambiental." },
+      { label: "Logística marítima", text: "Cruceros, tripulación, abastecimiento y apoyo a flote." }
+    ],
     badgeEyebrow: "Presencia operativa",
     badgeTitle: "Cobertura nacional",
     mapAlt: "Mapa de Chile con las zonas de cobertura de MRM"
