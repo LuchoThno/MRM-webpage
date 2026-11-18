@@ -2,15 +2,23 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Globe, Menu, X } from "lucide-react";
+import { Building2, Globe, Home, Mail, Menu, Ship, Waves, X, type LucideIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import { Logo } from "@/components/logo";
 import { localeLabels, localizePath, locales, stripLocale, type Locale } from "@/i18n/config";
 
+const navIcons: Record<string, LucideIcon> = {
+  home: Home,
+  company: Building2,
+  services: Waves,
+  logistics: Ship,
+  quote: Mail
+};
+
 type NavClientProps = {
   locale: Locale;
-  items: { label: string; href: string }[];
+  items: { key: string; label: string; href: string }[];
   homeHref: string;
   labels: { openMenu: string; closeMenu: string; switchLanguage: string };
 };
@@ -67,16 +75,22 @@ export function NavClient({ locale, items, homeHref, labels }: NavClientProps) {
           <Logo compact priority className={`transition-all duration-500 ${scrolled ? "!w-[6.25rem] sm:!w-[6.75rem]" : ""}`} />
         </Link>
 
-        <nav className="hidden items-center justify-center gap-8 lg:flex">
-          {items.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="text-sm uppercase tracking-[0.28em] text-slate-200/85 transition hover:text-white"
-            >
-              {item.label}
-            </Link>
-          ))}
+        <nav className="hidden items-center justify-center gap-6 lg:flex xl:gap-8">
+          {items.map((item) => {
+            const Icon = navIcons[item.key];
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className="group inline-flex items-center gap-2 whitespace-nowrap text-[13px] uppercase tracking-[0.2em] text-slate-200/85 transition hover:text-white xl:text-sm xl:tracking-[0.24em]"
+              >
+                {Icon ? (
+                  <Icon size={15} strokeWidth={1.8} aria-hidden="true" className="shrink-0 text-[var(--gold-soft)] transition group-hover:text-white" />
+                ) : null}
+                {item.label}
+              </Link>
+            );
+          })}
         </nav>
 
         <div className="col-start-3 flex items-center justify-self-end gap-3">
@@ -96,16 +110,20 @@ export function NavClient({ locale, items, homeHref, labels }: NavClientProps) {
       {open ? (
         <div className="mx-4 mt-3 rounded-[2rem] border border-white/10 bg-slate-950/95 p-6 shadow-2xl backdrop-blur-2xl lg:hidden">
           <div className="flex flex-col gap-4">
-            {items.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="text-sm uppercase tracking-[0.28em] text-slate-100/85"
-                onClick={() => setOpen(false)}
-              >
-                {item.label}
-              </Link>
-            ))}
+            {items.map((item) => {
+              const Icon = navIcons[item.key];
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="inline-flex items-center gap-3 text-sm uppercase tracking-[0.28em] text-slate-100/85"
+                  onClick={() => setOpen(false)}
+                >
+                  {Icon ? <Icon size={16} strokeWidth={1.8} aria-hidden="true" className="shrink-0 text-[var(--gold-soft)]" /> : null}
+                  {item.label}
+                </Link>
+              );
+            })}
           </div>
         </div>
       ) : null}
