@@ -9,6 +9,8 @@ import {
   Clock3,
   Gauge,
   MonitorPlay,
+  Ship,
+  Waves,
   Camera,
   CheckCircle2,
   ClipboardList,
@@ -394,7 +396,41 @@ export function HomePage({ locale, dict, services }: HomePageProps) {
     </div>
   </div>
 
-  <div className="relative z-10 mt-16 grid auto-rows-fr gap-5 md:grid-cols-2 xl:grid-cols-3">
+  <div className="relative z-10 mt-14">
+              <p className="text-xs uppercase tracking-[0.32em] text-[var(--gold-soft)]">
+                {dict.servicesSection.capabilitiesLabel}
+              </p>
+              <div className="mt-4 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+                {metrics.map((metric, index) => {
+                  const MetricIcon = metricIcons[index] ?? Gauge;
+                  return (
+                    <motion.div
+                      key={metric.label}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: "-10%" }}
+                      transition={{ duration: 0.5, delay: index * 0.06 }}
+                      className="flex gap-4 rounded-[1.4rem] border border-white/10 bg-[rgba(7,21,36,0.78)] p-5 backdrop-blur-sm"
+                    >
+                      <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-[rgba(240,179,35,0.08)] text-[var(--gold-soft)]">
+                        <MetricIcon size={20} strokeWidth={1.8} aria-hidden="true" />
+                      </span>
+                      <div className="min-w-0">
+                        <p className="font-[family-name:var(--font-space)] text-3xl font-semibold leading-none text-white">
+                          {metric.value}
+                        </p>
+                        <p className="mt-2 text-[11px] font-medium uppercase tracking-[0.22em] text-slate-300">
+                          {metric.label}
+                        </p>
+                        <p className="mt-2 text-sm leading-6 text-slate-400">{metric.detail}</p>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+    </div>
+
+  <div className="relative z-10 mt-10 grid auto-rows-fr gap-5 md:grid-cols-2 xl:grid-cols-3">
     {subseaServices.map((service, index) => {
       const Icon = getServiceIcon(service.slug);
 
@@ -558,37 +594,21 @@ export function HomePage({ locale, dict, services }: HomePageProps) {
                 title={dict.coverage.title}
                 description={dict.coverage.description}
               />
-              <p className="mt-10 text-xs uppercase tracking-[0.32em] text-[var(--gold-soft)]">
-                {dict.coverage.capabilitiesLabel}
-              </p>
-              <div className="mt-4 grid gap-4 sm:grid-cols-2">
-                {metrics.map((metric, index) => {
-                  const MetricIcon = metricIcons[index] ?? Gauge;
+              <ul className="mt-8 space-y-3">
+                {dict.coverage.lines.map((line, index) => {
+                  const LineIcon = index === 0 ? Waves : Ship;
                   return (
-                    <motion.div
-                      key={metric.label}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true, margin: "-10%" }}
-                      transition={{ duration: 0.5, delay: index * 0.06 }}
-                      className="flex gap-4 rounded-[1.4rem] border border-white/10 bg-[rgba(7,21,36,0.78)] p-5 backdrop-blur-sm"
-                    >
-                      <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-[rgba(240,179,35,0.08)] text-[var(--gold-soft)]">
-                        <MetricIcon size={20} strokeWidth={1.8} aria-hidden="true" />
+                    <li key={line.label} className="flex items-start gap-3">
+                      <span className="mt-0.5 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-[rgba(240,179,35,0.08)] text-[var(--gold-soft)]">
+                        <LineIcon size={17} strokeWidth={1.8} aria-hidden="true" />
                       </span>
-                      <div className="min-w-0">
-                        <p className="font-[family-name:var(--font-space)] text-3xl font-semibold leading-none text-white">
-                          {metric.value}
-                        </p>
-                        <p className="mt-2 text-[11px] font-medium uppercase tracking-[0.22em] text-slate-300">
-                          {metric.label}
-                        </p>
-                        <p className="mt-2 text-sm leading-6 text-slate-400">{metric.detail}</p>
-                      </div>
-                    </motion.div>
+                      <p className="text-sm leading-6 text-slate-300/85">
+                        <span className="font-medium text-white">{line.label}:</span> {line.text}
+                      </p>
+                    </li>
                   );
                 })}
-              </div>
+              </ul>
             </div>
 
             <div className="glass-panel rounded-[2rem] p-6">
