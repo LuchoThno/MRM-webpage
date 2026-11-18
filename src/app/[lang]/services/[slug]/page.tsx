@@ -8,7 +8,7 @@ import { Nav } from "@/components/nav";
 import type { Metadata } from "next";
 
 import { getServices } from "@/data/content";
-import { serviceSlugs } from "@/data/site";
+import { isLogisticsSlug, serviceSlugs } from "@/data/site";
 import { isLocale, localeLabels, localizePath, locales } from "@/i18n/config";
 import { JsonLd } from "@/components/json-ld";
 import { buildAlternates, serviceJsonLd, siteName } from "@/lib/seo";
@@ -61,6 +61,7 @@ export default async function ServicePage({ params }: PageProps<"/[lang]/service
   const t = getDictionary(lang).servicePage;
 
   const Icon = service.icon;
+  const logistics = isLogisticsSlug(service.slug);
 
   return (
     <>
@@ -69,11 +70,11 @@ export default async function ServicePage({ params }: PageProps<"/[lang]/service
       <main className="min-h-screen bg-[#020914] px-6 pb-24 pt-32 md:px-8">
         <div className="mx-auto max-w-6xl">
           <Link
-            href={localizePath(lang, "/#servicios")}
+            href={localizePath(lang, logistics ? "/#logistica" : "/#servicios")}
             className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.35em] text-[#8fd9ff] transition hover:text-white"
           >
             <ArrowLeft size={14} />
-            {t.back}
+            {logistics ? t.backLogistics : t.back}
           </Link>
 
           <div className="mt-8 overflow-hidden rounded-[2.2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.02))]">

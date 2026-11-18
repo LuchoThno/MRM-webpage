@@ -1,8 +1,8 @@
 const es = {
   meta: {
-    title: "Inspección submarina con ROV en Chile | MRM Magallanes ROV Marine",
+    title: "Inspección submarina con ROV y logística marítima en Chile | MRM Magallanes ROV Marine",
     description:
-      "Inspección submarina con ROV, inspección y limpieza de cascos, limpieza por cavitación, batimetría y monitoreo ambiental en Chile. Base en Punta Arenas, cobertura nacional para puertos, salmoneras y navieras.",
+      "Inspección submarina con ROV, limpieza de cascos y logística marítima para naves y cruceros en los principales puertos de Chile: abastecimiento, tripulación y apoyo técnico a flote.",
     ogDescription:
       "Ingeniería submarina en Chile: inspección con ROV, limpieza de cascos y cavitación, survey y reportes técnicos. Base en Punta Arenas, cobertura nacional.",
     twitterDescription:
@@ -18,32 +18,40 @@ const es = {
       "inspección de redes salmoneras",
       "batimetría",
       "posicionamiento USBL",
+      "logística marítima Chile",
+      "servicios a cruceros Chile",
+      "abastecimiento de naves",
+      "cambio de tripulación Chile",
+      "apoyo técnico a flote",
       "Magallanes ROV Marine"
     ],
     serviceTitleSuffix: "en Chile",
     ogImageAlt: "MRM Magallanes ROV Marine: inspección submarina con ROV en Chile",
     orgDescription:
-      "Empresa de ingeniería submarina con base en Punta Arenas que presta servicios de inspección con ROV, inspección y limpieza de cascos, survey, posicionamiento USBL y monitoreo ambiental en todo Chile.",
+      "Empresa de ingeniería submarina y logística marítima con base en Punta Arenas: inspección con ROV, limpieza de cascos, survey y monitoreo ambiental en todo Chile, y servicios logísticos para naves y cruceros en los principales puertos del país.",
     breadcrumbHome: "Inicio",
-    breadcrumbServices: "Servicios"
+    breadcrumbServices: "Servicios submarinos",
+    breadcrumbLogistics: "Logística marítima"
   },
   nav: {
     home: "Inicio",
     company: "Empresa",
-    services: "Servicios",
+    services: "Servicios submarinos",
+    logistics: "Logística",
     quote: "Cotizar",
     openMenu: "Abrir menú",
     closeMenu: "Cerrar menú",
     switchLanguage: "Ver el sitio en inglés"
   },
   hero: {
-    title: "Ingeniería submarina",
-    subtitle: "para operaciones críticas",
-    tagline: "Marine Robotics & Subsea Engineering",
+    title: "Soluciones submarinas y logísticas",
+    subtitle: "para naves",
+    tagline: "Subsea Engineering & Marine Logistics",
     description:
-      "Inspección, survey y soporte técnico con enfoque ejecutivo, trazabilidad digital y capacidad de despliegue nacional para puertos, acuicultura, navieras e infraestructura marítima.",
+      "Inspección con ROV, limpieza de cascos y logística en puerto a lo largo de Chile: un solo equipo para navieras, cruceros, acuicultura e infraestructura marítima.",
     primaryCta: "Solicitar cotización",
-    secondaryCta: "Nuestros servicios",
+    secondaryCta: "Servicios submarinos",
+    tertiaryCta: "Logística marítima",
     imageAlt: "ROV industrial trabajando bajo el agua",
     cardImageAlt: "Inspección de casco con ROV",
     cardBadge: "Inspección ROV",
@@ -76,13 +84,24 @@ const es = {
     response: "Respuesta técnica desde Magallanes a nivel nacional"
   },
   servicesSection: {
-    eyebrow: "Nuestros servicios",
+    eyebrow: "Servicios submarinos",
     title: "Capacidades submarinas para una industria que no admite error.",
     description:
       "Diseñamos cada faena con trazabilidad, evidencia y criterios técnicos claros para que tu equipo decida rápido y ejecute con seguridad.",
     sectorsLabel: "Sectores que atendemos",
-    sectors: ["Puertos", "Salmoneras", "Navieras", "Industria"],
+    sectors: ["Puertos", "Salmoneras", "Navieras", "Cruceros", "Industria"],
     viewService: "Ver servicio"
+  },
+  logisticsSection: {
+    eyebrow: "Logística marítima",
+    title: "Todo lo que tu nave necesita en puerto, coordinado por un solo equipo.",
+    description:
+      "Apoyamos de forma frecuente la recalada de naves y cruceros en los principales puertos de Chile: logística de tripulación, abastecimiento a bordo y apoyo técnico a flote, sumado a nuestra capacidad submarina.",
+    coverageLabel: "Cobertura nacional",
+    coverageValue: "Servicio frecuente en los principales puertos de Chile",
+    coverageNote: "Valparaíso, San Antonio, Talcahuano, Puerto Montt y Punta Arenas, entre otros.",
+    pillars: ["Punto de contacto 24/7", "Proveedores locales verificados", "ROV y logística en la misma recalada"],
+    viewService: "Ver detalle"
   },
   coverage: {
     eyebrow: "Cobertura nacional",
@@ -138,6 +157,8 @@ const es = {
       email: "Correo",
       phone: "Teléfono",
       service: "Servicio",
+      subseaGroup: "Servicios submarinos",
+      logisticsGroup: "Logística marítima",
       message: "Mensaje"
     },
     submit: "Enviar solicitud",
@@ -150,7 +171,8 @@ const es = {
     tagline:
       "Vis Manet, Locus Tenetur. Ingeniería submarina, robótica y evidencia técnica para activos críticos a lo largo de Chile.",
     navigation: "Navegación",
-    services: "Servicios",
+    services: "Servicios submarinos",
+    logistics: "Logística marítima",
     contact: "Contacto",
     social: "Redes",
     rights: "Todos los derechos reservados.",
@@ -159,6 +181,7 @@ const es = {
   },
   servicePage: {
     back: "Volver a servicios",
+    backLogistics: "Volver a logística",
     overview: "Visión general",
     sectors: "Sectores",
     application: "Aplicación",
@@ -392,7 +415,80 @@ const es = {
         "Conclusiones claras sin sobrecargar el informe con relleno.",
         "Formato adaptable al tipo de activo, faena o requerimiento."
       ]
+    },
+    "cruise-support": {
+      title: "Apoyo a cruceros",
+      summary: "Soporte integral en recaladas de cruceros en los principales puertos de Chile.",
+      detail:
+        "Acompañamos la recalada de cruceros en los principales puertos de Chile, desde Valparaíso y San Antonio hasta Puerto Montt y Punta Arenas, coordinando en un solo punto de contacto el abastecimiento, la logística de tripulación y técnicos, y la inspección y limpieza de casco con ROV. El objetivo es que la nave cumpla su itinerario sin pérdidas de tiempo en puerto.",
+      sectors: ["Cruceros", "Navieras", "Puertos"],
+      application:
+        "Recaladas de cruceros, cambios de tripulación en puerto y preparación de la nave antes de zarpar.",
+      deliverable:
+        "Plan de recalada coordinado, servicios ejecutados según itinerario, registro de entregas y reporte de cierre para el armador o agente.",
+      availability: "Servicio frecuente durante todo el año, con coordinación previa a cada recalada y respuesta 24/7 durante la estadía.",
+      highlights: [
+        "Un solo interlocutor local para el capitán, el armador y el agente.",
+        "Inspección y limpieza de casco con ROV durante la recalada.",
+        "Abastecimiento, tripulación y apoyo técnico en la misma recalada.",
+        "Cobertura en los principales puertos del país."
+      ]
+    },
+    "crew-logistics": {
+      title: "Logística de tripulación",
+      summary: "Cambios de tripulación, traslados, alojamiento y asistencia en tierra para tripulantes y personal técnico.",
+      detail:
+        "Organizamos los cambios de tripulación en los principales puertos de Chile: recepción en aeropuerto, traslados entre aeropuerto, hotel y nave, alojamiento, pasajes y apoyo en trámites migratorios. También coordinamos el traslado de técnicos o inspectores que deben embarcar.",
+      sectors: ["Cruceros", "Navieras", "Pesca"],
+      application:
+        "Relevos de tripulación, embarque de técnicos e inspectores y personal en tránsito.",
+      deliverable:
+        "Itinerario coordinado por tripulante, traslados y alojamiento confirmados, y seguimiento hasta el embarque o el vuelo de salida.",
+      availability: "Programado según itinerario de la nave, con apoyo ante cambios de último minuto.",
+      highlights: [
+        "Recepción en aeropuerto y traslados puerta a puerta.",
+        "Hotel, pasajes y coordinación de horarios con la nave.",
+        "Apoyo en trámites migratorios.",
+        "Coordinación de técnicos e inspectores que deben embarcar."
+      ]
+    },
+    "ship-supply": {
+      title: "Abastecimiento y entregas a bordo",
+      summary: "Provisiones, agua, stores, repuestos y courier entregados a bordo o en muelle.",
+      detail:
+        "Coordinamos el abastecimiento de la nave con proveedores locales: provisiones frescas y secas, agua potable, consumibles de cubierta y máquina, repuestos en tránsito y courier. Recibimos, consolidamos y entregamos en muelle o a bordo, cuidando la cadena de frío y los tiempos de la nave.",
+      sectors: ["Cruceros", "Navieras", "Pesca"],
+      application:
+        "Naves en recalada o en tránsito que necesitan reponer provisiones, recibir repuestos urgentes o cargar suministros antes de zarpar.",
+      deliverable:
+        "Lista de pedido confirmada, recepción y consolidación de carga, entrega a bordo con registro y documentación de respaldo.",
+      availability: "Según itinerario de la nave, con entregas coordinadas en muelle o a bordo.",
+      highlights: [
+        "Provisiones frescas, secas y agua potable.",
+        "Stores de cubierta, máquina y cabina.",
+        "Recepción y entrega de repuestos y courier en tránsito.",
+        "Entregas coordinadas con los horarios de la nave."
+      ]
+    },
+    "afloat-technical-support": {
+      title: "Apoyo técnico a flote",
+      summary: "Inspección de casco, reparaciones a flote, técnicos y certificaciones sin sacar la nave del agua.",
+      detail:
+        "Integramos nuestra capacidad submarina con apoyo técnico en puerto: inspección de casco y hélice con ROV, limpieza de nichos, reparaciones menores a flote, coordinación de técnicos, inspectores y casas clasificadoras, y apoyo en renovaciones de certificados. Es la forma de resolver un problema técnico sin perder la ventana de la nave.",
+      sectors: ["Navieras", "Cruceros", "Pesca"],
+      application:
+        "Daños detectados en tránsito, inspecciones requeridas por la casa clasificadora o la aseguradora, limpiezas antes de temporada y reparaciones que no justifican varar la nave.",
+      deliverable:
+        "Diagnóstico con evidencia visual, trabajos coordinados o ejecutados a flote e informe técnico para el armador, la casa clasificadora o la aseguradora.",
+      availability: "Respuesta rápida y faenas programadas en los principales puertos de Chile.",
+      highlights: [
+        "Inspección ROV de casco, hélice, timón y cajas de mar.",
+        "Coordinación de técnicos, inspectores y casas clasificadoras.",
+        "Reparaciones menores y limpiezas a flote.",
+        "Evidencia útil para aseguradoras y certificaciones."
+      ]
     }
+
   },
   technologies: {
     kirke: {

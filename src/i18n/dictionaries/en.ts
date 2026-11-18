@@ -2,9 +2,9 @@ import type { Dictionary } from "./es";
 
 const en: Dictionary = {
   meta: {
-    title: "ROV Subsea Inspection in Chile | MRM Magallanes ROV Marine",
+    title: "ROV Subsea Inspection and Marine Logistics in Chile | MRM Magallanes ROV Marine",
     description:
-      "ROV subsea inspection, hull inspection and cleaning, cavitation cleaning, bathymetric surveys and environmental monitoring in Chile. Based in Punta Arenas with nationwide coverage for ports, salmon farms and shipping.",
+      "ROV subsea inspection, hull cleaning and marine logistics for vessels and cruise ships in Chile's main ports: ship supply, crew changes and afloat technical support.",
     ogDescription:
       "Subsea engineering in Chile: ROV inspection, hull and cavitation cleaning, surveys and technical reporting. Based in Punta Arenas, serving all of Chile.",
     twitterDescription: "Subsea robotics, industrial inspection and technical evidence for marine operations in Chile.",
@@ -18,32 +18,40 @@ const en: Dictionary = {
       "aquaculture net inspection",
       "bathymetric survey",
       "USBL positioning",
+      "marine logistics Chile",
+      "cruise ship services Chile",
+      "ship supply Magellan Strait",
+      "crew change Chile",
+      "afloat technical support",
       "Magallanes ROV Marine"
     ],
     serviceTitleSuffix: "in Chile",
     ogImageAlt: "MRM Magallanes ROV Marine: ROV subsea inspection in Chile",
     orgDescription:
-      "Subsea engineering company based in Punta Arenas providing ROV inspection, hull inspection and cleaning, surveys, USBL positioning and environmental monitoring throughout Chile.",
+      "Subsea engineering and marine logistics company based in Punta Arenas: ROV inspection, hull cleaning, surveys and environmental monitoring throughout Chile, plus logistics for vessels and cruise ships in the country's main ports.",
     breadcrumbHome: "Home",
-    breadcrumbServices: "Services"
+    breadcrumbServices: "Subsea services",
+    breadcrumbLogistics: "Marine logistics"
   },
   nav: {
     home: "Home",
     company: "Company",
-    services: "Services",
+    services: "Subsea services",
+    logistics: "Logistics",
     quote: "Get a quote",
     openMenu: "Open menu",
     closeMenu: "Close menu",
     switchLanguage: "Ver el sitio en español"
   },
   hero: {
-    title: "Subsea engineering",
-    subtitle: "for critical marine operations",
-    tagline: "Marine Robotics & Subsea Engineering",
+    title: "Subsea and logistics solutions",
+    subtitle: "for vessels",
+    tagline: "Subsea Engineering & Marine Logistics",
     description:
-      "Inspection, survey and technical support with an executive focus, digital traceability and nationwide deployment for ports, aquaculture, shipping and marine infrastructure.",
+      "ROV inspection, hull cleaning and port logistics across Chile: one team for shipping lines, cruise ships, aquaculture and marine infrastructure.",
     primaryCta: "Request a quote",
-    secondaryCta: "Our services",
+    secondaryCta: "Subsea services",
+    tertiaryCta: "Marine logistics",
     imageAlt: "Industrial ROV working underwater",
     cardImageAlt: "ROV hull inspection",
     cardBadge: "ROV Inspection",
@@ -76,13 +84,24 @@ const en: Dictionary = {
     response: "Technical response from Magallanes, nationwide"
   },
   servicesSection: {
-    eyebrow: "Our services",
+    eyebrow: "Subsea services",
     title: "Subsea capabilities for an industry with no margin for error.",
     description:
       "We design every job with traceability, evidence and clear technical criteria so your team can decide quickly and execute safely.",
     sectorsLabel: "Industries we serve",
-    sectors: ["Ports", "Salmon farming", "Shipping", "Industry"],
+    sectors: ["Ports", "Salmon farming", "Shipping", "Cruise ships", "Industry"],
     viewService: "View service"
+  },
+  logisticsSection: {
+    eyebrow: "Marine logistics",
+    title: "Everything your vessel needs in port, coordinated by one team.",
+    description:
+      "We regularly support port calls by vessels and cruise ships in Chile's main ports: crew logistics, ship supply and afloat technical support, backed by our subsea capability.",
+    coverageLabel: "Nationwide coverage",
+    coverageValue: "Frequent service in Chile's main ports",
+    coverageNote: "Valparaíso, San Antonio, Talcahuano, Puerto Montt and Punta Arenas, among others.",
+    pillars: ["24/7 point of contact", "Vetted local suppliers", "ROV and logistics in the same port call"],
+    viewService: "View details"
   },
   coverage: {
     eyebrow: "Nationwide coverage",
@@ -137,6 +156,8 @@ const en: Dictionary = {
       email: "Email",
       phone: "Phone",
       service: "Service",
+      subseaGroup: "Subsea services",
+      logisticsGroup: "Marine logistics",
       message: "Message"
     },
     submit: "Send request",
@@ -149,7 +170,8 @@ const en: Dictionary = {
     tagline:
       "Vis Manet, Locus Tenetur. Subsea engineering, robotics and technical evidence for critical assets throughout Chile.",
     navigation: "Navigation",
-    services: "Services",
+    services: "Subsea services",
+    logistics: "Marine logistics",
     contact: "Contact",
     social: "Social",
     rights: "All rights reserved.",
@@ -158,6 +180,7 @@ const en: Dictionary = {
   },
   servicePage: {
     back: "Back to services",
+    backLogistics: "Back to logistics",
     overview: "Overview",
     sectors: "Industries",
     application: "Application",
@@ -387,6 +410,78 @@ const en: Dictionary = {
         "Evidence organized for auditors, clients or management.",
         "Clear conclusions without padding the report.",
         "Format adapted to the asset, job or requirement."
+      ]
+    },
+    "cruise-support": {
+      title: "Cruise ship support",
+      summary: "End-to-end support for cruise ship port calls in Chile's main ports.",
+      detail:
+        "We support cruise ships calling at Chile's main ports, from Valparaíso and San Antonio to Puerto Montt and Punta Arenas, coordinating ship supply, crew and technician logistics, and ROV hull inspection and cleaning through a single point of contact. The goal is to keep the vessel on schedule without losing time in port.",
+      sectors: ["Cruise ships", "Shipping", "Ports"],
+      application:
+        "Cruise port calls, crew changes in port and vessel preparation before sailing.",
+      deliverable:
+        "A coordinated port-call plan, services delivered on schedule, delivery records and a closing report for the owner or agent.",
+      availability: "Frequent service all year round, with planning ahead of each call and 24/7 response while in port.",
+      highlights: [
+        "One local contact for the master, the owner and the agent.",
+        "ROV hull inspection and cleaning during the port call.",
+        "Supply, crew logistics and technical support in the same port call.",
+        "Coverage in the country's main ports."
+      ]
+    },
+    "crew-logistics": {
+      title: "Crew logistics",
+      summary: "Crew changes, transfers and accommodation ashore for seafarers and technical staff.",
+      detail:
+        "We organise crew changes in Chile's main ports: airport meet and greet, transfers between airport, hotel and vessel, accommodation, tickets and help with immigration formalities. We also coordinate technicians and inspectors who need to board.",
+      sectors: ["Cruise ships", "Shipping", "Fishing"],
+      application:
+        "Crew rotations, technicians and inspectors joining the vessel, and staff in transit.",
+      deliverable:
+        "A coordinated itinerary per crew member, confirmed transfers and accommodation, and follow-up until boarding or departure flight.",
+      availability: "Scheduled around the vessel's itinerary, with support for last-minute changes.",
+      highlights: [
+        "Airport meet and greet and door-to-door transfers.",
+        "Hotel, tickets and timing coordinated with the vessel.",
+        "Help with immigration formalities.",
+        "Coordination of technicians and inspectors who need to board."
+      ]
+    },
+    "ship-supply": {
+      title: "Ship supply and deliveries on board",
+      summary: "Provisions, fresh water, stores, spare parts and courier delivered on board or at the quay.",
+      detail:
+        "We coordinate vessel supply with local suppliers: fresh and dry provisions, fresh water, deck and engine consumables, spare parts in transit and courier. We receive, consolidate and deliver at the quay or on board, protecting the cold chain and the vessel's schedule.",
+      sectors: ["Cruise ships", "Shipping", "Fishing"],
+      application:
+        "Vessels in port or in transit that need to restock provisions, receive urgent spares or load supplies before sailing.",
+      deliverable:
+        "Confirmed order list, cargo reception and consolidation, delivery on board with records and supporting documents.",
+      availability: "According to the vessel's itinerary, with deliveries coordinated at the quay or on board.",
+      highlights: [
+        "Fresh and dry provisions and fresh water.",
+        "Deck, engine and cabin stores.",
+        "Reception and delivery of spare parts and courier in transit.",
+        "Deliveries timed to the vessel's schedule."
+      ]
+    },
+    "afloat-technical-support": {
+      title: "Afloat technical support",
+      summary: "Hull inspection, afloat repairs, technicians and certification support without taking the vessel out of the water.",
+      detail:
+        "We combine our subsea capability with technical support in port: ROV hull and propeller inspection, niche area cleaning, minor afloat repairs, coordination of technicians, surveyors and class societies, and support with certificate renewals. It is a way to solve a technical issue without losing the vessel's window.",
+      sectors: ["Shipping", "Cruise ships", "Fishing"],
+      application:
+        "Damage found in transit, inspections required by class or insurers, pre-season cleaning and repairs that do not justify dry-docking.",
+      deliverable:
+        "Diagnosis with visual evidence, work coordinated or carried out afloat and a technical report for the owner, class society or insurer.",
+      availability: "Fast response and scheduled jobs in Chile's main ports.",
+      highlights: [
+        "ROV inspection of hull, propeller, rudder and sea chests.",
+        "Coordination of technicians, surveyors and class societies.",
+        "Minor repairs and cleaning afloat.",
+        "Evidence suitable for insurers and certification."
       ]
     }
   },
